@@ -33,10 +33,14 @@ If FalkorDB is unavailable or no connected evidence exists, Company Brain refuse
 
 A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explainability, graph-controlled action, persistent memory, and disconnection refusal:
 
-[![Aqua Company Brain Walkthrough](demo/video/demo-preview.gif)](https://youtu.be/8DfhnxvLxXA)
+[![Aqua Company Brain Walkthrough](https://img.youtube.com/vi/8DfhnxvLxXA/maxresdefault.jpg)](https://youtu.be/8DfhnxvLxXA)
 
-> 🎬 **[▶️ Watch Demo on YouTube](https://youtu.be/8DfhnxvLxXA)**  
-> 📹 **GitHub Player**: [Play `aqua-company-brain-demo.mp4` on GitHub](https://github.com/Vaibhav-tester/Aqua_Assistant/blob/main/demo/video/aqua-company-brain-demo.mp4) | [💾 Direct Download](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/download/v1.0.0/aqua-company-brain-demo.mp4)  
+<p align="center">
+  <a href="https://youtu.be/8DfhnxvLxXA"><strong>▶️ Click to Watch the Full Walkthrough on YouTube (1080p HD with Audio Narration)</strong></a>
+</p>
+
+> 🎬 **YouTube Video URL**: [https://youtu.be/8DfhnxvLxXA](https://youtu.be/8DfhnxvLxXA)  
+> 📹 **GitHub Native Player**: [Play `aqua-company-brain-demo.mp4` on GitHub](https://github.com/Vaibhav-tester/Aqua_Assistant/blob/main/demo/video/aqua-company-brain-demo.mp4) | [💾 Download MP4](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/download/v1.0.0/aqua-company-brain-demo.mp4)  
 > 📝 **Captions/Subtitles**: [📄 `demo/video/captions.srt`](demo/video/captions.srt) | 📖 **Step-by-step Runbook**: [`docs/DEMO_RUNBOOK.md`](docs/DEMO_RUNBOOK.md)
 
 ### Walkthrough Timeline:
