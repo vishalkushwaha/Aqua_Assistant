@@ -1,0 +1,19 @@
+[package]
+name = "aqua-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+aqua-core = { path = "../../core" }
+aqua-audio-adapter = { path = "../../adapters/audio_adapter" }
+aqua-vision-adapter = { path = "../../adapters/vision_adapter" }
+aqua-native-tools = { path = "../../adapters/native_tools", default-features = false }
+aqua-mcp-adapters = { path = "../../adapters/mcp_adapters" }
+tokio = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+ratatui = "0.26"
+crossterm = "0.27"

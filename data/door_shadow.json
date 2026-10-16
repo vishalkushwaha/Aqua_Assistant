@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "note": "Browser and desktop calls: what the tool host would have said (host), what the one door would have said (door, never looser than host) and what the old route did (ran, failed, asked, refused). 'looser' counts the calls where the door was looser than the old route; the door may be switched on only when it is empty.",
+  "counts": {
+    "browser.navigate|auto|auto|ran": 2,
+    "browser.snapshot|auto|auto|ran": 1
+  },
+  "looser": {}
+}

@@ -1,0 +1,6 @@
+{
+  "terraform_path": null,
+  "dirs": [],
+  "env_secrets": {},
+  "max_destroy": 5
+}

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-orb-place-forget"
+description = "Enables the orb_place_forget command without any pre-configured scope."
+commands.allow = ["orb_place_forget"]
+
+[[permission]]
+identifier = "deny-orb-place-forget"
+description = "Denies the orb_place_forget command without any pre-configured scope."
+commands.deny = ["orb_place_forget"]

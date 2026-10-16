@@ -1,0 +1,8 @@
+{
+  "hosts": [],
+  "ssh_path": null,
+  "scp_path": null,
+  "keyscan_path": null,
+  "keygen_path": null,
+  "connect_timeout_s": 10
+}

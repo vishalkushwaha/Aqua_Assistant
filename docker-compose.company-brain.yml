@@ -1,0 +1,21 @@
+services:
+  falkordb:
+    image: falkordb/falkordb:6.0.0
+    container_name: aqua-company-brain-falkordb
+    ports:
+      - "127.0.0.1:6379:6379"
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - company_brain_data:/var/lib/falkordb/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  company_brain_data:
+    name: aqua_company_brain_data
+

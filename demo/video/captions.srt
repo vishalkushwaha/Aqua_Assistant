@@ -1,0 +1,27 @@
+1
+00:00:00,000 --> 00:00:08,000
+Aqua Company Brain uses FalkorDB as the required context and decision layer.
+
+2
+00:00:08,000 --> 00:00:16,000
+Synthetic company knowledge is stored as tenant-scoped people, projects, incidents, decisions, documents, and chats.
+
+3
+00:00:16,000 --> 00:00:24,000
+The agent follows live graph paths to identify the accountable owner and cite the exact supporting sources.
+
+4
+00:00:24,000 --> 00:00:32,000
+Every result exposes the multi-hop path behind the answer. FalkorDB is doing the reasoning work, not decorating ordinary storage.
+
+5
+00:00:32,000 --> 00:00:40,000
+Before acting, Aqua revalidates Ticket to Project to Owner and records the approved assignment and outcome in the graph.
+
+6
+00:00:40,000 --> 00:00:48,000
+The question, answer, sources, and action are recalled from a persistent tenant-scoped FalkorDB session.
+
+7
+00:00:48,000 --> 00:00:56,000
+The grounded incident context is handed to a second agent, proving persistent memory and multi-agent coordination.

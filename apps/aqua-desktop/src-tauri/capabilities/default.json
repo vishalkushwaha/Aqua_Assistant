@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Permissions for the main window and the voice orb overlay",
+  "windows": ["main", "voice-overlay"],
+  "permissions": ["core:default", "core:window:allow-start-dragging"]
+}

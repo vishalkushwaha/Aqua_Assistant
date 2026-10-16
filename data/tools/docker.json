@@ -1,0 +1,8 @@
+{
+  "docker_path": null,
+  "manage_all": false,
+  "allow_images": [],
+  "max_memory_mb": 4096,
+  "max_cpus": 4.0,
+  "min_host_port": 1024
+}

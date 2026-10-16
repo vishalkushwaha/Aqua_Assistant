@@ -1,0 +1,58 @@
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Aqua local credentials and runtime state
+data/.aqua_api_token
+data/.aqua_ui_token
+data/*.db
+data/*.db-*
+data/*.db.*
+data/vault/*.db
+data/vault/*.db-*
+data/models/
+data/index/
+data/tools/host.audit*.jsonl
+logs/
+tool-output/
+
+# Dependencies and build outputs
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+apps/aqua-desktop/src-tauri/bin/*.exe
+apps/aqua-desktop/src-tauri/WebView2Loader.dll
+apps/aqua-desktop/src-tauri/target_build/
+apps/aqua-desktop/src-tauri/resources/engines/
+target/
+target-*/
+vendor/
+.phase*-module-check/
+coverage/
+
+# Local FalkorDB persistence
+.company-brain-data/
+.demo-chrome-profile/
+demo/video/frames/
+showcase-site/
+
+# Untracked local folders that must never be staged
+founder/
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.tmp
+*.log

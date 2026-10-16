@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Facebook stand-in (Facebook-shaped, not Facebook)</title>
+<style>
+  body { font-family: sans-serif; max-width: 640px; margin: 16px auto; }
+  #mind { border: 1px solid #aaa; border-radius: 18px; padding: 10px 14px; cursor: pointer; margin: 12px 0; }
+  #modal { border: 1px solid #888; padding: 12px; margin-top: 12px; }
+  #editor { border: 1px solid #aaa; min-height: 70px; padding: 6px; margin: 8px 0; }
+  article { border: 1px solid #ddd; padding: 8px; margin: 8px 0; }
+</style></head>
+<body>
+<p><a href="/facebook-standin.html">Facebook</a></p>
+<p>A stand-in for the Facebook home page, used to rehearse Aqua's posting steps. It is laid out the way the recipe expects Facebook to be laid out. It posts nothing anywhere and no account is used.</p>
+
+<main id="home">
+  <div id="toast" role="status"></div>
+  <div id="mind" role="button" tabindex="0" aria-label="What's on your mind, Asha?">What's on your mind, Asha?</div>
+  <section id="feed" aria-label="News Feed">
+    <article aria-label="Post by Ravi Kumar"><p>Good morning from the stand-in feed.</p></article>
+  </section>
+</main>
+
+<div id="modal" role="dialog" aria-label="Create post" hidden>
+  <h2>Create post</h2>
+  <button id="audience" aria-label="Edit privacy. Sharing with Only me.">Only me</button>
+  <div id="editor" role="textbox" aria-label="What's on your mind, Asha?" aria-multiline="true" contenteditable="true"></div>
+  <p id="media-note"></p>
+  <button id="photo">Photo/video</button>
+  <div id="dropzone" hidden><button id="addphotos">Add photos/videos</button></div>
+  <input id="file" type="file" accept="image/*" hidden>
+  <button id="post" disabled>Post</button>
+</div>
+
+<section id="single" aria-label="Post" hidden>
+  <h1>A post by Asha Rao</h1>
+  <p>The page a "View" link on the notice leads to.</p>
+</section>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const params = new URLSearchParams(location.search);
+  // ?post=1 : the page of a single post (where the "View" link of the notice leads).
+  if (params.get('post')) { $('home').hidden = true; $('single').hidden = false; }
+  // ?fail=silent : Post is pressed, the window closes, and the page never says the post is shared and shows no new post.
+  function openWindow() {
+    $('modal').hidden = false;
+    // The window hides the page behind it, as Facebook's does.
+    $('home').setAttribute('inert', '');
+    $('home').setAttribute('aria-hidden', 'true');
+  }
+  $('mind').addEventListener('click', openWindow);
+  $('editor').addEventListener('input', () => { $('post').disabled = $('editor').textContent.trim().length === 0; });
+  $('photo').addEventListener('click', () => { $('dropzone').hidden = false; });
+  $('addphotos').addEventListener('click', () => { $('file').click(); });
+  $('file').addEventListener('change', () => {
+    if ($('file').files.length) { $('media-note').textContent = 'Image attached: ' + $('file').files[0].name; }
+  });
+  $('post').addEventListener('click', () => {
+    const text = $('editor').textContent;
+    window.__posted = window.__posted || [];
+    window.__posted.push(text);
+    const silent = text.includes('[fail-silently]') || params.get('fail') === 'silent';
+    $('modal').hidden = true;
+    $('home').removeAttribute('inert');
+    $('home').removeAttribute('aria-hidden');
+    if (silent) return;
+    setTimeout(() => {
+      $('toast').innerHTML = 'Your post is now shared. <a href="/facebook-standin.html?post=1">View</a>';
+      const a = document.createElement('article');
+      a.setAttribute('aria-label', 'Post by Asha Rao');
+      const p = document.createElement('p');
+      p.textContent = text;
+      a.appendChild(p);
+      $('feed').prepend(a);
+    }, 400);
+  });
+</script>
+</body></html>

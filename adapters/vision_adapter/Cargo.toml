@@ -1,0 +1,31 @@
+[package]
+name = "aqua-vision-adapter"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+aqua-tool-host = { path = "../tool_host" }
+
+[features]
+# `vision_engine` (`VisionEngine`, `OcrResult`, `DetectedObject`) is a simulator that returns fixed text and nothing calls it (card OA13-04): kept in the tree, not compiled unless this feature is on.
+# `cargo test -p aqua-vision-adapter --features unwired` builds it with its tests. The live part is `screen`, which is always compiled. Not in any other feature; it adds no dependency.
+unwired = []
+
+# Reading the screen (card R2-07): the text reader of Windows is a Windows Runtime class, which needs the `windows` crate (0.54 is the one already in the lock file);
+# the picture itself is taken with plain Win32 calls.
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.54", features = ["Foundation", "Foundation_Collections", "Globalization", "Graphics_Imaging", "Media_Ocr", "Storage_Streams", "Win32_System_WinRT"] }
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Gdi",
+    "Win32_System_Threading",
+    "Win32_UI_HiDpi",
+    "Win32_UI_WindowsAndMessaging",
+] }

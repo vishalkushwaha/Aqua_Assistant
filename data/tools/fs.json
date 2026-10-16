@@ -1,0 +1,53 @@
+{
+  "roots": [
+    {
+      "alias": "ws",
+      "path": "%USERPROFILE%/AquaWorkspace",
+      "access": "rw",
+      "trusted": true
+    }
+  ],
+  "sensitive_names": [
+    "*.env",
+    ".env",
+    ".env.*",
+    "*.tfvars",
+    "*secret*",
+    "*credential*",
+    "*.kdbx",
+    "*.pem",
+    "*.key",
+    "*.pfx",
+    "*.p12",
+    "*.ovpn",
+    ".pgpass",
+    "id_rsa*",
+    "id_ed25519*",
+    "id_ecdsa*",
+    "terraform.tfstate*",
+    ".npmrc",
+    ".netrc",
+    "*token",
+    "*password",
+    "*passwords",
+    "*.ppk",
+    "*.gpg",
+    ".pypirc",
+    ".dockercfg",
+    ".git-credentials",
+    ".htpasswd",
+    "*.jks",
+    "*.keystore",
+    "hosts.yml"
+  ],
+  "limits": {
+    "read_max_bytes": 1048576,
+    "write_max_bytes": 1048576,
+    "edit_max_file_bytes": 4194304,
+    "list_max_entries": 500,
+    "find_max_files": 20000,
+    "find_max_scan_bytes": 209715200,
+    "hash_max_bytes": 67108864,
+    "view_chars": 2400
+  }
+}

@@ -1,0 +1,88 @@
+[workspace]
+members = [
+    "core",
+    "apps/aqua-cli",
+    "adapters/audio_adapter",
+    "adapters/vision_adapter",
+    "adapters/mcp_adapters",
+    "adapters/tool_host",
+    "adapters/native_tools",
+    "adapters/device_monitor",
+    "adapters/orb_placement",
+]
+# Vendor crates that ship their own package roots (not Aqua workspace members).
+exclude = [
+    "vendor/laya_rust/laya-rs",
+    "vendor/laya_rust/laya-rs/bindings/python",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["VisKush <viskush@gitlab.com>"]
+license = "MIT"
+repository = "https://gitlab.com/VisKush/aqua_assistant.git"
+
+[workspace.dependencies]
+tokio = { version = "1.38", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+ndarray = "0.15.6"
+tract-onnx = "0.21.4"
+
+# Dev builds run the Laya safety model with no optimisation, which turned one gate decision into 4-6 minutes.
+# Optimise only the ML and matrix-math crates (the rest of the dev build stays quick to compile and debug).
+# The speech gate and the resampler loop over every sample of a recording; unoptimised they take ~30x longer.
+[profile.dev.package.aqua-audio-adapter]
+opt-level = 3
+[profile.dev.package.laya-candle]
+opt-level = 3
+[profile.dev.package.candle-core]
+opt-level = 3
+[profile.dev.package.candle-nn]
+opt-level = 3
+[profile.dev.package.gemm]
+opt-level = 3
+[profile.dev.package.gemm-common]
+opt-level = 3
+[profile.dev.package.gemm-f32]
+opt-level = 3
+[profile.dev.package.gemm-f64]
+opt-level = 3
+[profile.dev.package.gemm-f16]
+opt-level = 3
+[profile.dev.package.gemm-c32]
+opt-level = 3
+[profile.dev.package.gemm-c64]
+opt-level = 3
+[profile.dev.package.pulp]
+opt-level = 3
+[profile.dev.package.half]
+opt-level = 3
+[profile.dev.package.tokenizers]
+opt-level = 3
+[profile.dev.package.fancy-regex]
+opt-level = 3
+[profile.dev.package.rayon-core]
+opt-level = 3
+[profile.dev.package.rayon]
+opt-level = 3
+# The speaker model runs on tract; unoptimised it needs minutes for one voice sample, so it is optimised in dev builds too.
+[profile.dev.package.tract-core]
+opt-level = 3
+[profile.dev.package.tract-linalg]
+opt-level = 3
+[profile.dev.package.tract-onnx]
+opt-level = 3
+[profile.dev.package.tract-hir]
+opt-level = 3
+[profile.dev.package.tract-data]
+opt-level = 3
+[profile.dev.package.tract-nnef]
+opt-level = 3
+[profile.dev.package.tract-onnx-opl]
+opt-level = 3

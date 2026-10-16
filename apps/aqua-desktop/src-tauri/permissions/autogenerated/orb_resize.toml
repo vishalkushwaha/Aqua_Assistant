@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-orb-resize"
+description = "Enables the orb_resize command without any pre-configured scope."
+commands.allow = ["orb_resize"]
+
+[[permission]]
+identifier = "deny-orb-resize"
+description = "Denies the orb_resize command without any pre-configured scope."
+commands.deny = ["orb_resize"]

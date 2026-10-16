@@ -1,0 +1,80 @@
+[package]
+name = "aqua-native-tools"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+# Only the programs listed below are built. A scratch file in `src/bin` that no longer compiles (`test_weather.rs` was one: it stopped
+# the build of every integration test of this crate, which cargo builds together with the crate's programs) is then not picked up.
+autobins = false
+
+[features]
+default = ["fs", "term", "code", "check", "sys", "ssh", "git", "db", "http", "docker", "k8s", "iac", "cloud", "mon", "forge", "netdb", "doc"]
+fs = []
+term = ["fs"]
+code = ["fs"]
+check = ["code", "term"]
+sys = []
+ssh = ["term"]
+git = ["term"]
+db = ["fs"]
+netdb = ["db", "dep:postgres", "dep:postgres-native-tls", "dep:native-tls", "dep:mysql"]
+http = ["fs"]
+docker = ["fs", "term"]
+k8s = ["fs", "term"]
+iac = ["fs", "term"]
+cloud = ["fs", "term"]
+mon = ["fs", "term", "sys"]
+forge = ["http"]
+doc = ["fs", "dep:lopdf", "dep:zip", "dep:roxmltree", "dep:calamine"]
+
+[dependencies]
+aqua-tool-host = { path = "../tool_host" }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+sha2 = "0.10"
+regex = "1"
+rusqlite = { version = "0.37", features = ["bundled"] }
+ureq = "2"
+url = "2"
+base64 = "0.22"
+# Nothing uses tree-sitter any more (card OA6-03: fs/ast.rs is made of serde_json and a text scanner, and no grammar crate was ever added). The line stays only because taking it out changes Cargo.lock;
+# the owner can remove it together with its lock entries.
+tree-sitter = "0.24"
+similar = "2.6"
+postgres = { version = "0.19", optional = true }
+postgres-native-tls = { version = "0.5", optional = true }
+native-tls = { version = "0.2", optional = true }
+mysql = { version = "25", default-features = false, features = ["minimal", "native-tls"], optional = true }
+lopdf = { version = "0.34", default-features = false, features = ["nom_parser"], optional = true }
+zip = { version = "2", default-features = false, features = ["deflate"], optional = true }
+roxmltree = { version = "0.20", optional = true }
+calamine = { version = "0.26", optional = true }
+scrapling = { path = "../../vendor/scrapling_rust", default-features = false, features = ["browser", "fetchers"] }
+
+[[bin]]
+name = "aqua_fake_ssh"
+path = "src/bin/aqua_fake_ssh.rs"
+
+# A stand-in for a language server, used only by the tests of the language-server bridge (card OA12-04). It needs no crate of its own.
+[[bin]]
+name = "aqua_fake_lsp"
+path = "src/bin/aqua_fake_lsp.rs"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Security_Authorization",
+    "Win32_Security_Credentials",
+    "Win32_Storage_FileSystem",
+    "Win32_System_DataExchange",
+    "Win32_System_Diagnostics_ToolHelp",
+    "Win32_System_JobObjects",
+    "Win32_System_Memory",
+    "Win32_System_Pipes",
+    "Win32_System_SystemInformation",
+    "Win32_System_Threading",
+] }

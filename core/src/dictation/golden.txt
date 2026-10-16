@@ -1,0 +1,361 @@
+# Golden lines of the dictation cleanup (rules only, the default level).
+#
+# [unchanged]  Each line is text that is right as it stands. `clean` must give it back exactly as it is: a rule that damages correct text is worse than no rule,
+#              because the text goes into a document nobody looks at first.
+# [tidy]       Each line is `what was heard -> what must come out`: fillers, stutters, a missing capital, a space before a stop.
+#
+# Written once from the failures people have (a "cancel that" in the middle of a sentence, "ER" the room, ".env" the file, "i.e." the abbreviation); add a line
+# when a new damage is found, and fix the rule.
+
+[unchanged]
+I told him to cancel that.
+Please delete that.
+She works in the ER.
+Edit the .env file.
+I like .NET and Rust.
+A hash, i.e. a digest, is a fingerprint.
+Use a verb, e.g. the cat sat.
+It was so so.
+The meeting is at 3.5 hours.
+Dr. Smith will see you at 9 a.m. tomorrow.
+Mrs. Jones and Mr. Brown arrived.
+He said hello. Then he left.
+Email me at anna@example.com, please.
+Visit example.com for more.
+We use Node.js and Next.js.
+What time is it?
+Wow!
+I'm sure I'll go, and I've said so.
+UM Ann Arbor is a university.
+That that is true.
+I had had enough.
+She said no, no, and no again.
+I know, I know.
+Cancel that order if it ships late.
+Delete that file when you are done.
+Never mind the noise outside.
+Scratch that off the list.
+The ER is on the second floor.
+Please open the .gitignore file.
+The .NET framework is old.
+Save it as report.final.docx.
+Version 2.0 is out.
+It costs $12.50 today.
+See https://example.com/page for details.
+Call me at 555-0100 tomorrow.
+Anna's number is 555-0100.
+He asked, "Can you hear me?"
+She replied, "Yes, I can."
+Meet me at 3:30 p.m. on Friday.
+We met at 10 a.m. and left at 2 p.m.
+Is it etc. or something else?
+Buy milk, eggs, etc. Then go home.
+He lives in St. Louis now.
+Mr. and Mrs. Lee are here.
+I'd like to book a table for four.
+We'll see you there, won't we?
+Thanks, that's all.
+The summer was humming.
+Hummus and pita, please.
+The UK and the US agreed.
+I think so.
+Yes.
+OK.
+No.
+It works.
+Numbers 1, 2 and 3.
+The score was 3-2.
+The rate is 4.5% per year.
+Open the .bashrc, then the .profile.
+I read the README.md file.
+Python 3.11 is installed.
+He's not here yet.
+Good morning, everyone.
+Please cancel that meeting, it is not needed.
+She wants to delete that account.
+We can scratch that plan.
+They said never mind and left.
+The ER nurse was kind.
+Run the .exe file as admin.
+Anna sent the report to Bo.
+The invoice is ready, and Bo has the keys.
+Please send Anna the contract for 4 items.
+Is the schedule at 4:21 on Friday, Priya?
+The menu is ready, and Marcus has the keys.
+Anna will call you at 6:35 tomorrow.
+Is the photo at 7:42 on Friday, Lena?
+Did Anna finish the ticket?
+Anna will call you at 9:56 tomorrow.
+Anna said, "I will be there at 10 p.m."
+Did Anna finish the report?
+Anna sent the invoice to Chloe.
+Anna said, "I will be there at 1 p.m."
+Please send Anna the schedule for 6 items.
+Anna sent the menu to Sofia.
+The proposal is ready, and Sofia has the keys.
+Please send Anna the photo for 9 items.
+Is the ticket at 6:59 on Friday, Tom?
+The recipe is ready, and Anna has the keys.
+Bo will call you at 8:13 tomorrow.
+Is the report at 9:20 on Friday, Priya?
+Did Bo finish the invoice?
+Bo will call you at 11:34 tomorrow.
+Bo said, "I will be there at 12 p.m."
+Did Bo finish the menu?
+Bo sent the proposal to Lena.
+Bo said, "I will be there at 3 p.m."
+Please send Bo the ticket for 2 items.
+Bo sent the recipe to Chloe.
+The budget is ready, and Chloe has the keys.
+Please send Bo the report for 5 items.
+Is the invoice at 8:37 on Friday, Ravi?
+The contract is ready, and Sofia has the keys.
+Bo will call you at 10:51 tomorrow.
+Is the menu at 11:58 on Friday, Tom?
+Did Bo finish the proposal?
+Priya will call you at 1:12 tomorrow.
+Priya said, "I will be there at 2 p.m."
+Did Priya finish the recipe?
+Priya sent the budget to Bo.
+Priya said, "I will be there at 5 p.m."
+Please send Priya the invoice for 7 items.
+Priya sent the contract to Lena.
+The schedule is ready, and Lena has the keys.
+Please send Priya the menu for 10 items.
+Is the proposal at 10:15 on Friday, Omar?
+The photo is ready, and Chloe has the keys.
+Priya will call you at 12:29 tomorrow.
+Is the recipe at 1:36 on Friday, Ravi?
+Did Priya finish the budget?
+Priya will call you at 3:50 tomorrow.
+Priya said, "I will be there at 4 p.m."
+Did Priya finish the contract?
+Priya sent the schedule to Tom.
+Marcus said, "I will be there at 7 p.m."
+Please send Marcus the proposal for 3 items.
+Marcus sent the photo to Bo.
+The ticket is ready, and Bo has the keys.
+Please send Marcus the recipe for 6 items.
+Is the budget at 12:53 on Friday, Priya?
+The report is ready, and Lena has the keys.
+Marcus will call you at 2:07 tomorrow.
+Is the contract at 3:14 on Friday, Omar?
+Did Marcus finish the schedule?
+Marcus will call you at 5:28 tomorrow.
+Marcus said, "I will be there at 6 p.m."
+Did Marcus finish the photo?
+Marcus sent the ticket to Ravi.
+Marcus said, "I will be there at 9 p.m."
+Please send Marcus the budget for 8 items.
+Marcus sent the report to Tom.
+The invoice is ready, and Tom has the keys.
+Please send Lena the contract for 2 items.
+Is the schedule at 2:31 on Friday, Anna?
+The menu is ready, and Bo has the keys.
+Lena will call you at 4:45 tomorrow.
+Is the photo at 5:52 on Friday, Priya?
+Did Lena finish the ticket?
+Lena will call you at 7:06 tomorrow.
+Lena said, "I will be there at 8 p.m."
+Did Lena finish the report?
+Lena sent the invoice to Omar.
+Lena said, "I will be there at 11 p.m."
+Please send Lena the schedule for 4 items.
+Lena sent the menu to Ravi.
+The proposal is ready, and Ravi has the keys.
+Please send Lena the photo for 7 items.
+Is the ticket at 4:09 on Friday, Sofia?
+The recipe is ready, and Tom has the keys.
+Lena will call you at 6:23 tomorrow.
+Is the report at 7:30 on Friday, Anna?
+Did Omar finish the invoice?
+Omar will call you at 9:44 tomorrow.
+Omar said, "I will be there at 10 p.m."
+Did Omar finish the menu?
+Omar sent the proposal to Priya.
+Omar said, "I will be there at 1 p.m."
+Please send Omar the ticket for 9 items.
+Omar sent the recipe to Lena.
+The budget is ready, and Lena has the keys.
+Please send Omar the report for 3 items.
+Is the invoice at 6:47 on Friday, Chloe?
+The contract is ready, and Ravi has the keys.
+Omar will call you at 8:01 tomorrow.
+Is the menu at 9:08 on Friday, Sofia?
+Did Omar finish the proposal?
+Omar will call you at 11:22 tomorrow.
+Omar said, "I will be there at 12 p.m."
+Did Chloe finish the recipe?
+Chloe sent the budget to Anna.
+Chloe said, "I will be there at 3 p.m."
+Please send Chloe the invoice for 5 items.
+Chloe sent the contract to Priya.
+The schedule is ready, and Priya has the keys.
+Please send Chloe the menu for 8 items.
+Is the proposal at 8:25 on Friday, Marcus?
+The photo is ready, and Lena has the keys.
+Chloe will call you at 10:39 tomorrow.
+Is the recipe at 11:46 on Friday, Omar?
+Did Chloe finish the budget?
+Chloe will call you at 1:00 tomorrow.
+Chloe said, "I will be there at 2 p.m."
+Did Chloe finish the contract?
+Chloe sent the schedule to Sofia.
+Chloe said, "I will be there at 5 p.m."
+Please send Chloe the proposal for 10 items.
+Ravi sent the photo to Anna.
+The ticket is ready, and Anna has the keys.
+Please send Ravi the recipe for 4 items.
+Is the budget at 10:03 on Friday, Bo?
+The report is ready, and Priya has the keys.
+Ravi will call you at 12:17 tomorrow.
+Is the contract at 1:24 on Friday, Marcus?
+Did Ravi finish the schedule?
+Ravi will call you at 3:38 tomorrow.
+Ravi said, "I will be there at 4 p.m."
+Did Ravi finish the photo?
+Ravi sent the ticket to Omar.
+Ravi said, "I will be there at 7 p.m."
+Please send Ravi the budget for 6 items.
+Ravi sent the report to Sofia.
+The invoice is ready, and Sofia has the keys.
+Please send Ravi the contract for 9 items.
+Is the schedule at 12:41 on Friday, Tom?
+The menu is ready, and Anna has the keys.
+Sofia will call you at 2:55 tomorrow.
+Is the photo at 3:02 on Friday, Bo?
+Did Sofia finish the ticket?
+Sofia will call you at 5:16 tomorrow.
+Sofia said, "I will be there at 6 p.m."
+Did Sofia finish the report?
+Sofia sent the invoice to Marcus.
+Sofia said, "I will be there at 9 p.m."
+Please send Sofia the schedule for 2 items.
+Sofia sent the menu to Omar.
+The proposal is ready, and Omar has the keys.
+Please send Sofia the photo for 5 items.
+Is the ticket at 2:19 on Friday, Chloe?
+The recipe is ready, and Ravi has the keys.
+Sofia will call you at 4:33 tomorrow.
+Is the report at 5:40 on Friday, Tom?
+Did Sofia finish the invoice?
+Tom will call you at 7:54 tomorrow.
+Tom said, "I will be there at 8 p.m."
+Did Tom finish the menu?
+Tom sent the proposal to Bo.
+Tom said, "I will be there at 11 p.m."
+Please send Tom the ticket for 7 items.
+Tom sent the recipe to Marcus.
+The budget is ready, and Marcus has the keys.
+Please send Tom the report for 10 items.
+Is the invoice at 4:57 on Friday, Lena?
+The contract is ready, and Omar has the keys.
+Tom will call you at 6:11 tomorrow.
+Is the menu at 7:18 on Friday, Chloe?
+Did Tom finish the proposal?
+Tom will call you at 9:32 tomorrow.
+Tom said, "I will be there at 10 p.m."
+Did Tom finish the recipe?
+Tom sent the budget to Sofia.
+
+[tidy]
+um we left early, and the rest stayed . -> We left early, and the rest stayed.
+We left uh early, and the rest stayed. -> We left early, and the rest stayed.
+We left early, and the the rest stayed. -> We left early, and the rest stayed.
+We left early , er , and the rest stayed. -> We left early, and the rest stayed.
+um the report is ready, so please send the invoice . -> The report is ready, so please send the invoice.
+The report uh is ready, so please send the invoice. -> The report is ready, so please send the invoice.
+The report is ready, so please send the the invoice. -> The report is ready, so please send the invoice.
+The report is ready , er , so please send the invoice. -> The report is ready, so please send the invoice.
+um please check the oven, and the timer too . -> Please check the oven, and the timer too.
+Please check uh the oven, and the timer too. -> Please check the oven, and the timer too.
+Please check the the oven, and the timer too. -> Please check the oven, and the timer too.
+Please check the oven , er , and the timer too. -> Please check the oven, and the timer too.
+um i opened the file, but the data was missing . -> I opened the file, but the data was missing.
+I opened uh the file, but the data was missing. -> I opened the file, but the data was missing.
+I opened the the file, but the data was missing. -> I opened the file, but the data was missing.
+I opened the file , er , but the data was missing. -> I opened the file, but the data was missing.
+um it rained all day, so the match was cancelled . -> It rained all day, so the match was cancelled.
+It rained uh all day, so the match was cancelled. -> It rained all day, so the match was cancelled.
+It rained all day, so the the match was cancelled. -> It rained all day, so the match was cancelled.
+It rained all day , er , so the match was cancelled. -> It rained all day, so the match was cancelled.
+um we should call the bank, then the landlord . -> We should call the bank, then the landlord.
+We should uh call the bank, then the landlord. -> We should call the bank, then the landlord.
+We should call the the bank, then the landlord. -> We should call the bank, then the landlord.
+We should call the bank , er , then the landlord. -> We should call the bank, then the landlord.
+um the train was late, and the station was packed . -> The train was late, and the station was packed.
+The train uh was late, and the station was packed. -> The train was late, and the station was packed.
+The train was late, and the the station was packed. -> The train was late, and the station was packed.
+The train was late , er , and the station was packed. -> The train was late, and the station was packed.
+um please bring the keys, the wallet and the phone . -> Please bring the keys, the wallet and the phone.
+Please bring uh the keys, the wallet and the phone. -> Please bring the keys, the wallet and the phone.
+Please bring the the keys, the wallet and the phone. -> Please bring the keys, the wallet and the phone.
+Please bring the keys , er , the wallet and the phone. -> Please bring the keys, the wallet and the phone.
+um i think the plan works, but the budget is tight . -> I think the plan works, but the budget is tight.
+I think uh the plan works, but the budget is tight. -> I think the plan works, but the budget is tight.
+I think the the plan works, but the budget is tight. -> I think the plan works, but the budget is tight.
+I think the plan works , er , but the budget is tight. -> I think the plan works, but the budget is tight.
+um the door was open, so the dog ran out . -> The door was open, so the dog ran out.
+The door uh was open, so the dog ran out. -> The door was open, so the dog ran out.
+The door was open, so the the dog ran out. -> The door was open, so the dog ran out.
+The door was open , er , so the dog ran out. -> The door was open, so the dog ran out.
+um we met in the lobby, and the guide was waiting . -> We met in the lobby, and the guide was waiting.
+We met uh in the lobby, and the guide was waiting. -> We met in the lobby, and the guide was waiting.
+We met in the the lobby, and the guide was waiting. -> We met in the lobby, and the guide was waiting.
+We met in the lobby , er , and the guide was waiting. -> We met in the lobby, and the guide was waiting.
+um it is the best option, and the cheapest one . -> It is the best option, and the cheapest one.
+It is uh the best option, and the cheapest one. -> It is the best option, and the cheapest one.
+It is the the best option, and the cheapest one. -> It is the best option, and the cheapest one.
+It is the best option , er , and the cheapest one. -> It is the best option, and the cheapest one.
+um please close the window, the room is cold . -> Please close the window, the room is cold.
+Please close uh the window, the room is cold. -> Please close the window, the room is cold.
+Please close the the window, the room is cold. -> Please close the window, the room is cold.
+Please close the window , er , the room is cold. -> Please close the window, the room is cold.
+um i saw the sign, and the road was closed . -> I saw the sign, and the road was closed.
+I saw uh the sign, and the road was closed. -> I saw the sign, and the road was closed.
+I saw the the sign, and the road was closed. -> I saw the sign, and the road was closed.
+I saw the sign , er , and the road was closed. -> I saw the sign, and the road was closed.
+um the coffee is cold, so I made the tea . -> The coffee is cold, so I made the tea.
+The coffee uh is cold, so I made the tea. -> The coffee is cold, so I made the tea.
+The coffee is cold, so I made the the tea. -> The coffee is cold, so I made the tea.
+The coffee is cold , er , so I made the tea. -> The coffee is cold, so I made the tea.
+um we ate at the cafe, and the food was great . -> We ate at the cafe, and the food was great.
+We ate uh at the cafe, and the food was great. -> We ate at the cafe, and the food was great.
+We ate at the the cafe, and the food was great. -> We ate at the cafe, and the food was great.
+We ate at the cafe , er , and the food was great. -> We ate at the cafe, and the food was great.
+um please read the notes, then the summary . -> Please read the notes, then the summary.
+Please read uh the notes, then the summary. -> Please read the notes, then the summary.
+Please read the the notes, then the summary. -> Please read the notes, then the summary.
+Please read the notes , er , then the summary. -> Please read the notes, then the summary.
+um the test passed, but the build failed . -> The test passed, but the build failed.
+The test uh passed, but the build failed. -> The test passed, but the build failed.
+The test passed, but the the build failed. -> The test passed, but the build failed.
+The test passed , er , but the build failed. -> The test passed, but the build failed.
+um i wrote the draft, and the team approved it . -> I wrote the draft, and the team approved it.
+I wrote uh the draft, and the team approved it. -> I wrote the draft, and the team approved it.
+I wrote the the draft, and the team approved it. -> I wrote the draft, and the team approved it.
+I wrote the draft , er , and the team approved it. -> I wrote the draft, and the team approved it.
+um it was the first day, and the weather was fine . -> It was the first day, and the weather was fine.
+It was uh the first day, and the weather was fine. -> It was the first day, and the weather was fine.
+It was the the first day, and the weather was fine. -> It was the first day, and the weather was fine.
+It was the first day , er , and the weather was fine. -> It was the first day, and the weather was fine.
+um we checked the list, and the item was gone . -> We checked the list, and the item was gone.
+We checked uh the list, and the item was gone. -> We checked the list, and the item was gone.
+We checked the the list, and the item was gone. -> We checked the list, and the item was gone.
+We checked the list , er , and the item was gone. -> We checked the list, and the item was gone.
+um the shop closes at six, so the queue is long . -> The shop closes at six, so the queue is long.
+The shop uh closes at six, so the queue is long. -> The shop closes at six, so the queue is long.
+The shop closes at six, so the the queue is long. -> The shop closes at six, so the queue is long.
+The shop closes at six , er , so the queue is long. -> The shop closes at six, so the queue is long.
+um please water the plants, and the garden too . -> Please water the plants, and the garden too.
+Please water uh the plants, and the garden too. -> Please water the plants, and the garden too.
+Please water the the plants, and the garden too. -> Please water the plants, and the garden too.
+Please water the plants , er , and the garden too. -> Please water the plants, and the garden too.
+um i booked the flight, but the hotel is full . -> I booked the flight, but the hotel is full.
+I booked uh the flight, but the hotel is full. -> I booked the flight, but the hotel is full.
+I booked the the flight, but the hotel is full. -> I booked the flight, but the hotel is full.
+I booked the flight , er , but the hotel is full. -> I booked the flight, but the hotel is full.
+um the meeting moved to noon, so the lunch is later . -> The meeting moved to noon, so the lunch is later.
+The meeting uh moved to noon, so the lunch is later. -> The meeting moved to noon, so the lunch is later.
+The meeting moved to noon, so the the lunch is later. -> The meeting moved to noon, so the lunch is later.
+The meeting moved to noon , er , so the lunch is later. -> The meeting moved to noon, so the lunch is later.

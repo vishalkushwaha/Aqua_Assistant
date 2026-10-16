@@ -1,0 +1,10 @@
+{
+  "mode": "standard",
+  "limits": {
+    "reads_per_minute": 300,
+    "changes_per_minute": 60,
+    "max_concurrent": 16
+  },
+  "hard_deny": [],
+  "tool_overrides": {}
+}

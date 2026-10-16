@@ -1,0 +1,12 @@
+# Aqua's formatting rules.
+#
+# The code base was written with long lines (many over 200 characters, one statement per line is not the habit here), so these settings
+# keep rustfmt from rewrapping everything into short lines. Even so, the existing code has not been formatted once with rustfmt, so
+# `cargo fmt --check` still reports differences. The plan (see documentation/competitive/tasks/phase0_tasks.md, T0-03.1):
+#   1. when nobody else is editing the files, run `cargo fmt --all` in a commit of its own (reviewable: formatting only),
+#   2. then switch the gate to `scripts/ci.ps1 -StrictFmt` and the CI `fmt` job to blocking.
+# Until then formatting is reported, not enforced.
+edition = "2021"
+max_width = 200
+use_small_heuristics = "Max"
+newline_style = "Auto"

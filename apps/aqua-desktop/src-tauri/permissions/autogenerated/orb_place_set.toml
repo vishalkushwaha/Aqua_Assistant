@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-orb-place-set"
+description = "Enables the orb_place_set command without any pre-configured scope."
+commands.allow = ["orb_place_set"]
+
+[[permission]]
+identifier = "deny-orb-place-set"
+description = "Denies the orb_place_set command without any pre-configured scope."
+commands.deny = ["orb_place_set"]

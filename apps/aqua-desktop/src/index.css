@@ -1,0 +1,566 @@
+/*
+  Aqua admin console: shared look and motion.
+
+  Colour has one job here: it says what a part of the assistant is doing, using the same colours as the voice orb.
+    hear  (cyan)    the assistant is taking in speech
+    think (violet)  it is working out an answer
+    speak (green)   it is talking back, and also "ready / OK"
+    attention (amber)  something needs a look
+    problem (rose)  something is broken
+  Fonts are the system ones on purpose: the app's content security policy only allows its own fonts, so a web font
+  import would never load.
+*/
+
+:root {
+  /* Surfaces */
+  --bg-primary: #06080c;
+  --bg-secondary: #0b0f16;
+  --bg-tertiary: #121926;
+
+  /* State colours (shared with the orb) */
+  --accent-cyan: #3ccbff;
+  --accent-blue: #4d8dff;
+  --accent-purple: #b06aff;
+  --accent-emerald: #3cea8e;
+  --accent-rose: #ff5c7a;
+  --accent-amber: #ffb03c;
+
+  --state-hear: var(--accent-cyan);
+  --state-think: var(--accent-purple);
+  --state-speak: var(--accent-emerald);
+  --state-ok: var(--accent-emerald);
+  --state-attention: var(--accent-amber);
+  --state-problem: var(--accent-rose);
+
+  /* Text */
+  --text-primary: #eef3f8;
+  --text-secondary: #9fb0c3;
+  --text-muted: #6a7b90;
+
+  /* Glass */
+  --glass-bg: rgba(18, 25, 38, 0.5);
+  --glass-bg-hover: rgba(24, 33, 50, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-border-highlight: rgba(255, 255, 255, 0.16);
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Depth */
+  --shadow-glow-cyan: 0 0 18px rgba(60, 203, 255, 0.14);
+  --shadow-glow-purple: 0 0 18px rgba(176, 106, 255, 0.14);
+  --shadow-glass: 0 8px 28px 0 rgba(0, 0, 0, 0.38);
+
+  /* Type */
+  --font-display: 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Segoe UI Variable Text', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Cascadia Code', 'Cascadia Mono', Consolas, ui-monospace, monospace;
+
+  /* Motion: quick for feedback, a little longer for things that explain a change */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-slow: 420ms;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(circle at 12% 40%, rgba(60, 203, 255, 0.035) 0%, transparent 50%),
+    radial-gradient(circle at 88% 25%, rgba(176, 106, 255, 0.035) 0%, transparent 50%);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The orb's window is see-through: nothing may paint behind the orb (not the colour, not the glows). */
+html.overlay, html.overlay body, html.overlay #root {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Keyboard focus is always visible, mouse focus is not */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg-tertiary); border-radius: var(--radius-sm); }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Panels. Only panels marked .interactive react to the pointer; a big panel that lights up on hover reads as clickable. */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-glass);
+  transition: border-color var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+.glass-panel.interactive { cursor: pointer; }
+.glass-panel.interactive:hover {
+  border-color: var(--glass-border-highlight);
+  background: var(--glass-bg-hover);
+  transform: translateY(-2px);
+}
+.glass-panel.interactive:active { transform: translateY(0); }
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue) 55%, var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  background: linear-gradient(135deg, rgba(60, 203, 255, 0.12), rgba(77, 141, 255, 0.1));
+  border: 1px solid rgba(60, 203, 255, 0.32);
+  color: var(--accent-cyan);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast);
+  box-shadow: var(--shadow-glow-cyan);
+}
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(60, 203, 255, 0.22), rgba(77, 141, 255, 0.2));
+  border-color: var(--accent-cyan);
+  transform: translateY(-1px);
+}
+.btn-primary:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast), transform var(--dur-fast) var(--ease-out);
+}
+.btn-ghost:hover:not(:disabled) {
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+  color: var(--text-primary);
+}
+.btn-ghost:active:not(:disabled) { transform: scale(0.98); }
+.btn-ghost:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---------- Animations that pages already ask for (they were never defined, so spinners did not spin) ---------- */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes slide-down { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+.spin { animation: spin 0.9s linear infinite; }
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 12px currentColor;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Decorative idle animations (the pipeline's travelling dots, the "connected" pulse) pause while this window is not in
+   use. Indicators of real work (the task bar's dot, spinners, progress sweeps, a stage that is working) keep going. */
+html[data-inactive] .pulse-dot:not([data-work]),
+html[data-inactive] .flow-link::after { animation-play-state: paused !important; }
+
+/* Placeholder while something loads: a soft sweep, so the page keeps its shape */
+.skeleton {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0.04) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* ---------- App shell ---------- */
+.shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  background: rgba(10, 14, 21, 0.85);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.nav {
+  position: relative;
+  width: 272px;
+  flex-shrink: 0;
+  padding: 14px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+  background: rgba(10, 14, 21, 0.6);
+  border-right: 1px solid var(--glass-border);
+}
+
+.nav-group-label {
+  padding: 16px 12px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.nav-group-label:first-child { padding-top: 4px; }
+
+/* The marker slides to the page you are on, so the move from one page to another reads as one continuous place */
+.nav-indicator {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 0;
+  height: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(60, 203, 255, 0.13), rgba(77, 141, 255, 0.06));
+  border: 1px solid rgba(60, 203, 255, 0.28);
+  box-shadow: var(--shadow-glow-cyan);
+  pointer-events: none;
+  transition: transform var(--dur-slow) var(--ease-out), height var(--dur-slow) var(--ease-out), opacity var(--dur-base);
+  opacity: 0;
+}
+
+.nav-item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.nav-item:hover { background: rgba(255, 255, 255, 0.04); color: var(--text-primary); }
+.nav-item[aria-current='page'] { color: var(--text-primary); font-weight: 500; background: transparent; }
+.nav-item .nav-label { flex: 1; min-width: 0; }
+.nav-item svg { flex-shrink: 0; transition: color var(--dur-base); }
+
+/* Small readiness dot on pages for an engine */
+.nav-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: var(--text-muted); transition: background var(--dur-slow), box-shadow var(--dur-slow); }
+.nav-dot[data-state='ok'] { background: var(--state-ok); box-shadow: 0 0 8px var(--state-ok); }
+.nav-dot[data-state='attention'] { background: var(--state-attention); box-shadow: 0 0 8px var(--state-attention); }
+.nav-dot[data-state='problem'] { background: var(--state-problem); box-shadow: 0 0 8px var(--state-problem); }
+
+/* A page coming into view after you chose it from the menu */
+.page-enter { animation: page-enter var(--dur-base) var(--ease-out) both; }
+@keyframes page-enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Page structure ---------- */
+.page { display: flex; flex-direction: column; gap: 22px; max-width: 1200px; margin: 0 auto; }
+.page-title { font-size: 26px; font-weight: 650; color: var(--text-primary); }
+.page-subtitle { font-size: 14.5px; line-height: 1.5; color: var(--text-secondary); max-width: 68ch; }
+
+/* ---------- Status pill ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: border-color var(--dur-slow), background var(--dur-slow), color var(--dur-slow);
+}
+.pill strong { color: var(--text-primary); font-weight: 600; }
+.pill[data-state='ok'] { border-color: rgba(60, 234, 142, 0.3); background: rgba(60, 234, 142, 0.06); }
+.pill[data-state='attention'] { border-color: rgba(255, 176, 60, 0.32); background: rgba(255, 176, 60, 0.06); }
+.pill[data-state='problem'] { border-color: rgba(255, 92, 122, 0.34); background: rgba(255, 92, 122, 0.07); }
+
+.meter { height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
+.meter > span { display: block; height: 100%; border-radius: 999px; background: var(--state-ok); transition: width var(--dur-slow) var(--ease-out), background var(--dur-slow); }
+
+/* ---------- Voice pipeline diagram ---------- */
+.flow { display: flex; align-items: stretch; gap: 0; }
+.flow-node {
+  flex: 1 1 0;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 14px 14px;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  --tone: var(--text-muted);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--tone) 7%, transparent), transparent 70%), var(--glass-bg);
+  transition: border-color var(--dur-slow), background var(--dur-slow), transform var(--dur-base) var(--ease-out);
+}
+.flow-node:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--tone) 55%, transparent); }
+.flow-node:active { transform: translateY(0); }
+.flow-node[data-state='ok'] { border-color: color-mix(in srgb, var(--tone) 38%, transparent); }
+.flow-node[data-state='attention'] { --tone: var(--state-attention); }
+.flow-node[data-state='problem'] { --tone: var(--state-problem); }
+.flow-node[data-state='loading'] { --tone: var(--text-muted); }
+
+.flow-icon {
+  width: 38px; height: 38px; border-radius: 11px;
+  display: grid; place-items: center;
+  color: var(--tone);
+  background: color-mix(in srgb, var(--tone) 14%, transparent);
+  transition: color var(--dur-slow), background var(--dur-slow);
+}
+.flow-name { font-family: var(--font-display); font-size: 16px; font-weight: 600; }
+.flow-tech { font-size: 12px; color: var(--text-muted); }
+.flow-desc { font-size: 13px; line-height: 1.45; color: var(--text-secondary); }
+.flow-status { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--tone); margin-top: auto; }
+.flow-status i { width: 7px; height: 7px; border-radius: 50%; background: var(--tone); box-shadow: 0 0 8px var(--tone); }
+.flow-hint { font-size: 12.5px; line-height: 1.4; color: var(--text-secondary); }
+
+/* The link between two stages. Pulses travel along it only while both stages are ready: a broken stage visibly breaks the line. */
+.flow-link { flex: 0 0 44px; position: relative; align-self: center; height: 2px; }
+.flow-link::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.16) 0 4px, transparent 4px 9px);
+}
+.flow-link[data-live='true']::before { background: linear-gradient(90deg, var(--from), var(--to)); opacity: 0.55; }
+.flow-link[data-live='true']::after {
+  content: ''; position: absolute; top: -2px; left: 0; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--to); box-shadow: 0 0 10px var(--to);
+  animation: flow-pulse 1.8s var(--ease-out) infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes flow-pulse {
+  0% { transform: translateX(0); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateX(38px); opacity: 0; }
+}
+
+@media (max-width: 1100px) {
+  .flow { flex-direction: column; }
+  .flow-link { flex: 0 0 28px; width: 2px; height: 28px; }
+  .flow-link::before { background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0 4px, transparent 4px 9px); }
+  .flow-link[data-live='true']::before { background: linear-gradient(180deg, var(--from), var(--to)); }
+  .flow-link[data-live='true']::after { top: 0; left: -2px; animation-name: flow-pulse-v; }
+  @keyframes flow-pulse-v {
+    0% { transform: translateY(0); opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { transform: translateY(22px); opacity: 0; }
+  }
+}
+
+/* Respect the system setting: no movement, state changes still show through colour */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  /* A spinner is progress, not decoration: it keeps turning */
+  .spin { animation-duration: 0.9s !important; animation-iteration-count: infinite !important; }
+}
+
+/* ---------- Test pages: a stage that is running, a note about the run, a result ---------- */
+.flow-node.static { cursor: default; }
+.flow-node.static:hover { transform: none; border-color: var(--glass-border); }
+.flow-node.static[data-state='ok']:hover { border-color: color-mix(in srgb, var(--tone) 38%, transparent); }
+.flow-node.static[data-state='attention']:hover { border-color: color-mix(in srgb, var(--tone) 55%, transparent); }
+.flow-node.static[data-state='problem']:hover { border-color: color-mix(in srgb, var(--tone) 55%, transparent); }
+/* While a run is in progress the stages glow one after the other, so the line reads as something moving through it */
+.flow-node[data-state='working'] {
+  --tone: var(--accent-cyan);
+  border-color: color-mix(in srgb, var(--tone) 50%, transparent);
+  animation: stage-working 1.5s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes stage-working {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50% { box-shadow: 0 0 22px -2px color-mix(in srgb, var(--tone) 55%, transparent); }
+}
+
+.alert {
+  --tone: var(--text-muted);
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--tone) 35%, transparent);
+  background: color-mix(in srgb, var(--tone) 8%, transparent);
+  font-size: 14px; line-height: 1.45;
+  color: var(--text-primary);
+}
+.alert[data-tone='ok'] { --tone: var(--state-ok); }
+.alert[data-tone='attention'] { --tone: var(--state-attention); }
+.alert[data-tone='problem'] { --tone: var(--state-problem); }
+.alert svg { color: var(--tone); }
+
+.btn-danger {
+  background: rgba(255, 92, 122, 0.1);
+  border: 1px solid rgba(255, 92, 122, 0.45);
+  color: var(--accent-rose);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background var(--dur-fast), transform var(--dur-fast) var(--ease-out);
+}
+.btn-danger:hover { background: rgba(255, 92, 122, 0.2); }
+.btn-danger:active { transform: scale(0.98); }
+.btn-danger.solid { background: var(--accent-rose); color: #1a0509; border-color: var(--accent-rose); animation: pulse 2s infinite; }
+
+.result-row { display: grid; grid-template-columns: 120px 1fr; gap: 14px; align-items: baseline; }
+.result-label { font-size: 13px; color: var(--text-muted); }
+.result-body { font-size: 15px; line-height: 1.55; color: var(--text-primary); user-select: text; word-break: break-word; max-width: 80ch; }
+.result-body[data-empty='true'] { color: var(--text-secondary); }
+@media (max-width: 700px) { .result-row { grid-template-columns: 1fr; gap: 4px; } }
+
+/* Something that appears or goes away in the flow of a page folds open and shut, so what is below moves smoothly instead of jumping */
+.collapse { display: grid; grid-template-rows: 0fr; margin-bottom: -22px; transition: grid-template-rows var(--dur-base) var(--ease-out), margin-bottom var(--dur-base) var(--ease-out); }
+.collapse[data-open='true'] { grid-template-rows: 1fr; margin-bottom: 0; }
+.collapse > div { overflow: hidden; min-height: 0; }
+
+/* ---------- Record button with a ring that follows the voice ---------- */
+.rec-stage { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 30px 16px 26px; border-radius: var(--radius-md); border: 1px solid var(--glass-border); background: linear-gradient(180deg, rgba(60, 203, 255, 0.04), transparent 70%); transition: border-color var(--dur-slow), background var(--dur-slow); }
+.rec-stage[data-phase='recording'] { border-color: rgba(255, 92, 122, 0.35); background: linear-gradient(180deg, rgba(255, 92, 122, 0.06), transparent 70%); }
+.rec-stage[data-phase='finishing'] { border-color: rgba(176, 106, 255, 0.35); background: linear-gradient(180deg, rgba(176, 106, 255, 0.06), transparent 70%); }
+
+.rec { --level: 0; position: relative; width: 168px; height: 168px; display: grid; place-items: center; }
+.rec-ring { position: absolute; inset: 40px; border-radius: 50%; border: 1.5px solid rgba(255, 92, 122, 0); opacity: 0; transition: opacity var(--dur-base); }
+.rec-stage[data-phase='recording'] .rec-ring {
+  opacity: 1;
+  border-color: rgba(255, 92, 122, 0.55);
+  background: radial-gradient(circle, rgba(255, 92, 122, 0.16), transparent 70%);
+  transform: scale(calc(1 + var(--level) * 0.9));
+  transition: transform 60ms linear, opacity var(--dur-base);
+}
+.rec-stage[data-phase='recording'] .rec-ring.second { transform: scale(calc(1.05 + var(--level) * 0.5)); opacity: 0.5; border-color: rgba(255, 92, 122, 0.3); background: none; }
+
+.rec-btn {
+  position: relative; z-index: 1; width: 88px; height: 88px; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer;
+  color: var(--accent-cyan);
+  background: linear-gradient(135deg, rgba(60, 203, 255, 0.16), rgba(77, 141, 255, 0.1));
+  border: 1.5px solid rgba(60, 203, 255, 0.45);
+  box-shadow: var(--shadow-glow-cyan);
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-base), color var(--dur-base), border-color var(--dur-base), box-shadow var(--dur-base);
+}
+.rec-btn:hover:not(:disabled) { transform: scale(1.05); background: linear-gradient(135deg, rgba(60, 203, 255, 0.26), rgba(77, 141, 255, 0.18)); }
+.rec-btn:active:not(:disabled) { transform: scale(0.96); }
+.rec-btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
+.rec-btn.live { color: #1a0509; background: var(--accent-rose); border-color: var(--accent-rose); box-shadow: 0 0 28px rgba(255, 92, 122, 0.45); }
+.rec-stage[data-phase='finishing'] .rec-btn { color: var(--accent-purple); border-color: rgba(176, 106, 255, 0.5); background: rgba(176, 106, 255, 0.12); box-shadow: var(--shadow-glow-purple); }
+
+.transcript { min-height: 130px; padding: 20px 22px; border-radius: var(--radius-md); background: var(--bg-tertiary); border: 1px solid var(--glass-border); font-size: 17px; line-height: 1.75; white-space: pre-wrap; user-select: text; box-shadow: inset 0 4px 18px rgba(0, 0, 0, 0.2); }
+.transcript[data-empty='true'] { color: var(--text-muted); }
+
+.select { background: rgba(0, 0, 0, 0.25); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); color: var(--text-primary); font: inherit; font-size: 13px; padding: 7px 10px; cursor: pointer; transition: border-color var(--dur-fast); }
+.select:hover:not(:disabled) { border-color: var(--glass-border-highlight); }
+.select:disabled { opacity: 0.5; cursor: not-allowed; }
+.select option { background: #121926; }
+
+/* ---------- Guided steps ---------- */
+.step-head { display: flex; align-items: center; gap: 12px; }
+.step-head h3 { font-size: 17px; font-weight: 600; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+  font-size: 13px; font-weight: 600; color: var(--text-muted);
+  border: 1.5px solid var(--glass-border-highlight); background: transparent;
+  transition: color var(--dur-slow), border-color var(--dur-slow), background var(--dur-slow), box-shadow var(--dur-slow);
+}
+.step-num[data-state='active'] { color: var(--accent-cyan); border-color: var(--accent-cyan); background: rgba(60, 203, 255, 0.1); box-shadow: 0 0 12px rgba(60, 203, 255, 0.25); }
+.step-num[data-state='done'] { color: #05140c; border-color: var(--state-ok); background: var(--state-ok); }
+
+.rec-stage.compact { padding: 18px 14px; gap: 14px; }
+.rec.small { width: 128px; height: 128px; }
+.rec.small .rec-ring { inset: 22px; }
+.rec.small .rec-btn { width: 72px; height: 72px; }
+
+.chip {
+  padding: 6px 14px; border-radius: 999px; font: inherit; font-size: 13px; cursor: pointer;
+  color: var(--text-secondary); background: transparent; border: 1px solid var(--glass-border);
+  transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast), transform var(--dur-fast) var(--ease-out);
+}
+.chip:hover:not(:disabled) { color: var(--text-primary); border-color: var(--glass-border-highlight); }
+.chip:active:not(:disabled) { transform: scale(0.96); }
+.chip[data-active='true'] { color: var(--state-ok); border-color: rgba(60, 234, 142, 0.5); background: rgba(60, 234, 142, 0.09); }
+.chip:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Work in progress with no known end: a bar that keeps moving */
+.progress { height: 3px; border-radius: 999px; background: rgba(255, 255, 255, 0.07); overflow: hidden; position: relative; margin-top: 2px; }
+.progress::after { content: ''; position: absolute; inset: 0 auto 0 0; width: 35%; border-radius: inherit; background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent); animation: progress-sweep 1.2s ease-in-out infinite; }
+@keyframes progress-sweep { from { transform: translateX(-100%); } to { transform: translateX(300%); } }
+
+/* Before and after */
+.compare-card { --tone: var(--text-muted); display: flex; flex-direction: column; gap: 14px; padding: 18px; border-radius: var(--radius-md); border: 1px solid color-mix(in srgb, var(--tone) 28%, transparent); background: linear-gradient(180deg, color-mix(in srgb, var(--tone) 6%, transparent), transparent 75%); }
+.wave { position: relative; border-radius: var(--radius-sm); background: var(--bg-tertiary); border: 1px solid var(--glass-border); overflow: hidden; }
+.wave canvas { display: block; width: 100%; height: 110px; }
+.wave canvas.reveal { animation: wave-reveal 0.9s var(--ease-out) both; }
+@keyframes wave-reveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.wave-empty { position: absolute; inset: 0; display: grid; place-items: center; font-size: 13px; color: var(--text-muted); }
+.playhead { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--text-primary); box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); pointer-events: none; transition: opacity var(--dur-base); }
+
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+.stat { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: var(--radius-md); background: var(--bg-tertiary); border: 1px solid var(--glass-border); }
+.stat-label { font-size: 13px; color: var(--text-secondary); }
+.stat-value { font-family: var(--font-mono); font-size: 26px; font-weight: 600; }
+.stat-value small { font-size: 14px; color: var(--text-secondary); font-weight: 400; }
+
+/* The strip under the header that says what the assistant is doing, what is waiting, and offers Stop */
+.task-bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 20px;
+  background: rgba(176, 106, 255, 0.07);
+  border-bottom: 1px solid rgba(176, 106, 255, 0.25);
+  font-size: 14px; color: var(--text-primary);
+}

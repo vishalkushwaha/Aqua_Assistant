@@ -1,0 +1,5 @@
+{
+  "probes": [],
+  "disk_free_warn_percent": 10,
+  "memory_free_warn_percent": 10
+}

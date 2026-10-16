@@ -1,0 +1,37 @@
+[package]
+name = "aqua-mcp-adapters"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+url = "2.5"
+aqua-tool-host = { path = "../tool_host" }
+sha2 = "0.10"
+rusqlite = { version = "0.37", features = ["bundled"] }
+
+[features]
+# `browser_mcp::social_watchdog` (and its re-exports `SocialWatchdog`, `SocialWatchdogConfig`, `CommentNotification`, `UploadTask`) is a simulator that nothing calls (card OA13-04): kept in the tree,
+# not compiled unless this feature is on. `cargo test -p aqua-mcp-adapters --features unwired` builds it with its tests. Not in any other feature; it adds no dependency.
+unwired = []
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Storage_FileSystem",
+    "Win32_System_IO",
+    "Win32_System_JobObjects",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Power",
+    "Win32_System_Threading",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+] }

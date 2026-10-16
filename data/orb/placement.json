@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "salt": 1791015215972854501,
+  "settings": {
+    "auto_move": true,
+    "lock": false,
+    "avoid_content": true,
+    "avoid_cursor": true,
+    "per_app": true,
+    "per_page": false,
+    "scroll_move": true,
+    "scroll_live": true,
+    "scroll_interval_ms": 350,
+    "sensitivity": "medium"
+  },
+  "preferred": {
+    "fx": 0.90654206,
+    "fy": 0.5714286
+  },
+  "apps": [
+    {
+      "app": "notepad.exe",
+      "spot": {
+        "fx": 0.9364486,
+        "fy": 0.0
+      },
+      "seen_ms": 1791015348529
+    },
+    {
+      "app": "antigravity ide.exe",
+      "spot": {
+        "fx": 0.5825545,
+        "fy": 0.3774436
+      },
+      "seen_ms": 1792152388346
+    },
+    {
+      "app": "taskmgr.exe",
+      "spot": {
+        "fx": 0.8529595,
+        "fy": 0.23308271
+      },
+      "seen_ms": 1791016021331
+    },
+    {
+      "app": "chrome.exe",
+      "spot": {
+        "fx": 0.9457944,
+        "fy": 0.10977443
+      },
+      "seen_ms": 1791477141234
+    },
+    {
+      "app": "opera.exe",
+      "spot": {
+        "fx": 0.952648,
+        "fy": 0.47218046
+      },
+      "seen_ms": 1791070929685
+    },
+    {
+      "app": "cursor.exe",
+      "spot": {
+        "fx": 0.6498442,
+        "fy": 0.07969925
+      },
+      "seen_ms": 1792152479149
+    },
+    {
+      "app": "brave.exe",
+      "spot": {
+        "fx": 0.90654206,
+        "fy": 0.5714286
+      },
+      "seen_ms": 1792170219037
+    },
+    {
+      "app": "windowsterminal.exe",
+      "spot": {
+        "fx": 0.96074766,
+        "fy": 0.0
+      },
+      "seen_ms": 1791470013596
+    }
+  ],
+  "pages": []
+}

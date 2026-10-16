@@ -1,0 +1,17 @@
+[package]
+name = "aqua-tool-host"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+sha2 = "0.10"
+regex = "1"
+base64 = "0.22"
+getrandom = "0.2"
+ring = "0.17"

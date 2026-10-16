@@ -1,0 +1,6 @@
+{
+  "kubectl_path": null,
+  "kubeconfig": null,
+  "contexts": [],
+  "max_replicas": 20
+}

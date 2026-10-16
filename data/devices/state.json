@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "salt": 10705129358355203859,
+  "settings": {
+    "enabled": true,
+    "announce_connections": true,
+    "announce_disconnections": true,
+    "announce_low_battery": true,
+    "announce_critical_battery": true,
+    "announce_charging": false,
+    "announce_fully_charged": false,
+    "announce_recovered": false,
+    "announce_unknown_usb": true,
+    "low_percent": 20,
+    "very_low_percent": 10,
+    "critical_percent": 5,
+    "battery_cooldown_secs": 600,
+    "charging_cooldown_secs": 60,
+    "rate_limit_per_minute": 6,
+    "infer_charging": false,
+    "repeat_critical_minutes": 0,
+    "quiet_hours": {
+      "enabled": false,
+      "start_hour": 22,
+      "end_hour": 7
+    },
+    "disabled_categories": [],
+    "devices": {},
+    "templates": {}
+  },
+  "known": {
+    "bt:1c112f3450ea": {
+      "name": "iQOO Z9x 5G",
+      "device_type": "headphones",
+      "connection": "bluetooth",
+      "id_kind": "address",
+      "last_seen": 1791016780
+    },
+    "bt:41427836a8f1": {
+      "name": "trüke Buds Pro ANC",
+      "device_type": "headphones",
+      "connection": "bluetooth",
+      "id_kind": "address",
+      "last_seen": 1791016780
+    },
+    "bt:4142f648f38a": {
+      "name": "trüke Buds Pro ANC",
+      "device_type": "headphones",
+      "connection": "bluetooth",
+      "id_kind": "address",
+      "last_seen": 1791016780
+    },
+    "bt:67d57819437d": {
+      "name": "TCL S332W",
+      "device_type": "headphones",
+      "connection": "bluetooth",
+      "id_kind": "address",
+      "last_seen": 1791016780
+    },
+    "bt:70bbe920d50f": {
+      "name": "Redmi Note 6 Pro",
+      "device_type": "headphones",
+      "connection": "bluetooth",
+      "id_kind": "address",
+      "last_seen": 1791016780
+    },
+    "bt:75e5764bbb97": {
+      "name": "NearbySharing",
+      "device_type": "headphones",
+      "connection": "bluetooth",
+      "id_kind": "address",
+      "last_seen": 1791016780
+    },
+    "bt:98226e585755": {
+      "name": "Echo Show 8-0RR",
+      "device_type": "speaker",
+      "connection": "bluetooth",
+      "id_kind": "address",
+      "last_seen": 1791016780
+    },
+    "bt:d09ff9618aa1": {
+      "name": "Rockerz 551ANC",
+      "device_type": "headphones",
+      "connection": "bluetooth",
+      "id_kind": "address",
+      "last_seen": 1791016780
+    },
+    "bt:e44097697af6": {
+      "name": "OPPO Reno10 5G",
+      "device_type": "headphones",
+      "connection": "bluetooth",
+      "id_kind": "address",
+      "last_seen": 1791016780
+    },
+    "c:d4615868-c385-5ed9-8fe6-e822d74b0af1": {
+      "name": "Bluetooth Peripheral Device",
+      "device_type": "headphones",
+      "connection": "bluetooth",
+      "id_kind": "container",
+      "last_seen": 1791016780
+    },
+    "c:f2030415-58b4-585b-ae5f-d9f62b4b6e02": {
+      "name": "Bluetooth Peripheral Device",
+      "device_type": "speaker",
+      "connection": "bluetooth",
+      "id_kind": "container",
+      "last_seen": 1791016780
+    },
+    "system:battery": {
+      "name": "",
+      "device_type": "computer",
+      "connection": "internal",
+      "id_kind": "system",
+      "last_seen": 1792168577
+    },
+    "usb:2717:ff40:d23df8970922": {
+      "name": "Redmi Note 12 5G",
+      "device_type": "phone",
+      "connection": "usb",
+      "id_kind": "usb_serial",
+      "last_seen": 1790989033
+    }
+  }
+}

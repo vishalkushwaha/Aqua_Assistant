@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "key": "notepad",
+      "name": "Notepad",
+      "recipe": {
+        "kind": "exe",
+        "target": "notepad.exe"
+      },
+      "source": "well-known",
+      "confidence": 0.991091,
+      "successes": 14,
+      "failures": 0,
+      "fail_streak": 0,
+      "unverified": 2,
+      "avg_ms": 505,
+      "last_ms": 764,
+      "learned_unix": 1790989044,
+      "last_unix": 1791224722
+    },
+    {
+      "key": "clock",
+      "name": "Clock",
+      "recipe": {
+        "kind": "apps_folder",
+        "target": "Microsoft.WindowsAlarms_8wekyb3d8bbwe!App"
+      },
+      "source": "start menu",
+      "confidence": 0.625,
+      "successes": 1,
+      "failures": 0,
+      "fail_streak": 0,
+      "unverified": 1,
+      "avg_ms": 353,
+      "last_ms": 353,
+      "learned_unix": 1790989048,
+      "last_unix": 1790989062
+    },
+    {
+      "key": "paint",
+      "name": "Paint",
+      "recipe": {
+        "kind": "exe",
+        "target": "mspaint.exe"
+      },
+      "source": "well-known",
+      "confidence": 0.5,
+      "successes": 0,
+      "failures": 0,
+      "fail_streak": 0,
+      "unverified": 1,
+      "avg_ms": 0,
+      "last_ms": 0,
+      "learned_unix": 1790989107,
+      "last_unix": 1790989107
+    },
+    {
+      "key": "calculator",
+      "name": "Calculator",
+      "recipe": {
+        "kind": "exe",
+        "target": "calc.exe"
+      },
+      "source": "well-known",
+      "confidence": 0.71875,
+      "successes": 2,
+      "failures": 0,
+      "fail_streak": 0,
+      "unverified": 0,
+      "avg_ms": 1185,
+      "last_ms": 895,
+      "learned_unix": 1791019154,
+      "last_unix": 1791019199
+    }
+  ]
+}

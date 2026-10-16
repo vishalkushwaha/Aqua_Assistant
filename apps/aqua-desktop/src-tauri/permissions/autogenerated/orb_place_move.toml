@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-orb-place-move"
+description = "Enables the orb_place_move command without any pre-configured scope."
+commands.allow = ["orb_place_move"]
+
+[[permission]]
+identifier = "deny-orb-place-move"
+description = "Denies the orb_place_move command without any pre-configured scope."
+commands.deny = ["orb_place_move"]

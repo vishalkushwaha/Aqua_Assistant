@@ -1,0 +1,20 @@
+{
+  "allow": [
+    "*.wikipedia.org",
+    "*.bbc.com",
+    "*.bbc.co.uk",
+    "*.duckduckgo.com",
+    "wttr.in",
+    "docs.rs",
+    "crates.io",
+    "*.rust-lang.org"
+  ],
+  "deny": [],
+  "allow_private": [],
+  "blocked_ports": [],
+  "unknown_hosts": "ask",
+  "auth": {},
+  "search": null,
+  "search_fallback": [],
+  "scrape": true
+}

@@ -1,0 +1,70 @@
+[package]
+name = "aqua-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+# `cargo run -p aqua-core` stays the core now that the package also has a second program (the fake model server below).
+default-run = "aqua-core"
+
+[dependencies]
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+rusqlite = { version = "0.37", features = ["bundled"] }
+axum = { version = "0.7", features = ["ws"] }
+tower-http = { version = "0.5", features = ["cors"] }
+tokio-stream = "0.1"
+aqua-audio-adapter = { path = "../adapters/audio_adapter" }
+aqua-mcp-adapters = { path = "../adapters/mcp_adapters" }
+aqua-device-monitor = { path = "../adapters/device_monitor" }
+aqua-tool-host = { path = "../adapters/tool_host" }
+aqua-vision-adapter = { path = "../adapters/vision_adapter" }
+aqua-native-tools = { path = "../adapters/native_tools", features = ["fs", "term", "sys", "ssh", "git", "db", "http", "docker", "k8s", "iac", "cloud", "mon", "forge", "netdb", "doc"] }
+laya = { package = "laya-candle", path = "../vendor/laya_rust/laya-rs" }
+indexmap = { version = "2", features = ["serde"] }
+base64 = "0.22"
+image = { version = "0.25", default-features = false, features = ["png"] }
+ab_glyph = "0.2"
+calamine = { version = "0.26", features = ["dates"] }
+rust_xlsxwriter = "0.79"
+csv = "1"
+sha2 = "0.10"
+regex = "1"
+ring = "0.17"
+url = "2.5"
+zip = { version = "2", default-features = false, features = ["deflate"] }
+ureq = { version = "2", features = ["json"] }
+chrono = "0.4.45"
+chrono-tz = "0.10"
+getrandom = "0.2"
+dirs = "7.0.0"
+# The static embedding model of card R3-06 (`memory/static_embed.rs`). The versions and features are the ones the lock file already holds:
+# safetensors 0.8 (through candle and the vendored Laya) and tokenizers 0.23 with the regular expressions of fancy-regex (as the Laya uses it).
+safetensors = "0.8"
+tokenizers = { version = "0.23", default-features = false, features = ["fancy-regex"] }
+
+[features]
+# `aqua_core::test_support` (the scripted planner, completer and approver, the environment guard, the throw-away world, `wait_until`, the data-folder tripwire).
+# This crate's own unit tests always have it; the feature is for the integration tests in `core/tests/`: `cargo test -p aqua-core --features test-support --test <name>`.
+# It adds no dependency, and nothing in a release build.
+test-support = []
+
+# The old scaffold modules that nothing calls (card OA13-04): career, hal, crypto::key_rotation and, in modules/, backup_manager, code_generator, dependency_integrator, document_reader,
+# file_organizer, image_generator, scheduler and updater. The code is kept in the tree and is not compiled unless this feature is on, so it cannot rot unseen:
+# `cargo test -p aqua-core --features unwired` builds it with its tests. Not in any other feature, and nothing in a release build. It adds no dependency.
+unwired = []
+
+# A stand-in for `llama-server` (card OA2-02): replies and faults from a script, started through the real launch path by `core/tests/llama_fault_test.rs`. Only with the feature, so no
+# release build contains it. It uses `serde_json` and the standard library and nothing that is not already a dependency of this crate.
+[[bin]]
+name = "aqua_fake_llama"
+path = "src/bin/aqua_fake_llama.rs"
+required-features = ["test-support"]
+
+[dev-dependencies]
+tower ={ version = "0.5", features = ["util"] }
+http-body-util = "0.1"

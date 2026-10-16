@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-orb-hit-regions"
+description = "Enables the orb_hit_regions command without any pre-configured scope."
+commands.allow = ["orb_hit_regions"]
+
+[[permission]]
+identifier = "deny-orb-hit-regions"
+description = "Denies the orb_hit_regions command without any pre-configured scope."
+commands.deny = ["orb_hit_regions"]

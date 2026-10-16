@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "host": "127.0.0.1",
+  "port": 6379,
+  "graph": "AquaCompanyBrain",
+  "tenant_id": "demo",
+  "user": null,
+  "secret": null,
+  "tls": false
+}

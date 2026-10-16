@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-orb-place-recheck"
+description = "Enables the orb_place_recheck command without any pre-configured scope."
+commands.allow = ["orb_place_recheck"]
+
+[[permission]]
+identifier = "deny-orb-place-recheck"
+description = "Denies the orb_place_recheck command without any pre-configured scope."
+commands.deny = ["orb_place_recheck"]

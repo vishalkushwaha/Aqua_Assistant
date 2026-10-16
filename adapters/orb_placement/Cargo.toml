@@ -1,0 +1,11 @@
+[package]
+name = "aqua-orb-placement"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Where the voice orb should sit so it does not cover what the person is working on (pure logic, no windows, no I/O except one small settings file)"
+
+# No `workspace = true` inheritance on purpose: the desktop shell (apps/aqua-desktop/src-tauri) is its own cargo workspace and uses this crate by path.
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

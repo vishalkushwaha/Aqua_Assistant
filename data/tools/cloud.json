@@ -1,0 +1,8 @@
+{
+  "aws_path": null,
+  "azure_path": null,
+  "gcloud_path": null,
+  "enabled": [],
+  "env": {},
+  "env_secrets": {}
+}

@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "servers": {
+    "browser:browser mcp": {
+      "server": "Browser MCP 0.1.3",
+      "recorded_at": 1792140263,
+      "tools": {
+        "browser_click": "d81867c2ced9e2569c7fc3f6a08a90b243a460e2b8920a6721ae07dfaf84b832",
+        "browser_get_console_logs": "e91214461096fd6ca3f678491882be24d25d0298b7d84d211b6f0aa4439aa486",
+        "browser_go_back": "491e5f818d7be1b6c6b39a083d55f8c166f705ceff7c558d8eda42f98db8656e",
+        "browser_go_forward": "35be96f5aee655ced2b34d595ce885686ef65d465dbc45c0a3d463b57bc0b085",
+        "browser_hover": "c057eff7a4c6d4b2393ed543350449b445b60dbd041e318c4aedc61f4a49adb2",
+        "browser_navigate": "1265a04609e92151089fbe716982b789b04f2fa8be8a42afaa35c19545db1c69",
+        "browser_press_key": "2cf302da57532ee48c6205ab3ad7157d052ef53d0b9fc2e2acbe0978f28f25d0",
+        "browser_screenshot": "399bc4770e55481bc2f3324005797245684f07384394b6fe383047398ba82239",
+        "browser_select_option": "fa4c7574b9ea91cc222ae1eb4393957669380f31aef369e7b4b4ab59499512ce",
+        "browser_snapshot": "af306972dd773f8aa93cdde020124941847d55668994fca5217f65fc7017b99c",
+        "browser_type": "0db4ffdaed8b68981d87423dc367fab44a0ef4fc206ee928d631e07ac082157a",
+        "browser_wait": "155d3f57e53acc176ab32f4e25d9b8738c0288ea1c0f594be89bec87f6565502"
+      }
+    },
+    "windows:windows-mcp": {
+      "server": "windows-mcp 4.0.10",
+      "recorded_at": 1792112565,
+      "tools": {
+        "App": "dc9cb8410a22a210186c94a4486dd5c10acd234b7ddc932cba88b2ef12633595",
+        "Click": "975f1bb66b5b9ae3e2653a108b2ae365879f74a5c8203f6c9c2b9bc27d258f59",
+        "DisplayInventory": "2a309d3b0324143235ec8df130760b417802f9ce415da678f9a56b0436ca7091",
+        "Move": "c0acc3bc5dc175469f567266178b4ab57159162639556f286576c99bde2c9d30",
+        "MultiEdit": "9af3a486567645ae0ead12daead2bc95f34bd94952a0ff0c787c4622d2ba0e59",
+        "MultiSelect": "0825d69bf241ea6f29117bdf1c58c2f42f683d2004aea6f5f3bae1d7ac6e613f",
+        "Notification": "46b7d13c6c3bcf6bde3800976f3e7c4e7dabb23259a968bfedb6c570dfbf950d",
+        "Screenshot": "bba372f6a516f8dec3b69a5fde01e9fd511d5136d01aa2b6569ffcfacb26a0cb",
+        "Scroll": "002596505e86af0d57183cf02f62b12678c5e1b94c722e46ac7f483bd80f74f9",
+        "Shortcut": "42385b07ed3309cf44a846104c06260137fa0ba8cdc42d045dbcbdb6dcaafbd2",
+        "Snapshot": "1b3ae9393286e9b01b34be579b2a71b1d21be04e0210c534f1ca2a1890f291bc",
+        "Type": "075cb8034e2b1f64a3ed3cdc8e7956a8d57786ab2a715aeffd9dcf9575dc9d2b",
+        "Wait": "1187452f8188e755941622a7815deb265dce742ea5ff0ce9dfa2fff20d417447",
+        "WaitFor": "ca5b769a604b3d03b8e516a777c411bd1d42bfe55b40dd5d74d17aae9dc39515"
+      }
+    }
+  }
+}

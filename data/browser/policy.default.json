@@ -1,0 +1,42 @@
+{
+  "mode": "ask",
+  "allow": [
+    "localhost",
+    "127.0.0.1",
+    "*.bbc.com",
+    "*.bbc.co.uk",
+    "*.duckduckgo.com",
+    "*.wikipedia.org",
+    "wttr.in"
+  ],
+  "deny": [
+    "127.0.0.1:1420",
+    "127.0.0.1:8766",
+    "127.0.0.1:8767",
+    "localhost:1420",
+    "localhost:8766",
+    "localhost:8767",
+    "[::1]:1420",
+    "[::1]:8766",
+    "[::1]:8767",
+    "10.0.0.0/8",
+    "172.16.0.0/12",
+    "192.168.0.0/16",
+    "169.254.0.0/16",
+    "100.64.0.0/10",
+    "0.0.0.0/8",
+    "fc00::/7",
+    "fe80::/10",
+    "metadata.google.internal"
+  ],
+  "javascript": "off",
+  "javascript_sites": [],
+  "confirm_irreversible": true,
+  "confirm_timeout_secs": 60,
+  "profile": "persistent",
+  "browser": "msedge",
+  "headless": false,
+  "max_tabs": 4,
+  "idle_shutdown_minutes": 10,
+  "snapshot_budget_chars": 6000
+}

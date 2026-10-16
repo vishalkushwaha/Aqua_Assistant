@@ -1,0 +1,70 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Aqua Assistant",
+  "version": "0.1.0",
+  "identifier": "com.viskush.aqua",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Aqua AI Desktop & Admin Panel",
+        "url": "http://127.0.0.1:1420",
+        "width": 1200,
+        "height": 800,
+        "resizable": true,
+        "fullscreen": false,
+        "transparent": false,
+        "backgroundColor": "#06080c",
+        "decorations": true,
+        "visible": true
+      },
+      {
+        "title": "",
+        "label": "voice-overlay",
+        "url": "http://127.0.0.1:1420/index.html?overlay=true",
+        "width": 300,
+        "height": 300,
+        "resizable": false,
+        "fullscreen": false,
+        "transparent": true,
+        "shadow": false,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "hiddenTitle": true,
+        "skipTaskbar": true,
+        "visible": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' ipc: http://ipc.localhost http://127.0.0.1:8767 http://127.0.0.1:1420; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["msi", "nsis", "appimage", "deb", "app", "dmg"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico"
+    ],
+    "publisher": "VisKush",
+    "category": "Productivity",
+    "externalBin": ["bin/aqua-core"],
+    "resources": { "resources/engines": "engines", "resources/setup": "setup" },
+    "windows": { "nsis": { "installerHooks": "installer-hooks.nsh" } },
+    "createUpdaterArtifacts": true
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEMyOEFBQjJGRDdCNTJEODcKUldTSExiWFhMNnVLd2dyQ3ZtZnFmL29SSG45MWJWVTNDZTB4bUUxMDB3N2IyZVVqS0pDVFFNQTcK",
+      "windows": { "installMode": "passive" }
+    }
+  }
+}

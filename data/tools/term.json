@@ -1,0 +1,26 @@
+{
+  "path_dirs": [
+    "%SystemRoot%/System32",
+    "%ProgramFiles%/Git/cmd",
+    "%ProgramFiles%/nodejs",
+    "%USERPROFILE%/.cargo/bin"
+  ],
+  "max_sessions": 8,
+  "memory_mb": 1024,
+  "max_processes": 32,
+  "extra_system_programs": [],
+  "discover": true,
+  "default_tier": "none",
+  "mcp_tier": "none",
+  "mxc": {
+    "exe": "",
+    "network_allow": [],
+    "read_paths": [],
+    "ui_disable": false
+  },
+  "auto_background": false,
+  "live_output": false,
+  "extended_project_checks": false,
+  "check_grants": false,
+  "journal": false
+}
