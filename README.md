@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/aqua-logo.png" alt="Aqua Logo" width="100" height="100" />
+  <img src="https://github.com/Vaibhav-tester/Aqua_Assistant/releases/download/v1.0.0/aqua-logo.png" alt="Aqua Logo" width="100" height="100" />
   <h1>Aqua Company Brain</h1>
   <p><strong>Graph-Grounded Private AI Agent powered by FalkorDB</strong></p>
   <p>
@@ -48,28 +48,28 @@ A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explain
 ### 1. Neural Voice Orb & Desktop Assistant
 Aqua features an always-available floating desktop **Neural Voice Orb** that handles hands-free speech, system control, and workspace context:
 
-![Aqua Neural Voice Orb](assets/aqua-orb-assistant.png)
+![Aqua Neural Voice Orb](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/download/v1.0.0/aqua-orb-assistant.png)
 
 ---
 
 ### 2. Company Brain Knowledge Graph Dashboard
 Ask complex enterprise questions and receive answers composed exclusively from FalkorDB records, complete with verified multi-hop paths, citations, and authority scores:
 
-![Aqua Company Brain Dashboard](assets/company-brain-dashboard.png)
+![Aqua Company Brain Dashboard](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/download/v1.0.0/company-brain-dashboard.png)
 
 ---
 
 ### 3. Graph-Authorized Action Execution
 Before modifying team tickets or triggering mutations, Aqua executes pre-flight Cypher traversals (`Ticket -> Project <- Person`) to revalidate ownership:
 
-![Graph-Authorized Action Execution](assets/action-validation-dashboard.png)
+![Graph-Authorized Action Execution](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/download/v1.0.0/action-validation-dashboard.png)
 
 ---
 
 ### 4. Persistent Memory Graph & Multi-Agent Coordination
 Sessions, questions, answers, source citations, state revisions, and agent handoffs are saved as persistent graph entities in FalkorDB:
 
-![FalkorDB Persistent Memory Graph](assets/memory-graph-dashboard.png)
+![FalkorDB Persistent Memory Graph](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/download/v1.0.0/memory-graph-dashboard.png)
 
 ## Architecture
 
