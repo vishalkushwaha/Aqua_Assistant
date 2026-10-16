@@ -10,7 +10,7 @@
 * **Tagline**: Graph-grounded private assistant using FalkorDB for context, multi-hop reasoning, action authorization, and persistent multi-agent memory.
 * **Track Selected**: Track 03 — Company Brain
 * **GitHub Repository URL**: `https://github.com/Vaibhav-tester/Aqua_Assistant`
-* **Demo Video URL**: *(Paste your public YouTube / Loom link here)*
+* **Demo Video URL**: `https://youtu.be/8DfhnxvLxXA`
 * **Release Download**: `https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0`
 * **Blog Post URL**: *(Paste your published Dev.to/Hashnode link here for the AirPods 5 prize)*
 

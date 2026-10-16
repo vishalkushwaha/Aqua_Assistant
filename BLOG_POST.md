@@ -128,5 +128,5 @@ Refusing to synthesize an ungrounded answer without graph proof.
 ## Try It Out
 
 - **GitHub Repository**: [https://github.com/Vaibhav-tester/Aqua_Assistant](https://github.com/Vaibhav-tester/Aqua_Assistant)
-- **Demo Video**: Included in the repository at `demo/video/aqua-company-brain-demo.mp4`
+- **Demo Video (YouTube)**: [https://youtu.be/8DfhnxvLxXA](https://youtu.be/8DfhnxvLxXA)
 - **Track**: Track 03 — Company Brain *(Graph Hacks: Context for AI Agents)*
