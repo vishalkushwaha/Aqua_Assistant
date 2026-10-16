@@ -1,4 +1,14 @@
-# Aqua Company Brain
+<div align="center">
+  <img src="assets/aqua-logo.png" alt="Aqua Logo" width="100" height="100" />
+  <h1>Aqua Company Brain</h1>
+  <p><strong>Graph-Grounded Private AI Agent powered by FalkorDB</strong></p>
+  <p>
+    <a href="https://youtu.be/8DfhnxvLxXA"><img src="https://img.shields.io/badge/YouTube-Watch%20Demo-red?style=flat-square&logo=youtube" alt="YouTube Demo" /></a>
+    <a href="https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0"><img src="https://img.shields.io/badge/Release-v1.0.0-blue?style=flat-square" alt="Release" /></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License" /></a>
+    <a href="https://www.wemakedevs.org/hackathons/falkordb"><img src="https://img.shields.io/badge/WeMakeDevs-Graph%20Hacks%20Track%2003-purple?style=flat-square" alt="Hackathon" /></a>
+  </p>
+</div>
 
 Aqua Company Brain is a graph-grounded agent for **Graph Hacks Track 03 - Company Brain**. It connects people, teams, projects, tickets, decisions, documents, chats, actions, and agent memories in FalkorDB. The graph is not a visualization layer: it determines the answer, validates the proposed assignment, supplies the cited paths, and stores later-session and multi-agent state.
 
@@ -32,6 +42,34 @@ A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explain
 - **0:32 - 0:40**: Graph-authorized action: revalidates ownership via Cypher before creating `ASSIGNED_TO`.
 - **0:40 - 0:48**: Persistent memory recall across sessions from FalkorDB.
 - **0:48 - 0:56**: Multi-agent coordination: handoff to second agent with shared graph context.
+
+## 🖼️ User Interface & System Showcase
+
+### 1. Neural Voice Orb & Desktop Assistant
+Aqua features an always-available floating desktop **Neural Voice Orb** that handles hands-free speech, system control, and workspace context:
+
+![Aqua Neural Voice Orb](assets/aqua-orb-assistant.png)
+
+---
+
+### 2. Company Brain Knowledge Graph Dashboard
+Ask complex enterprise questions and receive answers composed exclusively from FalkorDB records, complete with verified multi-hop paths, citations, and authority scores:
+
+![Aqua Company Brain Dashboard](assets/company-brain-dashboard.png)
+
+---
+
+### 3. Graph-Authorized Action Execution
+Before modifying team tickets or triggering mutations, Aqua executes pre-flight Cypher traversals (`Ticket -> Project <- Person`) to revalidate ownership:
+
+![Graph-Authorized Action Execution](assets/action-validation-dashboard.png)
+
+---
+
+### 4. Persistent Memory Graph & Multi-Agent Coordination
+Sessions, questions, answers, source citations, state revisions, and agent handoffs are saved as persistent graph entities in FalkorDB:
+
+![FalkorDB Persistent Memory Graph](assets/memory-graph-dashboard.png)
 
 ## Architecture
 
