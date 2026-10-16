@@ -144,11 +144,11 @@ Tauri **Rust backend** (`src-tauri/src`) is not in the repository yet — UI run
 | :--- | :--- |
 | Version | `0.1.0` |
 | Edition | 2021 |
-| License | MIT (workspace `Cargo.toml`) |
-| Authors | VisKush |
-| Repository | `https://gitlab.com/VisKush/aqua_assistant.git` |
+| License | MIT ([`LICENSE`](../LICENSE)) |
+| Authors | Aqua Assistant Team |
+| Repository | `https://github.com/Vaibhav-tester/Aqua_Assistant.git` |
 
-No root `LICENSE` file in tree; MIT is declared in crate manifests.
+Root `LICENSE` file in tree: MIT.
 
 ---
 
