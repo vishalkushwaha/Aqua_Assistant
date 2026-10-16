@@ -122,34 +122,118 @@ graph LR
 
 Every company and memory record is tenant-scoped. Ingested records also carry a source identity, content hash, observed time, source update time, freshness deadline, and active state.
 
-## Quick start
+## How to run Aqua
 
-Requirements:
+Aqua is built as a complete modular system comprising:
+1. **Frontend Web UI & FalkorDB Bridge** (`React + Vite + TypeScript` on Port `1420`)
+2. **Aqua Core Backend Engine** (`Rust / FastServer` on Port `8767`)
+3. **Windows Desktop Native UI & Floating Neural Voice Orb** (`Tauri v2 + Win32 Native Overlay`)
+4. **Knowledge Graph Database** (`FalkorDB Cloud` or local Docker on Port `6379`)
 
-- An accessible FalkorDB instance (a self-hosted server or FalkorDB Cloud; a TLS-enabled endpoint for remote hosts)
-- Node.js 18 or newer
-- npm
+You can launch everything simultaneously with the **1-Click Universal Launcher**, or start each component individually.
 
-From the repository root:
+---
+
+### Option 1: 1-Click Universal Launcher (Recommended)
+
+To start the **complete project** (Backend Core + Frontend + FalkorDB Bridge + Windows Desktop UI & Voice Orb) with a single command:
+
+#### On Windows (Double-Click or Terminal):
+Double-click `start.bat` in the repository root, or run in PowerShell:
 
 ```powershell
-Set-Location apps/aqua-desktop
+.\start.bat
+# or
+powershell -ExecutionPolicy Bypass -File .\start.ps1
+# or
+npm start
+```
+
+**What this does automatically:**
+1. Verifies local paths and configuration (`AQUA_WORKSPACE_ROOT`, Kokoro neural TTS models).
+2. Cleanly terminates any stale background processes on ports `8767` and `1420`.
+3. Boots the **Frontend & FalkorDB Graph Bridge** on `http://127.0.0.1:1420`.
+4. Spawns the **Aqua Core Backend** and **Windows Desktop UI & Floating Voice Orb** (`aqua-desktop.exe`).
+5. Opens your default web browser directly to `http://127.0.0.1:1420/`.
+
+---
+
+### Option 2: Running Components Individually
+
+If you prefer to run or debug specific tiers separately, follow these steps:
+
+#### 1. Database (FalkorDB)
+Choose either FalkorDB Cloud or local Docker:
+
+- **FalkorDB Cloud (Recommended):** Set your database credentials in `apps/aqua-desktop/.env`:
+  ```bash
+  FALKORDB_HOST=your-endpoint.falkordb.cloud
+  FALKORDB_PORT=6379
+  FALKORDB_GRAPH=AquaCompanyBrain
+  FALKORDB_USER=default
+  FALKORDB_PASSWORD=your_password
+  FALKORDB_TLS=true
+  ```
+- **Local FalkorDB (Docker):** Run from the project root:
+  ```bash
+  docker compose -f docker-compose.company-brain.yml up -d
+  ```
+
+#### 2. Frontend Web UI & FalkorDB Bridge
+The web interface includes the Company Brain visualizer, live Cypher query inspector, ticket dispatch controls, and agent memory timelines:
+
+```powershell
+# Navigate to desktop app directory
+cd apps/aqua-desktop
+
+# Copy example environment config (if not already created)
 Copy-Item .env.example .env
-# Fill in the FALKORDB_HOST, FALKORDB_PORT, FALKORDB_GRAPH, FALKORDB_USER and
-# FALKORDB_PASSWORD values for the instance you will use.
+
+# Install dependencies and start Vite dev server
 npm.cmd install
 npm.cmd run dev
 ```
+> **Access URL:** Open [http://127.0.0.1:1420](http://127.0.0.1:1420) in any modern browser. Choose **Company Brain**, click **Prepare demo company**, and explore the interactive graph traversals.
 
-Open `http://127.0.0.1:1420`, choose **Company Brain**, and select **Prepare demo company**. Ask the prefilled question, inspect its paths and sources, then approve the graph-backed assignment.
+#### 3. Windows Desktop UI & Floating Neural Voice Orb
+Aqua includes a native Windows desktop client featuring an always-on-top interactive neural voice orb, screen capture integration, and desktop shortcuts:
 
-Connection values are read from `apps/aqua-desktop/.env`; `vite.config.ts` passes them to the bridge. Remote hosts require TLS (`FALKORDB_TLS=true`). The password belongs in the environment file or the operating system Credential Manager, never in a committed file.
+- **Quick Launch (Release Binary):**
+  ```powershell
+  # From root directory:
+  .\run_aqua_desktop.bat
+  # or
+  powershell -ExecutionPolicy Bypass -File scripts\start-aqua-release.ps1
+  ```
+- **Development Mode (with live hot-reload):**
+  ```powershell
+  cd apps/aqua-desktop
+  npx tauri dev
+  ```
 
-The `FALKORDB_ALLOW_INSECURE_REMOTE=true` override exists only for synthetic-data demo endpoints that do not offer TLS. Use it with synthetic data only, and replace such an endpoint with a TLS-enabled one before handling confidential information.
+#### 4. Aqua Core Backend Engine (Rust)
+The native agent core provides local model execution (Candle/SLM), deterministic graph policy validation, and tool dispatch:
 
-`docker-compose.company-brain.yml` is kept in the repository for anyone who prefers to run FalkorDB locally in a container. It is an optional convenience, not a requirement for the quick start above.
+```powershell
+# Build and execute the release or debug core
+cargo run -p aqua-core --bin aqua-core
+```
+> **Backend API:** Health and tool endpoints will be available at [http://127.0.0.1:8767/api/v1/health](http://127.0.0.1:8767/api/v1/health).
+
+---
+
+### Port & Service Summary
+
+| Service | Port | Description |
+| :--- | :--- | :--- |
+| **Frontend & FalkorDB Bridge** | `1420` | React + Vite UI and FalkorDB Graph API bridge |
+| **Aqua Core Backend Engine** | `8767` | Rust agent core, tool dispatch, local SLM inference |
+| **FalkorDB Local Instance** | `6379` | Graph database engine (if running via Docker Compose) |
+| **Kokoro TTS Speech Daemon** | `8766` | Offline neural voice synthesis (optional) |
+| **Windows Desktop UI & Orb** | Native Win32 | Floating desktop assistant & always-on-top Voice Orb |
 
 See the [demo runbook](docs/DEMO_RUNBOOK.md) for reset, failure-mode, memory, and recording steps.
+
 
 ## Aqua core configuration
 
