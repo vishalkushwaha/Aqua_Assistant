@@ -16,6 +16,23 @@ If FalkorDB is unavailable or no connected evidence exists, Company Brain refuse
 4. Proposes and executes an assignment only when FalkorDB confirms the ownership path.
 5. Stores questions, answers, actions, outcomes, state revisions, and handoffs for later sessions and agents.
 
+## Demo Video & Walkthrough
+
+A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explainability, graph-controlled action, persistent memory, and disconnection refusal is included:
+
+<video src="https://github.com/Vaibhav-tester/Aqua_Assistant/raw/main/demo/video/aqua-company-brain-demo.mp4" controls="controls" width="100%" style="max-height: 480px;"></video>
+
+* **Direct Video File**: [▶️ `demo/video/aqua-company-brain-demo.mp4`](demo/video/aqua-company-brain-demo.mp4)
+* **Captions / Subtitles**: [📄 `demo/video/captions.srt`](demo/video/captions.srt)
+* **Demo Runbook**: [📖 `docs/DEMO_RUNBOOK.md`](docs/DEMO_RUNBOOK.md)
+
+### Walkthrough Timeline:
+- **0:00 - 0:16**: Problem statement & tenant-scoped company knowledge model in FalkorDB.
+- **0:16 - 0:32**: Live multi-hop graph retrieval (`Ticket -> Project <- Person -> Team`) and citing grounded sources.
+- **0:32 - 0:40**: Graph-authorized action: revalidates ownership via Cypher before creating `ASSIGNED_TO`.
+- **0:40 - 0:48**: Persistent memory recall across sessions from FalkorDB.
+- **0:48 - 0:56**: Multi-agent coordination: handoff to second agent with shared graph context.
+
 ## Architecture
 
 ```mermaid
@@ -199,4 +216,4 @@ AI coding assistants and multiple AI implementation agents were used for plannin
 
 ## License and ownership
 
-Project intellectual property belongs to the participant or team under the hackathon rules. Add the team's chosen open-source license before publishing if one is not already present, and agree internally on ownership and repository administration.
+This project is licensed under the [MIT License](LICENSE). Intellectual property developed during the hackathon belongs to the participant/team under the Graph Hacks rules.
