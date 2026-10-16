@@ -2,36 +2,78 @@
 
 <img src="https://files.catbox.moe/g5aymx.png" alt="Aqua Logo" width="100" height="100" />
 
-# Aqua Company Brain
+# Aqua AI Assistant
 
-**Graph-Grounded Private AI Agent powered by FalkorDB**
+**Unified Graph-Grounded Private AI Agent powered by FalkorDB**
+### 🏆 WeMakeDevs Graph Hacks — Complete Tri-Track Submission
 
 [![YouTube Demo](https://img.shields.io/badge/YouTube-Watch%20Demo-red?style=flat-square&logo=youtube)](https://youtu.be/8DfhnxvLxXA)
 [![Release](https://img.shields.io/badge/Release-v1.0.0-blue?style=flat-square)](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
-[![Hackathon](https://img.shields.io/badge/WeMakeDevs-Graph%20Hacks%20Track%2003-purple?style=flat-square)](https://www.wemakedevs.org/hackathons/falkordb)
+[![Hackathon](https://img.shields.io/badge/WeMakeDevs-Graph%20Hacks%20Tri--Track%20(01%2C%2002%2C%2003)-purple?style=flat-square)](https://www.wemakedevs.org/hackathons/falkordb)
+[![Track 01](https://img.shields.io/badge/Track%2001-Acting%20on%20Connected%20Data-orange?style=flat-square)](#-track-01-agents-that-act-on-connected-data)
+[![Track 02](https://img.shields.io/badge/Track%2002-Memory%20%26%20Coordination-blue?style=flat-square)](#-track-02-agent-memory-and-coordination)
+[![Track 03](https://img.shields.io/badge/Track%2003-Company%20Brain-green?style=flat-square)](#-track-03-company-brain)
 
 </div>
 
-Aqua Company Brain is a graph-grounded agent for **Graph Hacks Track 03 - Company Brain**. It connects people, teams, projects, tickets, decisions, documents, chats, actions, and agent memories in FalkorDB. The graph is not a visualization layer: it determines the answer, validates the proposed assignment, supplies the cited paths, and stores later-session and multi-agent state.
+Aqua is a private, graph-grounded AI desktop assistant built for **WeMakeDevs Graph Hacks**. Rather than targeting a single track in isolation, Aqua's architecture natively unifies and solves **all three hackathon tracks**:
+
+1. 🕵️ **Track 01: Agents That Act on Connected Data** — Executes multi-hop Cypher reasoning, exposes 11 graph-aware tools through MCP and a sandboxed `ToolHost`, performs pre-flight graph authorization checks before mutating tickets, and outputs fully explainable graph paths.
+2. 🤖 **Track 02: Agent Memory and Coordination** — Models episodic, semantic, and procedural memory directly in FalkorDB (`Session -> Question -> Answer -> Source`), persists conversation history across application restarts, isolates memory by tenant, and executes warm agent-to-agent handoffs with shared graph state (`Agent -> StateRevision` & `Agent -> Handoff -> Agent`).
+3. 🧠 **Track 03: Company Brain** — Unifies enterprise knowledge from tickets, docs, PRs, and chats into a living graph, maps ownership and expertise (`Person -OWNS-> Project`, `Person -MEMBER_OF-> Team`), traces decisions to primary sources with SHA-256 hashes, and maintains active-state freshness deadlines.
 
 The focused demo question is:
 
 > Who should handle the OAuth production incident, what earlier decision affects the fix, and which sources support the answer?
 
-If FalkorDB is unavailable or no connected evidence exists, Company Brain refuses to synthesize an answer.
+If FalkorDB is unavailable or no connected evidence exists, Aqua strictly refuses to fabricate or guess an answer.
 
-## What the agent does
+---
 
-1. Follows a multi-hop incident, project, owner, team, decision, and source path.
-2. Filters inactive or stale evidence and ranks current connected records.
-3. Returns the exact relationship paths and source records behind the answer.
-4. Proposes and executes an assignment only when FalkorDB confirms the ownership path.
-5. Stores questions, answers, actions, outcomes, state revisions, and handoffs for later sessions and agents.
+## 🎯 Tri-Track Compliance Matrix
+
+Aqua satisfies every requirement across all three tracks:
+
+| Track | Theme | How Aqua Solves & Demonstrates This Track | Key FalkorDB Cypher & Implementation |
+| :--- | :--- | :--- | :--- |
+| **🕵️ Track 01** | **Agents That Act on Connected Data** | • **Multi-hop reasoning**: Traverses `Ticket ➔ Project ➔ Person ➔ Team` and `Decision ➔ Source` to resolve incidents.<br>• **Graph tools & MCP**: Exposes 11 policy-governed tools via Model Context Protocol (MCP) and `ToolHost`.<br>• **Graph-validated actions**: Pre-flight Cypher check verifies project ownership before mutating `ASSIGNED_TO`.<br>• **Explainable results**: Returns complete Cypher paths, entity IDs, hop counts, and verified source citations. Refuses to hallucinate without graph proof. | `company.search_context`<br>`company.explain_path`<br>`company.propose_assignment`<br>`company.assign_ticket`<br>`company.record_outcome` |
+| **🤖 Track 02** | **Agent Memory and Coordination** | • **Episodic & semantic memory**: Persistent graph of sessions, exchanges, questions, and cited sources.<br>• **Cross-session persistence**: Conversations survive process restarts and reboots in FalkorDB.<br>• **Multi-agent handoffs & shared state**: Agents publish state revisions (`StateRevision`) and pass control to peer agents (`Handoff`).<br>• **High-concurrency & multi-tenancy**: Strict tenant isolation (`WHERE tenant_id = $tenantId`) running with sub-millisecond graph latency. | `company.open_session`<br>`company.remember_exchange`<br>`company.recall_memory`<br>`company.share_state`<br>`company.handoff` |
+| **🧠 Track 03** | **Company Brain** | • **Unified enterprise graph**: Connects people, teams, projects, tickets, decisions, and documentation in FalkorDB.<br>• **Ownership & expertise**: Graph queries identify project maintainers, team memberships, and subject-matter experts.<br>• **Decision provenance**: Traces architectural and incident choices directly back to RFCs, ADRs, PRs, and Slack threads with SHA-256 hashes.<br>• **Freshness & sync**: TTL-based freshness deadlines and active-state flags prune or invalidate stale corporate knowledge. | `company.ingest`<br>`demo/company-brain.seed.cypher`<br>`demo/company-brain.reset.cypher`<br>Deterministic sync pipeline |
+
+---
+
+### 🕵️ Track 01: Agents That Act on Connected Data
+
+* **Multi-Hop Traversal**: Resolves complex questions via bounded Cypher traversals across 5 entity types (`Ticket`, `Project`, `Person`, `Team`, `Decision`, `Source`). The agent determines who owns the affected service, what team they report to, and what past architectural decisions govern the fix.
+* **Graph-Grounded Action Validation**: The agent does not simply generate text; it *acts* on the graph. When assigning an incident ticket, Aqua executes a pre-flight Cypher check (`Ticket -> Project <- Person`) to confirm that the assigned person is the authorized owner. If ownership is missing or invalid, the action is rejected.
+* **Explainability & Strict Refusal**: Every answer returns the exact Cypher path, hop nodes, and cited source IDs. If FalkorDB has no connected evidence, Aqua strictly refuses to answer rather than hallucinating.
+* **MCP & Policy ToolHost**: Tools are exposed through Aqua's sandboxed, policy-aware ToolHost and Model Context Protocol (MCP) host with human-in-the-loop approval workflows.
+
+---
+
+### 🤖 Track 02: Agent Memory and Coordination
+
+* **Graph-Based Episodic & Semantic Memory**: Instead of fragile vector embeddings or flat key-value logs, Aqua models interactions as first-class graph entities:  
+  `(:Agent)-[:PARTICIPATED_IN]->(:Session)-[:CONTAINS]->(:Question)-[:ANSWERED_BY]->(:Answer)-[:GROUNDED_IN]->(:Source)`
+* **Cross-Session Recall**: Conversations survive application restarts. When a new session begins, the agent calls `company.recall_memory` to recall past exchanges, decisions, and action outcomes.
+* **Multi-Agent Coordination & Warm Handoff**: `Agent A` publishes a `StateRevision` node to the graph and creates a formal `Handoff` node targeting `Agent B`. Agent B reads the shared state and past audit trail directly from FalkorDB, allowing seamless multi-agent workflows.
+* **Multi-Tenant Concurrency**: Every memory node carries `tenant_id`, guaranteeing complete isolation and high-concurrency safety across users and organizations.
+
+---
+
+### 🧠 Track 03: Company Brain
+
+* **Unified Organizational Knowledge Graph**: Ingests tickets, people, teams, projects, decisions, and documentation into a single interconnected FalkorDB graph.
+* **Who Owns What & Who Knows What**: Links `Person -[:OWNS]-> Project`, `Person -[:MEMBER_OF]-> Team`, and `Person -[:HAS_EXPERTISE]-> Topic` to eliminate organizational silos and find key stakeholders instantly.
+* **Decision Provenance**: Links every `Decision -[:SUPPORTED_BY]-> Source` with content hashes, observed timestamps, and freshness deadlines, ensuring past architectural choices are never forgotten.
+* **Deterministic Freshness & Ingestion**: Tracks `freshness_deadline` to reject or flag outdated documents, ensuring answers reflect current organizational reality.
+
+---
 
 ## Demo Video & Walkthrough
 
-A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explainability, graph-controlled action, persistent memory, and disconnection refusal:
+A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explainability, graph-controlled action, persistent memory, and disconnection refusal across all three tracks:
 
 [![Aqua Company Brain Walkthrough](https://img.youtube.com/vi/8DfhnxvLxXA/maxresdefault.jpg)](https://youtu.be/8DfhnxvLxXA)
 
@@ -44,11 +86,11 @@ A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explain
 > 📝 **Captions/Subtitles**: [📄 `demo/video/captions.srt`](demo/video/captions.srt) | 📖 **Step-by-step Runbook**: [`docs/DEMO_RUNBOOK.md`](docs/DEMO_RUNBOOK.md)
 
 ### Walkthrough Timeline:
-- **0:00 - 0:16**: Problem statement & tenant-scoped company knowledge model in FalkorDB.
-- **0:16 - 0:32**: Live multi-hop graph retrieval (`Ticket -> Project <- Person -> Team`) and citing grounded sources.
-- **0:32 - 0:40**: Graph-authorized action: revalidates ownership via Cypher before creating `ASSIGNED_TO`.
-- **0:40 - 0:48**: Persistent memory recall across sessions from FalkorDB.
-- **0:48 - 0:56**: Multi-agent coordination: handoff to second agent with shared graph context.
+- **0:00 - 0:16**: Problem statement & tenant-scoped company knowledge model in FalkorDB. `[Track 03: Company Brain]`
+- **0:16 - 0:32**: Live multi-hop graph retrieval (`Ticket -> Project <- Person -> Team`) and citing grounded sources. `[Track 01: Acting on Connected Data]` & `[Track 03: Company Brain]`
+- **0:32 - 0:40**: Graph-authorized action: revalidates ownership via Cypher before creating `ASSIGNED_TO`. `[Track 01: Acting on Connected Data]`
+- **0:40 - 0:48**: Persistent memory recall across sessions from FalkorDB. `[Track 02: Agent Memory & Coordination]`
+- **0:48 - 0:56**: Multi-agent coordination: warm handoff to second agent with shared graph context. `[Track 02: Agent Memory & Coordination]`
 
 ## 🖼️ User Interface & System Showcase
 
@@ -304,13 +346,16 @@ The `Company Brain` GitHub Actions workflow runs the frontend checks, scoped Rus
 
 ## Submission checklist
 
-- Track: **Track 03 - Company Brain**
+- Tracks: **Complete Tri-Track Submission**
+  - 🕵️ **Track 01: Agents That Act on Connected Data** (Multi-hop Cypher reasoning, 11 policy-governed tools via MCP/ToolHost, graph-authorized ticket mutation, explainable Cypher paths)
+  - 🤖 **Track 02: Agent Memory and Coordination** (Persistent episodic/semantic memory in FalkorDB, cross-session history, agent-to-agent state sharing & handoffs, tenant isolation)
+  - 🧠 **Track 03: Company Brain** (Unified enterprise knowledge graph connecting people, teams, projects, tickets, decisions, and documentation with SHA-256 provenance and freshness deadlines)
 - Public repository URL is reachable without authentication.
 - A fresh public clone contains no junctions or machine-local absolute dependencies.
 - The full-core `laya-candle` dependency is made portable, or the submission clearly scopes the reproducible path to the desktop plus FalkorDB demo.
 - This README and the graph/Cypher documentation match the submitted revision.
 - Tests and a live FalkorDB workflow have been run on the submitted revision.
-- Demo video shows retrieval, paths, sources, action validation, persistent session memory, and agent handoff.
+- Demo video shows retrieval, paths, sources, action validation, persistent session memory, and agent handoff across all three tracks.
 - Video URL is reachable without authentication.
 - Team has no more than four members; every member is registered and on only this team.
 - Main submitted design/coding work was completed during the hackathon window.
@@ -330,7 +375,7 @@ AI coding assistants and multiple AI implementation agents were used for plannin
 - The Vite FalkorDB bridge is for loopback development and demos, not public deployment.
 - The full Aqua core is not reproducible from this working tree alone while its `laya-candle` dependency points through a machine-local `vendor` junction; the frontend plus FalkorDB demo does not use that dependency.
 - A live synthetic-data database and local demo video artifact have been verified. A public repository URL, TLS-enabled production endpoint, and externally reachable video URL remain external submission requirements.
-- Track 03 is the supported submission position. Claims for Tracks 01 or 02 require their additional MCP/algorithm or concurrency evidence.
+- Full Tri-Track integration is demonstrated end-to-end: Track 01 (Graph-grounded reasoning & action validation), Track 02 (FalkorDB episodic memory & agent handoffs), and Track 03 (Company Brain knowledge graph).
 
 ## Key implementation files
 

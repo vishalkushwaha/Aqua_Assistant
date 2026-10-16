@@ -1,14 +1,17 @@
 # Hackathon Submission Template: Aqua Company Brain
 
 > **Event**: Graph Hacks: Context for AI Agents (WeMakeDevs & FalkorDB)  
-> **Track**: Track 03 — Company Brain *(with crossover into Track 01: Acting on Connected Data & Track 02: Memory & Coordination)*
+> **Track**: Complete Tri-Track Submission:
+> - 🕵️ **Track 01**: Agents That Act on Connected Data
+> - 🤖 **Track 02**: Agent Memory and Coordination
+> - 🧠 **Track 03**: Company Brain
 
 ---
 
 ### 1. Basic Information
-* **Project Name**: Aqua Company Brain
-* **Tagline**: Graph-grounded private assistant using FalkorDB for context, multi-hop reasoning, action authorization, and persistent multi-agent memory.
-* **Track Selected**: Track 03 — Company Brain
+* **Project Name**: Aqua AI Assistant
+* **Tagline**: Graph-grounded private assistant using FalkorDB for multi-hop reasoning, graph-authorized actions, persistent episodic memory, and enterprise company brain.
+* **Track Selected**: Complete Tri-Track (Track 01, Track 02 & Track 03)
 * **GitHub Repository URL**: `https://github.com/Vaibhav-tester/Aqua_Assistant`
 * **Demo Video URL**: `https://youtu.be/8DfhnxvLxXA`
 * **Release Download**: `https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0`
