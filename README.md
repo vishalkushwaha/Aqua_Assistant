@@ -1,6 +1,6 @@
 <div align="center">
 
-![Aqua Logo](assets/aqua-logo.png)
+<img src="https://files.catbox.moe/g5aymx.png" alt="Aqua Logo" width="100" height="100" />
 
 # Aqua Company Brain
 
@@ -55,28 +55,28 @@ A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explain
 ### 1. Neural Voice Orb & Desktop Assistant
 Aqua features an always-available floating desktop **Neural Voice Orb** that handles hands-free speech, system control, and workspace context:
 
-![Aqua Neural Voice Orb](assets/aqua-orb-assistant.png)
+![Aqua Neural Voice Orb](https://files.catbox.moe/8jjr62.png)
 
 ---
 
 ### 2. Company Brain Knowledge Graph Dashboard
 Ask complex enterprise questions and receive answers composed exclusively from FalkorDB records, complete with verified multi-hop paths, citations, and authority scores:
 
-![Aqua Company Brain Dashboard](assets/company-brain-dashboard.png)
+![Aqua Company Brain Dashboard](https://files.catbox.moe/ljl3zd.png)
 
 ---
 
 ### 3. Graph-Authorized Action Execution
 Before modifying team tickets or triggering mutations, Aqua executes pre-flight Cypher traversals (`Ticket -> Project <- Person`) to revalidate ownership:
 
-![Graph-Authorized Action Execution](assets/action-validation-dashboard.png)
+![Graph-Authorized Action Execution](https://files.catbox.moe/sziohn.png)
 
 ---
 
 ### 4. Persistent Memory Graph & Multi-Agent Coordination
 Sessions, questions, answers, source citations, state revisions, and agent handoffs are saved as persistent graph entities in FalkorDB:
 
-![FalkorDB Persistent Memory Graph](assets/memory-graph-dashboard.png)
+![FalkorDB Persistent Memory Graph](https://files.catbox.moe/2jdr9q.png)
 
 ## Architecture
 
