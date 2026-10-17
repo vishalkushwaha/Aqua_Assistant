@@ -6,7 +6,8 @@ import { join, resolve } from 'node:path';
 const chromePath = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const baseUrl = process.env.DEMO_URL || 'http://127.0.0.1:1420';
 const outputDir = resolve(process.argv[2] || 'demo/video/frames');
-const scenes = [
+const mode = process.argv[3] || 'showcase';
+const showcaseScenes = [
   ['?showcase=overview', '01-overview.png', 8000],
   ['?demo=answer', '02-company-brain-answer.png', 22000],
   ['?demo=action', '03-company-brain-action.png', 28000],
@@ -17,6 +18,21 @@ const scenes = [
   ['?showcase=security', '08-voice-security.png', 10000],
   ['?showcase=showcase-platform', '09-platform-support.png', 8000],
 ];
+const submissionScenes = [
+  ['?showcase=overview', 'submission-01-overview.png', 8000],
+  ['?demo=seed', 'submission-02-dataset-ready.png', 14000],
+  ['?demo=answer', 'submission-03-grounded-answer.png', 24000],
+  ['?demo=action', 'submission-04-graph-action.png', 30000],
+  ['?demo=memory', 'submission-05-persistent-memory.png', 36000],
+  ['?demo=handoff', 'submission-06-agent-handoff.png', 42000],
+  ['?showcase=graph-memory', 'submission-07-live-graph.png', 14000],
+  ['?showcase=showcase-capabilities', 'submission-09-capabilities.png', 8000],
+  ['?showcase=showcase-platform', 'submission-10-platform.png', 8000],
+];
+const failureScenes = [
+  ['?demo=answer', 'submission-08-falkordb-refusal.png', 18000],
+];
+const scenes = mode === 'submission' ? submissionScenes : mode === 'failure' ? failureScenes : showcaseScenes;
 
 await mkdir(outputDir, { recursive: true });
 
@@ -51,4 +67,34 @@ for (const [query, filename, budget] of scenes) {
   await capture(query, filename, budget);
 }
 
-console.log(`Captured ${scenes.length} live Aqua showcase frames in ${outputDir}`);
+if (mode === 'submission') {
+  const origin = new URL(baseUrl).origin;
+  const request = async (path, options = {}) => {
+    const response = await fetch(`${baseUrl}${path}`, {
+      ...options,
+      headers: { Origin: origin, Accept: 'application/json', ...(options.headers || {}) },
+    });
+    if (!response.ok) throw new Error(`${path} failed with ${response.status}`);
+    return response.json();
+  };
+  const status = await request('/api/falkordb/status');
+  try {
+    await request('/api/falkordb/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ port: 1 }),
+    });
+    for (const [query, filename, budget] of failureScenes) {
+      await capture(query, filename, budget);
+    }
+  } finally {
+    await request('/api/falkordb/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ port: status.port }),
+    });
+  }
+}
+
+const capturedCount = scenes.length + (mode === 'submission' ? failureScenes.length : 0);
+console.log(`Captured ${capturedCount} live Aqua ${mode} frames in ${outputDir}`);

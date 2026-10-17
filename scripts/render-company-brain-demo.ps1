@@ -1,5 +1,7 @@
 param(
-    [string]$Output = "demo/video/aqua-company-brain-demo.mp4",
+    [ValidateSet("Showcase", "Submission")]
+    [string]$Mode = "Showcase",
+    [string]$Output = "",
     [string]$Voice = "af_heart",
     [double]$SpeechSpeed = 0.96,
     [switch]$SkipCapture
@@ -7,6 +9,10 @@ param(
 
 $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
+$captureMode = $Mode.ToLowerInvariant()
+if (-not $Output) {
+    $Output = if ($Mode -eq "Submission") { "demo/video/aqua-falkordb-submission-demo.mp4" } else { "demo/video/aqua-company-brain-demo.mp4" }
+}
 $frames = Join-Path $repoRoot "demo/video/frames"
 $videoDir = Split-Path -Parent (Join-Path $repoRoot $Output)
 $workDir = Join-Path $videoDir "render-work"
@@ -25,7 +31,7 @@ foreach ($required in @($kokoroPython, $kokoroDaemon, $kokoroModel, $kokoroVoice
     }
 }
 
-$scenes = @(
+$showcaseScenes = @(
     @{ File="01-overview.png"; Text="Meet Aqua, a privacy focused Windows desktop assistant. Its console brings voice, automation, knowledge, security, and device controls into one place." },
     @{ File="02-company-brain-answer.png"; Text="Company Brain uses FalkorDB as a real reasoning layer. It traverses tickets, projects, owners, decisions, and sources to produce a grounded answer with evidence." },
     @{ File="03-company-brain-action.png"; Text="Before Aqua acts, it revalidates the ownership path in the graph. The approved assignment and its result are then written back as auditable company knowledge." },
@@ -36,6 +42,20 @@ $scenes = @(
     @{ File="08-voice-security.png"; Text="Voice Security adds a custom wake phrase, speaker enrollment, and biometric verification for protected assistant actions." },
     @{ File="09-platform-support.png"; Text="Aqua is currently presented and validated as Windows desktop software. FalkorDB can run locally in Docker or through a configured cloud endpoint. Mac OS and Linux desktop releases are not claimed in this demo." }
 )
+
+$submissionScenes = @(
+    @{ File="submission-01-overview.png"; Text="This is Aqua Company Brain, a working Windows desktop agent built for Graph Hacks. FalkorDB is its required context, reasoning, action, and persistent memory layer." },
+    @{ File="submission-02-dataset-ready.png"; Text="First, Aqua prepares a repeatable synthetic company graph. People, teams, projects, incidents, decisions, documents, and chats are stored as tenant scoped nodes with explicit relationships and source provenance." },
+    @{ File="submission-03-grounded-answer.png"; Text="Now we ask who should handle the OAuth production incident, which earlier decision affects the fix, and which records support the answer. Aqua traverses ticket to project to owner, and decision to project to source. It identifies Priya Raman, decision D E C zero fourteen, and two exact source records." },
+    @{ File="submission-04-graph-action.png"; Text="The proposed assignment is not trusted blindly. Before acting, Aqua reruns the ownership path in FalkorDB. Only a person who owns the incident's project can be assigned. The completed action, selected owner, support path, and outcome are written back to the graph." },
+    @{ File="submission-05-persistent-memory.png"; Text="Next, Aqua recalls the interaction from a later session. FalkorDB stores the agent, session, question, grounded answer, cited sources, action, and outcome. This is persistent graph memory, not temporary browser state." },
+    @{ File="submission-06-agent-handoff.png"; Text="Aqua then hands the incident to a second response agent through the same tenant scoped graph. The receiving agent gets the grounded incident, decision, and sources, while the handoff itself remains auditable and available in future sessions." },
+    @{ File="submission-07-live-graph.png"; Text="The live Memory Graph confirms the database is connected and populated. The graph includes company knowledge alongside agent tasks, experiences, tools, and skills, and the Cypher console can inspect those relationships directly." },
+    @{ File="submission-08-falkordb-refusal.png"; Text="FalkorDB is mandatory, not decorative. Against an unavailable database, Aqua displays the dependency error and produces no fabricated fallback answer. Removing the graph removes retrieval, authorization, memory, and handoff capability." },
+    @{ File="submission-09-capabilities.png"; Text="Company Brain runs inside the wider Aqua Assistant: local voice interaction, workflows, scheduled routines, approval and privacy controls, inspectable learning, reviewed skills, private file search, and a secure vault." },
+    @{ File="submission-10-platform.png"; Text="The validated target is Aqua for Windows desktop, with FalkorDB available through local Docker or a configured cloud endpoint. This working demonstration covers connected reasoning, sourced answers, graph controlled action, persistent memory, tenant isolation, and multi agent coordination." }
+)
+$scenes = if ($Mode -eq "Submission") { $submissionScenes } else { $showcaseScenes }
 
 New-Item -ItemType Directory -Path $videoDir -Force | Out-Null
 New-Item -ItemType Directory -Path $workDir -Force | Out-Null
@@ -62,7 +82,7 @@ Write-Host "Kokoro narration provider: $($health.provider) ($($health.selftest_x
 if (-not $SkipCapture) {
     Push-Location $repoRoot
     try {
-        node scripts/capture-company-brain-demo.mjs $frames
+        node scripts/capture-company-brain-demo.mjs $frames $captureMode
         if ($LASTEXITCODE -ne 0) { throw "Live browser capture failed." }
     } finally {
         Pop-Location
@@ -125,6 +145,12 @@ $videoLines += "file '$($lastFrame.Replace("'", "''"))'"
 Set-Content -LiteralPath $concatVideo -Value $videoLines -Encoding ascii
 Set-Content -LiteralPath $concatAudio -Value $audioLines -Encoding ascii
 Set-Content -LiteralPath $captions -Value $srtLines -Encoding utf8
+$sidecarCaptions = if ($Mode -eq "Submission") {
+    Join-Path $videoDir "aqua-falkordb-submission-demo.srt"
+} else {
+    Join-Path $videoDir "captions.srt"
+}
+Set-Content -LiteralPath $sidecarCaptions -Value $srtLines -Encoding utf8
 
 $totalDuration = $cursor.ToString([Globalization.CultureInfo]::InvariantCulture)
 $subtitlePath = $captions.Replace('\','/').Replace(':','\:')

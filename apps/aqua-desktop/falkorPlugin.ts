@@ -446,6 +446,7 @@ export function falkorPlugin(config: Partial<FalkorConfig> = {}): Plugin {
             } catch (err: any) {
               return sendJson(res, {
                 success: false,
+                message: 'FalkorDB is unavailable; Company Brain withheld its answer instead of using ungrounded context.',
                 error: err?.message || 'Company Brain seed failed',
               }, 503);
             }

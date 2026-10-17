@@ -76,6 +76,9 @@ Aqua satisfies every requirement across all three tracks:
 
 A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explainability, graph-controlled action, persistent memory, and disconnection refusal across all three tracks:
 
+> **Judge-focused working demo**: [Play `aqua-falkordb-submission-demo.mp4` on GitHub](https://github.com/Vaibhav-tester/Aqua_Assistant/blob/main/demo/video/aqua-falkordb-submission-demo.mp4)
+> **Submission captions**: [`demo/video/aqua-falkordb-submission-demo.srt`](demo/video/aqua-falkordb-submission-demo.srt)
+
 [![Aqua Company Brain Walkthrough](https://img.youtube.com/vi/8DfhnxvLxXA/maxresdefault.jpg)](https://youtu.be/8DfhnxvLxXA)
 
 <p align="center">
@@ -360,6 +363,9 @@ The final desktop workflow also persists a tenant-scoped `Agent -> Session -> Qu
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/render-company-brain-demo.ps1
+
+# Judge-focused Graph Hacks submission cut
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/render-company-brain-demo.ps1 -Mode Submission
 ```
 
 The `Company Brain` GitHub Actions workflow runs the frontend checks, scoped Rust formatting, and the opt-in workflow against a disposable FalkorDB 6.0.0 service for every push and pull request.
@@ -394,7 +400,7 @@ AI coding assistants and multiple AI implementation agents were used for plannin
 - PDF extraction is not included; deterministic ingestion supports Markdown/frontmatter and JSON exports.
 - The Vite FalkorDB bridge is for loopback development and demos, not public deployment.
 - The full Aqua core is not reproducible from this working tree alone while its `laya-candle` dependency points through a machine-local `vendor` junction; the frontend plus FalkorDB demo does not use that dependency.
-- A live synthetic-data database and local demo video artifact have been verified. A public repository URL, TLS-enabled production endpoint, and externally reachable video URL remain external submission requirements.
+- A live synthetic-data database, public repository, YouTube walkthrough, and checked-in judge-focused demo have been verified. A TLS-enabled public deployment remains optional; final event registration, submission-form entry, and any replacement YouTube upload remain owner actions.
 - Full Tri-Track integration is demonstrated end-to-end: Track 01 (Graph-grounded reasoning & action validation), Track 02 (FalkorDB episodic memory & agent handoffs), and Track 03 (Company Brain knowledge graph).
 
 ## Key implementation files

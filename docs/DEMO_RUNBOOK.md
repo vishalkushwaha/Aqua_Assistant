@@ -83,6 +83,16 @@ docker compose -f docker-compose.company-brain.yml down --volumes
 
 This is intentionally a manual cleanup step because it destroys the local demo database.
 
+## Render the judge-focused video
+
+With the desktop dev server and FalkorDB running, the submission renderer captures the healthy workflow, temporarily points only the development bridge at a closed port for the refusal scene, restores the original FalkorDB port in a `finally` block, and renders the natural offline narration:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/render-company-brain-demo.ps1 -Mode Submission
+```
+
+The outputs are `demo/video/aqua-falkordb-submission-demo.mp4` and its matching `.srt` caption file. The temporary configuration change does not stop or modify the database.
+
 ## Evidence checklist
 
 - Database health is visible before the demo.

@@ -161,7 +161,7 @@ export const falkorApi = {
       headers: { Accept: 'application/json' },
     });
     const body = await res.json();
-    if (!res.ok) throw new Error(body.error || `Company Brain seed failed with ${res.status}`);
+    if (!res.ok) throw new Error(body.message || body.error || `Company Brain seed failed with ${res.status}`);
     return body;
   },
 

@@ -1,0 +1,40 @@
+﻿1
+00:00:00,000 --> 00:00:12,800
+This is Aqua Company Brain, a working Windows desktop agent built for Graph Hacks. FalkorDB is its required context, reasoning, action, and persistent memory layer.
+
+2
+00:00:12,800 --> 00:00:28,000
+First, Aqua prepares a repeatable synthetic company graph. People, teams, projects, incidents, decisions, documents, and chats are stored as tenant scoped nodes with explicit relationships and source provenance.
+
+3
+00:00:28,000 --> 00:00:49,100
+Now we ask who should handle the OAuth production incident, which earlier decision affects the fix, and which records support the answer. Aqua traverses ticket to project to owner, and decision to project to source. It identifies Priya Raman, decision D E C zero fourteen, and two exact source records.
+
+4
+00:00:49,100 --> 00:01:07,500
+The proposed assignment is not trusted blindly. Before acting, Aqua reruns the ownership path in FalkorDB. Only a person who owns the incident's project can be assigned. The completed action, selected owner, support path, and outcome are written back to the graph.
+
+5
+00:01:07,500 --> 00:01:24,000
+Next, Aqua recalls the interaction from a later session. FalkorDB stores the agent, session, question, grounded answer, cited sources, action, and outcome. This is persistent graph memory, not temporary browser state.
+
+6
+00:01:24,000 --> 00:01:39,700
+Aqua then hands the incident to a second response agent through the same tenant scoped graph. The receiving agent gets the grounded incident, decision, and sources, while the handoff itself remains auditable and available in future sessions.
+
+7
+00:01:39,700 --> 00:01:56,200
+The live Memory Graph confirms the database is connected and populated. The graph includes company knowledge alongside agent tasks, experiences, tools, and skills, and the Cypher console can inspect those relationships directly.
+
+8
+00:01:56,200 --> 00:02:14,400
+FalkorDB is mandatory, not decorative. Against an unavailable database, Aqua displays the dependency error and produces no fabricated fallback answer. Removing the graph removes retrieval, authorization, memory, and handoff capability.
+
+9
+00:02:14,400 --> 00:02:30,000
+Company Brain runs inside the wider Aqua Assistant: local voice interaction, workflows, scheduled routines, approval and privacy controls, inspectable learning, reviewed skills, private file search, and a secure vault.
+
+10
+00:02:30,000 --> 00:02:50,600
+The validated target is Aqua for Windows desktop, with FalkorDB available through local Docker or a configured cloud endpoint. This working demonstration covers connected reasoning, sourced answers, graph controlled action, persistent memory, tenant isolation, and multi agent coordination.
+
