@@ -53,6 +53,7 @@ founder/
 Thumbs.db
 .idea/
 .vscode/
+.claude/
 *.swp
 *.tmp
 *.log

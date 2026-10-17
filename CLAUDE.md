@@ -1,6 +1,6 @@
 # Aqua: rules for an AI coding agent
 
-Hard rules only. What each part is, and how it works, is in `documentation/` (start at `documentation/README.md`). How to run, build and debug is in the skills in `.claude/skills/` (`aqua-run`, `aqua-build`, `aqua-mcp-debug`). Start a task with `/pickup` and end a session with `/handoff` (`.claude/commands/`): other agents work in this tree too. Where a skill, a document and the code disagree, the code wins.
+Hard rules only. What each part is, and how it works, is in `documentation/` (start at `documentation/README.md`). Where documentation and the code disagree, the code wins.
 
 ## What is true
 - What works today is `documentation/CAPABILITIES.md` (generated from `documentation/capabilities.toml`; a test checks it against the code). `ARCHITECTURE.md` and `API_INTERCONNECT_AND_MODELS.md` are design targets, not the shipped state. The newest audit is in `documentation/competitive/refresh/`; the other audit files are dated snapshots.
@@ -27,7 +27,7 @@ Hard rules only. What each part is, and how it works, is in `documentation/` (st
 ## This machine (Windows 11; PowerShell and Git Bash)
 - The disk is small and test executables are huge (the `aqua-core` lib test alone is about 1.2 GB). Avoid `cargo test --workspace`: test one crate at a time, clear `target/debug/deps/*.exe` and `*.pdb` when space is short, or point `CARGO_TARGET_DIR` at a roomier drive. `powershell -File scripts/ci.ps1` does all of this and is the gate (`-Steps tests,docs-check` picks parts; `-DryRun` shows the plan).
 - Front end, in `apps/aqua-desktop`: `npm test` and `npm run build` (the UI is served on `127.0.0.1:1420`).
-- In Git Bash a `cd` in one command moves the tool's working directory: start each command with `cd /e/Personal_AI/Aqua && ...`.
+- In Git Bash, run commands from the repository root.
 - Files keep their own line ending: most are LF, some are CRLF (for example `documentation/TESTING.md`). Edit with a tool that preserves it. A script that rewrites files must read and write bytes, and check the line ending with Python (`b"\r\n" in data`) rather than `grep`.
 
 ## Documentation
