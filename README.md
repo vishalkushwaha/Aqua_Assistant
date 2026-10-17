@@ -400,7 +400,7 @@ AI coding assistants and multiple AI implementation agents were used for plannin
 - PDF extraction is not included; deterministic ingestion supports Markdown/frontmatter and JSON exports.
 - The Vite FalkorDB bridge is for loopback development and demos, not public deployment.
 - The full Aqua core is not reproducible from this working tree alone while its `laya-candle` dependency points through a machine-local `vendor` junction; the frontend plus FalkorDB demo does not use that dependency.
-- A live synthetic-data database, public repository, YouTube walkthrough, and checked-in judge-focused demo have been verified. A TLS-enabled public deployment remains optional; final event registration, submission-form entry, and any replacement YouTube upload remain owner actions.
+- A live synthetic-data database, repository push, YouTube walkthrough, and checked-in judge-focused demo have been verified. The repository still returns 404 without authentication, so making it public remains an owner action. A TLS-enabled deployment is optional; final event registration, submission-form entry, and any replacement YouTube upload also remain owner actions.
 - Full Tri-Track integration is demonstrated end-to-end: Track 01 (Graph-grounded reasoning & action validation), Track 02 (FalkorDB episodic memory & agent handoffs), and Track 03 (Company Brain knowledge graph).
 
 ## Key implementation files
