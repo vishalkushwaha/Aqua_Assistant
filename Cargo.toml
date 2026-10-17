@@ -20,9 +20,9 @@ resolver = "2"
 [workspace.package]
 version = "0.1.0"
 edition = "2021"
-authors = ["Aqua Assistant Team <https://github.com/Vaibhav-tester/Aqua_Assistant>"]
+authors = ["Aqua Assistant Team <https://github.com/vishalkushwaha/Aqua_Assistant>"]
 license = "Proprietary"
-repository = "https://github.com/Vaibhav-tester/Aqua_Assistant.git"
+repository = "https://github.com/vishalkushwaha/Aqua_Assistant.git"
 
 [workspace.dependencies]
 tokio = { version = "1.38", features = ["full"] }

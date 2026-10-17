@@ -12,9 +12,9 @@
 * **Project Name**: Aqua AI Assistant
 * **Tagline**: Graph-grounded private assistant using FalkorDB for multi-hop reasoning, graph-authorized actions, persistent episodic memory, and enterprise company brain.
 * **Track Selected**: Complete Tri-Track (Track 01, Track 02 & Track 03)
-* **GitHub Repository URL**: `https://github.com/Vaibhav-tester/Aqua_Assistant`
+* **GitHub Repository URL**: `https://github.com/vishalkushwaha/Aqua_Assistant`
 * **Demo Video URL**: `https://youtu.be/8DfhnxvLxXA`
-* **Release Download**: `https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0`
+* **Release Download**: `https://github.com/vishalkushwaha/Aqua_Assistant/releases/tag/v1.0.0`
 * **Blog Post URL**: *(Paste your published Dev.to/Hashnode link here for the AirPods 5 prize)*
 
 ---

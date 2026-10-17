@@ -1,3 +1,10 @@
 {
-  "bundle": { "createUpdaterArtifacts": false }
+  "bundle": {
+    "createUpdaterArtifacts": false,
+    "windows": {
+      "nsis": {
+        "compression": "zlib"
+      }
+    }
+  }
 }

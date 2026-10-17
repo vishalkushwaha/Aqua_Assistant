@@ -115,7 +115,7 @@ The live cloud endpoint supplied for this demo accepts plain Redis rather than T
 
 - **Watch on YouTube**: [https://youtu.be/8DfhnxvLxXA](https://youtu.be/8DfhnxvLxXA)
 - **Local Video Asset**: `demo/video/aqua-company-brain-demo.mp4` (with captions in `demo/video/captions.srt`)
-- **Release Download**: `https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0`
+- **Release Download**: `https://github.com/vishalkushwaha/Aqua_Assistant/releases/tag/v1.0.0`
 
 1. **Problem and graph (0:00–0:30):** show the connected company and memory model.
 2. **Live retrieval (0:30–1:20):** ask the incident question and show the graph-grounded answer.

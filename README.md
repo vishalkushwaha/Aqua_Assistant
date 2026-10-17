@@ -8,8 +8,8 @@
 ### 🏆 WeMakeDevs Graph Hacks — Complete Tri-Track Submission
 
 [![YouTube Demo](https://img.shields.io/badge/YouTube-Watch%20Demo-red?style=flat-square&logo=youtube)](https://youtu.be/8DfhnxvLxXA)
-[![Release](https://img.shields.io/badge/Release-v1.0.0-blue?style=flat-square)](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0)
-[![Windows Installer](https://img.shields.io/badge/Windows-Installer%20(.exe)-blueviolet?style=flat-square&logo=windows)](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0)
+[![Release](https://img.shields.io/badge/Release-v1.0.0-blue?style=flat-square)](https://github.com/vishalkushwaha/Aqua_Assistant/releases/tag/v1.0.0)
+[![Windows Installer](https://img.shields.io/badge/Windows-Installer%20(.exe)-blueviolet?style=flat-square&logo=windows)](https://github.com/vishalkushwaha/Aqua_Assistant/releases/tag/v1.0.0)
 [![License](https://img.shields.io/badge/License-Proprietary%20%2F%20Restricted-red?style=flat-square)](LICENSE)
 [![Hackathon](https://img.shields.io/badge/WeMakeDevs-Graph%20Hacks%20Tri--Track%20(01%2C%2002%2C%2003)-purple?style=flat-square)](https://www.wemakedevs.org/hackathons/falkordb)
 [![Track 01](https://img.shields.io/badge/Track%2001-Acting%20on%20Connected%20Data-orange?style=flat-square)](#-track-01-agents-that-act-on-connected-data)
@@ -76,7 +76,7 @@ Aqua satisfies every requirement across all three tracks:
 
 A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explainability, graph-controlled action, persistent memory, and disconnection refusal across all three tracks:
 
-> **Judge-focused working demo**: [Play `aqua-falkordb-submission-demo.mp4` on GitHub](https://github.com/Vaibhav-tester/Aqua_Assistant/blob/main/demo/video/aqua-falkordb-submission-demo.mp4)
+> **Judge-focused working demo**: [Play `aqua-falkordb-submission-demo.mp4` on GitHub](https://github.com/vishalkushwaha/Aqua_Assistant/blob/main/demo/video/aqua-falkordb-submission-demo.mp4)
 > **Submission captions**: [`demo/video/aqua-falkordb-submission-demo.srt`](demo/video/aqua-falkordb-submission-demo.srt)
 
 [![Aqua Company Brain Walkthrough](https://img.youtube.com/vi/8DfhnxvLxXA/maxresdefault.jpg)](https://youtu.be/8DfhnxvLxXA)
@@ -86,7 +86,7 @@ A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explain
 </p>
 
 > 🎬 **YouTube Video URL**: [https://youtu.be/8DfhnxvLxXA](https://youtu.be/8DfhnxvLxXA)  
-> 📹 **GitHub Native Player**: [Play `aqua-company-brain-demo.mp4` on GitHub](https://github.com/Vaibhav-tester/Aqua_Assistant/blob/main/demo/video/aqua-company-brain-demo.mp4) | [💾 Download MP4](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/download/v1.0.0/aqua-company-brain-demo.mp4)  
+> 📹 **GitHub Native Player**: [Play `aqua-company-brain-demo.mp4` on GitHub](https://github.com/vishalkushwaha/Aqua_Assistant/blob/main/demo/video/aqua-company-brain-demo.mp4) | [💾 Download MP4](https://github.com/vishalkushwaha/Aqua_Assistant/releases/download/v1.0.0/aqua-company-brain-demo.mp4)  
 > 📝 **Captions/Subtitles**: [📄 `demo/video/captions.srt`](demo/video/captions.srt) | 📖 **Step-by-step Runbook**: [`docs/DEMO_RUNBOOK.md`](docs/DEMO_RUNBOOK.md)
 
 ### Walkthrough Timeline:
@@ -183,7 +183,8 @@ You can install the ready-to-use Windows bundle, launch everything simultaneousl
 ### Option 0: Standalone Windows Installer (`.exe`) (For End-Users & Reviewers)
 
 For the easiest setup without requiring any development toolchains, run the compiled NSIS installer:
-- **Installer Executable:** `Aqua Assistant_0.1.0_x64-setup.exe` (located in `apps/aqua-desktop/src-tauri/target/release/bundle/nsis/` or from [GitHub Releases](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0)).
+- **Installer Executable:** `Aqua Assistant_0.1.0_x64-setup.exe` (located in `apps/aqua-desktop/src-tauri/target/release/bundle/nsis/` or from [GitHub Releases](https://github.com/vishalkushwaha/Aqua_Assistant/releases/tag/v1.0.0)).
+- Download and run the file whose name ends in `-Setup.exe`. Do not download or distribute the raw `aqua-desktop.exe`; it is a build output and does not contain the required Windows loader and installed resources by itself.
 - **What is Bundled & Configured:**
   - **Full Desktop UI & Floating Voice Orb**: Native Windows application with acrylic glassmorphism, drag-anywhere voice orb, and screen vision.
   - **Aqua Core Backend & Runtime DLLs**: GCC, UCRT, and MSVC runtime libraries bundled.
@@ -400,7 +401,7 @@ AI coding assistants and multiple AI implementation agents were used for plannin
 - PDF extraction is not included; deterministic ingestion supports Markdown/frontmatter and JSON exports.
 - The Vite FalkorDB bridge is for loopback development and demos, not public deployment.
 - The full Aqua core is not reproducible from this working tree alone while its `laya-candle` dependency points through a machine-local `vendor` junction; the frontend plus FalkorDB demo does not use that dependency.
-- A live synthetic-data database, repository push, YouTube walkthrough, and checked-in judge-focused demo have been verified. The repository still returns 404 without authentication, so making it public remains an owner action. A TLS-enabled deployment is optional; final event registration, submission-form entry, and any replacement YouTube upload also remain owner actions.
+- A live synthetic-data database, public repository push, YouTube walkthrough, and checked-in judge-focused demo have been verified. A TLS-enabled deployment is optional; final event registration, submission-form entry, and any replacement YouTube upload remain owner actions.
 - Full Tri-Track integration is demonstrated end-to-end: Track 01 (Graph-grounded reasoning & action validation), Track 02 (FalkorDB episodic memory & agent handoffs), and Track 03 (Company Brain knowledge graph).
 
 ## Key implementation files

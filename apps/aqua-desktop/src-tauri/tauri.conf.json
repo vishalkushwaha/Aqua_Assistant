@@ -56,7 +56,11 @@
     "publisher": "VisKush",
     "category": "Productivity",
     "externalBin": ["bin/aqua-core"],
-    "resources": { "resources/engines": "engines", "resources/setup": "setup" },
+    "resources": {
+      "resources/engines": "engines",
+      "resources/setup": "setup",
+      "target/release/WebView2Loader.dll": "."
+    },
     "windows": { "nsis": { "installerHooks": "installer-hooks.nsh" } },
     "createUpdaterArtifacts": true
   },

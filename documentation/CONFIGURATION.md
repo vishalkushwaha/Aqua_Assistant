@@ -146,7 +146,7 @@ Tauri **Rust backend** (`src-tauri/src`) is not in the repository yet — UI run
 | Edition | 2021 |
 | License | MIT ([`LICENSE`](../LICENSE)) |
 | Authors | Aqua Assistant Team |
-| Repository | `https://github.com/Vaibhav-tester/Aqua_Assistant.git` |
+| Repository | `https://github.com/vishalkushwaha/Aqua_Assistant.git` |
 
 Root `LICENSE` file in tree: MIT.
 

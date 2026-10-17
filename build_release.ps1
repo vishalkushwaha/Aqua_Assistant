@@ -15,6 +15,24 @@ function Step([string]$what, [scriptblock]$run) {
     if ($LASTEXITCODE -ne 0) { throw "$what failed (exit code $LASTEXITCODE)" }
 }
 
+function Assert-WindowsInstaller {
+    $releaseDir = Join-Path $root 'apps\aqua-desktop\src-tauri\target\release'
+    $manifest = Join-Path $releaseDir 'nsis\x64\installer.nsi'
+    $loader = Join-Path $releaseDir 'WebView2Loader.dll'
+    $installer = Get-ChildItem (Join-Path $releaseDir 'bundle\nsis') -Filter '*_x64-setup.exe' -File -ErrorAction SilentlyContinue |
+        Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if (-not (Test-Path -LiteralPath $loader)) {
+        throw 'WebView2Loader.dll was not produced; refusing to publish a Windows build that cannot start.'
+    }
+    if (-not (Test-Path -LiteralPath $manifest) -or -not (Select-String -LiteralPath $manifest -SimpleMatch 'WebView2Loader.dll' -Quiet)) {
+        throw 'The NSIS manifest does not install WebView2Loader.dll; refusing to publish the incomplete installer.'
+    }
+    if (-not $installer) {
+        throw 'The NSIS installer was not created.'
+    }
+    Write-Host "Verified Windows installer dependency: WebView2Loader.dll is included by $($installer.Name)."
+}
+
 $core = Join-Path $root 'target\release\aqua-core.exe'
 if (-not (Test-Path $core)) {
     Step 'Building Aqua Core (backend) in release mode...' { cargo build --release -p aqua-core }
@@ -85,6 +103,7 @@ Set-Location (Join-Path $root 'apps\aqua-desktop')
 if ($Tester) {
     try {
         Step 'Building the tester installer (NSIS)...' { npx tauri build --bundles nsis --config src-tauri\tauri.tester.conf.json }
+        Assert-WindowsInstaller
     } finally {
         foreach ($sc in $sidecars.Keys) { if ($sidecars[$sc] -and (Test-Path $sidecars[$sc])) { Copy-Item $sidecars[$sc] $sc -Force } }
         Write-Host 'Restored the development cores as the sidecars.'
@@ -102,5 +121,6 @@ if (-not $env:TAURI_SIGNING_PRIVATE_KEY -and -not $env:TAURI_SIGNING_PRIVATE_KEY
     $env:TAURI_SIGNING_PRIVATE_KEY_PATH = $defaultKey
 }
 Step 'Building the Tauri installer...' { npx tauri build }
+Assert-WindowsInstaller
 Write-Host 'Update files (installer + .sig) are next to the installers under src-tauri\target\release\bundle. To publish: scripts\make_update_manifest.ps1'
 Write-Host 'Done.'
