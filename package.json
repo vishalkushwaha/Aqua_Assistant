@@ -4,7 +4,7 @@
   "private": true,
   "description": "Aqua AI Desktop Assistant - WeMakeDevs Graph Hacks Hackathon",
   "scripts": {
-    "start": "cmd /c run.bat",
-    "run": "cmd /c run.bat"
+    "start": "cmd /c start.bat",
+    "run": "cmd /c start.bat"
   }
 }
