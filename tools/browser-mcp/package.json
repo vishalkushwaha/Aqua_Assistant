@@ -2,7 +2,7 @@
   "name": "aqua-browser-mcp",
   "private": true,
   "description": "Pinned Playwright MCP server for Aqua's managed browser backend. Install with `npm ci`; upgrade deliberately.",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {
     "@playwright/mcp": "0.0.82"
   }

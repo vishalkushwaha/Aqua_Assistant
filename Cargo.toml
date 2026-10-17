@@ -21,7 +21,7 @@ resolver = "2"
 version = "0.1.0"
 edition = "2021"
 authors = ["Aqua Assistant Team <https://github.com/Vaibhav-tester/Aqua_Assistant>"]
-license = "MIT"
+license = "Proprietary"
 repository = "https://github.com/Vaibhav-tester/Aqua_Assistant.git"
 
 [workspace.dependencies]

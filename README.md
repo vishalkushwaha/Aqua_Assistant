@@ -10,7 +10,7 @@
 [![YouTube Demo](https://img.shields.io/badge/YouTube-Watch%20Demo-red?style=flat-square&logo=youtube)](https://youtu.be/8DfhnxvLxXA)
 [![Release](https://img.shields.io/badge/Release-v1.0.0-blue?style=flat-square)](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0)
 [![Windows Installer](https://img.shields.io/badge/Windows-Installer%20(.exe)-blueviolet?style=flat-square&logo=windows)](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/badge/License-Proprietary%20%2F%20Restricted-red?style=flat-square)](LICENSE)
 [![Hackathon](https://img.shields.io/badge/WeMakeDevs-Graph%20Hacks%20Tri--Track%20(01%2C%2002%2C%2003)-purple?style=flat-square)](https://www.wemakedevs.org/hackathons/falkordb)
 [![Track 01](https://img.shields.io/badge/Track%2001-Acting%20on%20Connected%20Data-orange?style=flat-square)](#-track-01-agents-that-act-on-connected-data)
 [![Track 02](https://img.shields.io/badge/Track%2002-Memory%20%26%20Coordination-blue?style=flat-square)](#-track-02-agent-memory-and-coordination)
@@ -410,4 +410,4 @@ AI coding assistants and multiple AI implementation agents were used for plannin
 
 ## License and ownership
 
-This project is licensed under the [MIT License](LICENSE). Intellectual property developed during the hackathon belongs to the participant/team under the Graph Hacks rules.
+This project is proprietary and protected by copyright. Unauthorized use, copying, modification, personal use, or commercial distribution is strictly prohibited without explicit written permission from the author. Evaluation access is granted strictly to hackathon judges and reviewers of the WeMakeDevs Graph Hacks hackathon. See [LICENSE](LICENSE) for full legal terms.
