@@ -34,6 +34,15 @@ $ErrorActionPreference = 'Stop'
 $root   = Split-Path -Parent $PSScriptRoot
 $venv   = Join-Path $root 'vendor\kokoro-tts\.venv'
 $py     = Join-Path $venv 'Scripts\python.exe'
+if (-not (Test-Path $py)) {
+    $candidatePy = @(
+        (Join-Path $root 'engines\kokoro\python\python.exe'),
+        (Join-Path $root 'resources\engines\kokoro\python\python.exe'),
+        (Join-Path $root 'apps\aqua-desktop\src-tauri\resources\engines\kokoro\python\python.exe'),
+        (Join-Path $env:LOCALAPPDATA 'Aqua\engines\kokoro\python\python.exe')
+    ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+    if ($candidatePy) { $py = $candidatePy }
+}
 $target = if ($env:AQUA_KOKORO_GPU_LIBS) { $env:AQUA_KOKORO_GPU_LIBS } else { Join-Path $env:LOCALAPPDATA 'Aqua\kokoro-gpu' }
 
 # The tested set, installed without dependencies: onnxruntime-gpu needs nothing the virtual environment does not have.

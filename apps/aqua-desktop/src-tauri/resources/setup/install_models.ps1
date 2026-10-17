@@ -54,6 +54,7 @@ $steps = @(
     @{ Name = "Voice (Kokoro, 350 MB)";                     Script = "fetch_kokoro_v1.ps1" },
     @{ Name = "Listening, idle (Whisper base, 150 MB)";     Script = "fetch_whisper_base_en.ps1" },
     @{ Name = "Listening, after wake-up (Whisper small, 490 MB)"; Script = "fetch_whisper_small_en.ps1" },
+    @{ Name = "Language model (Qwen 4B Fast tier, 2.7 GB)"; Script = "fetch_llama_qwen_4b.ps1" },
     @{ Name = "Language model (Qwen3 8B, 5 GB)";            Script = "fetch_llama_qwen3_8b.ps1" }
 )
 $failed = @()
@@ -67,8 +68,50 @@ foreach ($s in $steps) {
     Write-Host ""
 }
 
+# 8. Check for NVIDIA GPU and configure CUDA / GPU acceleration
+Write-Host "==========================================================" -ForegroundColor Cyan
+Write-Host "  GPU & CUDA ACCELERATION DETECTION                       " -ForegroundColor Cyan
+Write-Host "==========================================================" -ForegroundColor Cyan
+$hasNvidia = $false
+try {
+    if (Get-Command nvidia-smi -ErrorAction SilentlyContinue) {
+        $gpuLine = (& nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader 2>$null | Select-Object -First 1)
+        if ($gpuLine) {
+            $hasNvidia = $true
+            Write-Host "  Detected NVIDIA GPU: $gpuLine" -ForegroundColor Green
+        }
+    }
+} catch {}
+
+if ($hasNvidia) {
+    Write-Host "  Configuring GPU acceleration for LLM..." -ForegroundColor Cyan
+    $gpuLlamaScript = Join-Path $PSScriptRoot "fetch_llama_gpu.ps1"
+    if (Test-Path $gpuLlamaScript) {
+        try {
+            & $gpuLlamaScript
+            Write-Host "  OK: GPU LLM acceleration enabled." -ForegroundColor Green
+        } catch {
+            Write-Host "  Warning: GPU LLM setup skipped: $($_.Exception.Message)" -ForegroundColor Yellow
+        }
+    }
+
+    Write-Host "  Configuring CUDA 12.6 acceleration for Kokoro TTS..." -ForegroundColor Cyan
+    $kokoroGpuScript = Join-Path $PSScriptRoot "enable_kokoro_gpu.ps1"
+    if (Test-Path $kokoroGpuScript) {
+        try {
+            & $kokoroGpuScript
+            Write-Host "  OK: CUDA Kokoro TTS acceleration enabled." -ForegroundColor Green
+        } catch {
+            Write-Host "  Warning: Kokoro CUDA setup skipped: $($_.Exception.Message)" -ForegroundColor Yellow
+        }
+    }
+} else {
+    Write-Host "  No NVIDIA GPU detected; running in optimized CPU mode." -ForegroundColor DarkGray
+}
+Write-Host ""
+
 if ($failed.Count -eq 0) {
-    Write-Host "  All models are in place. Start Aqua from the Start menu." -ForegroundColor Green
+    Write-Host "  All models and hardware acceleration are in place. Start Aqua from the Start menu." -ForegroundColor Green
     Finish 0
 } else {
     Write-Host "  These did not finish:" -ForegroundColor Yellow

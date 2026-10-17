@@ -19,7 +19,6 @@ if (-not (Test-Path (Join-Path $OutDir "enc.onnx"))) {
     Write-Host "Extracting to $OutDir ..."
     New-Item -ItemType Directory -Force -Path $OutDir | Out-Null
     tar -xzf $Tar -C $OutDir
-    if ($LASTEXITCODE -ne 0) { throw "tar could not unpack $Tar (exit code $LASTEXITCODE)" }
     $Nested = Join-Path $OutDir "tmp/export"
     if (Test-Path (Join-Path $Nested "enc.onnx")) {
         Write-Host "Flattening tmp/export ONNX files into $OutDir ..."

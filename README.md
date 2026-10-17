@@ -9,6 +9,7 @@
 
 [![YouTube Demo](https://img.shields.io/badge/YouTube-Watch%20Demo-red?style=flat-square&logo=youtube)](https://youtu.be/8DfhnxvLxXA)
 [![Release](https://img.shields.io/badge/Release-v1.0.0-blue?style=flat-square)](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0)
+[![Windows Installer](https://img.shields.io/badge/Windows-Installer%20(.exe)-blueviolet?style=flat-square&logo=windows)](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 [![Hackathon](https://img.shields.io/badge/WeMakeDevs-Graph%20Hacks%20Tri--Track%20(01%2C%2002%2C%2003)-purple?style=flat-square)](https://www.wemakedevs.org/hackathons/falkordb)
 [![Track 01](https://img.shields.io/badge/Track%2001-Acting%20on%20Connected%20Data-orange?style=flat-square)](#-track-01-agents-that-act-on-connected-data)
@@ -172,11 +173,30 @@ Aqua is built as a complete modular system comprising:
 3. **Windows Desktop Native UI & Floating Neural Voice Orb** (`Tauri v2 + Win32 Native Overlay`)
 4. **Knowledge Graph Database** (`FalkorDB Cloud` or local Docker on Port `6379`)
 
-You can launch everything simultaneously with the **1-Click Universal Launcher**, or start each component individually.
+You can install the ready-to-use Windows bundle, launch everything simultaneously with the **1-Click Universal Launcher**, or start each component individually.
 
 ---
 
-### Option 1: 1-Click Universal Launcher (Recommended)
+### Option 0: Standalone Windows Installer (`.exe`) (For End-Users & Reviewers)
+
+For the easiest setup without requiring any development toolchains, run the compiled NSIS installer:
+- **Installer Executable:** `Aqua Assistant_0.1.0_x64-setup.exe` (located in `apps/aqua-desktop/src-tauri/target/release/bundle/nsis/` or from [GitHub Releases](https://github.com/Vaibhav-tester/Aqua_Assistant/releases/tag/v1.0.0)).
+- **What is Bundled & Configured:**
+  - **Full Desktop UI & Floating Voice Orb**: Native Windows application with acrylic glassmorphism, drag-anywhere voice orb, and screen vision.
+  - **Aqua Core Backend & Runtime DLLs**: GCC, UCRT, and MSVC runtime libraries bundled.
+  - **Speech-to-Text**: Whisper STT engine (`whisper-cli.exe` + models).
+  - **Local LLM Engine**: Llama engine (`llama-cli.exe` and `llama-server.exe`) with Fast 4B Parameter model downloader (`fetch_llama_qwen_4b.ps1`).
+  - **Noise Suppression**: DeepFilterNet3 ONNX background voice remover (`deep-filter.exe`).
+  - **Offline Neural TTS**: Kokoro v1.0 ONNX engine with standalone embedded Python 3.12 runtime.
+  - **Automated NVIDIA GPU & CUDA Acceleration**: Automatically detects NVIDIA GPUs (e.g. GTX 1650, RTX series) via `nvidia-smi` at install time, sets up CUDA 12.6 runtime libraries (`onnxruntime-gpu 1.22.0`, `nvidia-cuda-runtime-cu12`, `nvidia-cudnn-cu12`) for **4x real-time neural voice synthesis**, and configures GPU layer offloading for LLM inference.
+  - **Start Menu Shortcuts Created**:
+    - `Aqua Assistant` (launches desktop UI + voice orb)
+    - `Download Aqua models` (downloads or verifies speech & 4B/8B language models)
+    - `Setup Aqua CUDA & GPU` (re-configures or optimizes NVIDIA GPU acceleration at any time)
+
+---
+
+### Option 1: 1-Click Universal Launcher (From Source)
 
 To start the **complete project** (Backend Core + Frontend + FalkorDB Bridge + Windows Desktop UI & Voice Orb) with a single command:
 

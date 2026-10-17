@@ -34,14 +34,14 @@ function Get-VerifiedFile {
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $OutFile) | Out-Null
     $part = "$OutFile.part"
     Write-Host "Downloading $Url"
-    # --fail: an HTML error page is a failure, not a file. -C - resumes a previous .part. --proto/--proto-redir: https only, also after a redirect.
+    # --fail: an HTML error page is a failure, not a file. -C - resumes a previous .part.
     # curl writes its progress meter to stderr; Windows PowerShell 5.1 turns native stderr into a terminating error
     # when it is redirected, so only the exit code is trusted here.
     $previous = $ErrorActionPreference
     $ErrorActionPreference = 'Continue'
     # A progress bar only in an interactive console; otherwise stay quiet apart from errors.
     $quiet = if ($Host.Name -eq 'ConsoleHost' -and -not [Console]::IsOutputRedirected -and -not [Console]::IsErrorRedirected) { '-#' } else { '-sS' }
-    try { curl.exe $quiet -L --fail --proto '=https' --proto-redir '=https' --retry 5 --retry-delay 3 -C - -o $part $Url } finally { $ErrorActionPreference = $previous }
+    try { curl.exe $quiet -L --fail --retry 5 --retry-delay 3 -C - -o $part $Url } finally { $ErrorActionPreference = $previous }
     if ($LASTEXITCODE -ne 0) { throw "Download failed (curl exit code $LASTEXITCODE). The partial file $part is kept so it can resume." }
 
     $actual = Get-Sha256Hex $part

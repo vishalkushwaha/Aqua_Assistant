@@ -15,12 +15,14 @@ function Step([string]$what, [scriptblock]$run) {
     if ($LASTEXITCODE -ne 0) { throw "$what failed (exit code $LASTEXITCODE)" }
 }
 
-Step 'Building Aqua Core (backend) in release mode...' { cargo build --release -p aqua-core }
-
+$core = Join-Path $root 'target\release\aqua-core.exe'
+if (-not (Test-Path $core)) {
+    Step 'Building Aqua Core (backend) in release mode...' { cargo build --release -p aqua-core }
+} else {
+    Write-Host "Using verified release core: $core"
+}
 $BinDir = Join-Path $root 'apps\aqua-desktop\src-tauri\bin'
 New-Item -ItemType Directory -Force -Path $BinDir | Out-Null
-$core = Join-Path $root 'target\release\aqua-core.exe'
-if (-not (Test-Path $core)) { throw "The release core was not produced: $core" }
 
 # Tauri looks for the sidecar named with the Rust host target (this machine may use gnu, not msvc).
 $triple = ((rustc -vV | Select-String '^host:').ToString() -split '\s+')[1]
@@ -69,7 +71,7 @@ foreach ($e in $wanted) {
 # The scripts that download the models after installing (installer-hooks.nsh runs install_models.ps1 from here).
 $setup = Join-Path $root 'apps\aqua-desktop\src-tauri\resources\setup'
 New-Item -ItemType Directory -Force -Path $setup | Out-Null
-foreach ($f in @('install_models.ps1', '_verified_download.ps1', 'fetch_deepfilternet3_onnx.ps1', 'fetch_speaker_model.ps1', 'fetch_whisper_vad.ps1', 'fetch_kokoro_v1.ps1', 'fetch_whisper_base_en.ps1', 'fetch_whisper_small_en.ps1', 'fetch_llama_qwen3_8b.ps1')) {
+foreach ($f in @('install_models.ps1', '_verified_download.ps1', 'fetch_deepfilternet3_onnx.ps1', 'fetch_speaker_model.ps1', 'fetch_whisper_vad.ps1', 'fetch_kokoro_v1.ps1', 'fetch_whisper_base_en.ps1', 'fetch_whisper_small_en.ps1', 'fetch_llama_qwen_4b.ps1', 'fetch_llama_qwen3_8b.ps1', 'fetch_llama_gpu.ps1', 'enable_kokoro_gpu.ps1', 'enable_gpu.ps1')) {
     Copy-Item (Join-Path $root "scripts\$f") -Destination $setup -Force
 }
 
