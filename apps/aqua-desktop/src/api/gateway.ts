@@ -16,10 +16,6 @@ export function isPackagedApp(): boolean {
 
 /** Pure: where a request should go, and whether it should carry the token. Only our own /api paths do. */
 export function rewrite(url: string, info: GatewayInfo): { url: string; token: string | null } {
-  // FalkorDB Cloud Graph bridge is hosted on port 1420
-  if (url.startsWith('/api/falkordb')) return { url: 'http://127.0.0.1:1420' + url, token: null };
-  if (url.startsWith('http://127.0.0.1:1420/api/falkordb')) return { url, token: null };
-
   if (url.startsWith('/api/')) return { url: info.base_url + url, token: info.ui_token };
   if (url.startsWith(info.base_url + '/api/')) return { url, token: info.ui_token };
   return { url, token: null };

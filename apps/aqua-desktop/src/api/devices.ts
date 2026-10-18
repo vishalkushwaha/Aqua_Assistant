@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { openEventStream } from './stream';
+import { readResponseJson, requireJson, responseErrorMessage } from './jsonResponse';
 
 export type DeviceType =
   | 'keyboard' | 'mouse' | 'headphones' | 'speaker' | 'microphone' | 'controller' | 'camera' | 'printer'
@@ -88,8 +89,8 @@ async function send(path: string, body?: unknown): Promise<{ ok: boolean; data?:
   try {
     const res = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body === undefined ? undefined : JSON.stringify(body) });
     if (res.status === 204) return { ok: true };
-    const data = await res.json().catch(() => ({}));
-    return res.ok ? { ok: true, data } : { ok: false, error: (data as { error?: string }).error ?? `HTTP ${res.status}` };
+    const data = await readResponseJson(res);
+    return res.ok ? { ok: true, data: data ?? undefined } : { ok: false, error: responseErrorMessage(data) || `HTTP ${res.status}` };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) };
   }
@@ -99,7 +100,7 @@ export const devicesApi = {
   async get(): Promise<DevicesSnapshot | null> {
     try {
       const res = await fetch('/api/v1/devices', { headers: { Accept: 'application/json' } });
-      return res.ok ? ((await res.json()) as DevicesSnapshot) : null;
+      return res.ok ? await requireJson<DevicesSnapshot>(res) : null;
     } catch {
       return null;
     }

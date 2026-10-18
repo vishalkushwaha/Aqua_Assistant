@@ -1,3 +1,5 @@
+import { requireJson, responseErrorMessage, readResponseJson } from './jsonResponse';
+
 // Streamed turns: the core answers POST /api/v1/pipeline/text/stream and /api/v1/pipeline/wav/stream with server-sent events, so
 // the first sentence of an answer is heard while the rest is still being written (a short answer takes 10 s to write on a laptop, its
 // first sentence 2 or 3). The events:
@@ -91,12 +93,8 @@ function parseData(data: string): StreamedResult {
 
 async function failure(res: Response): Promise<Error> {
   let why = `${res.status} ${res.statusText}`;
-  try {
-    const body = await res.json();
-    if (body?.error) why = String(body.error);
-  } catch {
-    /* not JSON */
-  }
+  const body = await readResponseJson(res);
+  why = responseErrorMessage(body) || why;
   return new Error(why);
 }
 
@@ -113,7 +111,7 @@ export async function streamTurn(path: string, request: unknown, signal: AbortSi
   if (res.status === 404 && options.fallbackPath) {
     const plain = await post(options.fallbackPath, 'application/json');
     if (!plain.ok) throw await failure(plain);
-    const data = (await plain.json()) as StreamedResult;
+    const data = await requireJson<StreamedResult>(plain);
     const result = data.result ?? data;
     handlers.onHeard?.(String(result.transcribed_text ?? ''));
     handlers.onDone?.(data);

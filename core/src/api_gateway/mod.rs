@@ -9,6 +9,7 @@ pub mod contract_schemas;
 pub mod devices_api;
 pub mod dictation_api;
 pub mod eval_api;
+pub mod falkor_api;
 pub mod flow_api;
 pub mod flow_comments_api;
 pub mod flow_sched_api;

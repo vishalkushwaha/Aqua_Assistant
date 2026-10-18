@@ -1,3 +1,5 @@
+import { readResponseJson, requireJson, responseErrorMessage } from './jsonResponse';
+
 export interface IndexStatus {
   enabled: boolean;
   index_files: boolean;
@@ -43,8 +45,8 @@ export interface IndexState {
 async function post(path: string, body?: unknown): Promise<{ ok: boolean; error?: string }> {
   try {
     const res = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body ?? {}) });
-    const data = await res.json().catch(() => ({}));
-    return res.ok ? { ok: true } : { ok: false, error: data.error ?? `HTTP ${res.status}` };
+    const data = await readResponseJson(res);
+    return res.ok ? { ok: true } : { ok: false, error: responseErrorMessage(data) || `HTTP ${res.status}` };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) };
   }
@@ -54,7 +56,7 @@ export const fileIndexApi = {
   async state(): Promise<IndexState | null> {
     try {
       const res = await fetch('/api/v1/index/status', { headers: { Accept: 'application/json' } });
-      return res.ok ? ((await res.json()) as IndexState) : null;
+      return res.ok ? await requireJson<IndexState>(res) : null;
     } catch {
       return null;
     }

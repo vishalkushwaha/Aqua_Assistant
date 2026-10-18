@@ -1,6 +1,8 @@
 // Typed client for aqua-core's AI Flows (/api/v1/flows/*). The dev proxy adds the tokens. Reading,
 // validating and diffing need any token; saving, restoring, importing and deleting need the UI token.
 
+import { requireJson } from './jsonResponse.ts';
+
 export type NodeKind =
   | 'trigger' | 'user_input' | 'research' | 'text_generation' | 'image_generation' | 'ai_agent' | 'browser' | 'website'
   | 'http' | 'n8n' | 'comment_replies' | 'tool' | 'file' | 'excel' | 'database' | 'social_media' | 'condition' | 'loop' | 'delay' | 'schedule'
@@ -141,17 +143,7 @@ export interface AuditEntry {
 }
 
 async function json<T>(r: Response): Promise<T> {
-  if (!r.ok) {
-    let detail = '';
-    try {
-      const body = await r.json();
-      detail = body?.error ? String(body.error) : '';
-    } catch {
-      /* not JSON */
-    }
-    throw new Error(detail || `${r.status} ${r.statusText}`);
-  }
-  return (await r.json()) as T;
+  return requireJson<T>(r, `Could not load or update this routine (${r.status}).`);
 }
 
 const send = (method: string, url: string, body?: unknown) =>

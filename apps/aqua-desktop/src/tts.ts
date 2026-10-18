@@ -1,3 +1,5 @@
+import { requireJson } from './api/jsonResponse.ts';
+
 export const TTS_CHUNK_MAX_CHARS = 220;
 // The CLI fallback has its own 120-second hard deadline. Give it a small
 // allowance for model startup and HTTP transfer, while still bounding the UI.
@@ -45,8 +47,7 @@ export async function fetchTtsChunk({
       body: JSON.stringify({ text, voice, lang }),
       signal: request.signal,
     });
-    if (!response.ok) throw new Error(`Voice service returned ${response.status}`);
-    return (await response.json()) as SynthesizedVoiceWav;
+    return await requireJson<SynthesizedVoiceWav>(response, 'Voice synthesis is unavailable. Please try again.');
   } catch (error) {
     if (timedOut) throw new Error('Voice synthesis timed out. Please try again.');
     throw error;

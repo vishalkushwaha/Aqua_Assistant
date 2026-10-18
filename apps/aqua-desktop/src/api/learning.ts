@@ -3,6 +3,7 @@
 // revalidating, reindexing, clearing) needs the UI token, which the proxy sends.
 
 import { mapRecipeList, recipeErrorSentence, RecipeError, serverSentence, UNREADABLE_ANSWER, type RecipeList } from './recipes.ts';
+import { readResponseJson, requireJson } from './jsonResponse.ts';
 
 export interface LearningSettings {
   learning_enabled: boolean;
@@ -200,17 +201,7 @@ export interface LearningJob {
 }
 
 async function json<T>(r: Response): Promise<T> {
-  if (!r.ok) {
-    let detail = '';
-    try {
-      const body = await r.json();
-      detail = body?.error ? `: ${body.error}` : '';
-    } catch {
-      /* not JSON */
-    }
-    throw new Error(`${r.status} ${r.statusText}${detail}`);
-  }
-  return (await r.json()) as T;
+  return requireJson<T>(r, `Could not load or update learning data (${r.status}).`);
 }
 
 const post = (url: string, body?: unknown) =>
@@ -260,12 +251,7 @@ async function recipeRequest(action: 'list' | 'forget', url: string, init?: Requ
 
 /** The error for a not-ok answer: a sentence, never the status line or the body as it came. */
 async function recipeFailure(action: 'list' | 'forget', r: Response): Promise<RecipeError> {
-  let body: unknown = null;
-  try {
-    body = await r.json();
-  } catch {
-    /* not JSON */
-  }
+  const body = await readResponseJson(r);
   return new RecipeError(recipeErrorSentence(action, r.status, serverSentence(body)));
 }
 
@@ -274,12 +260,7 @@ export const learningApi = {
   recipes: async (): Promise<RecipeList> => {
     const r = await recipeRequest('list', '/api/v1/learning/recipes');
     if (!r.ok) throw await recipeFailure('list', r);
-    let body: unknown = null;
-    try {
-      body = await r.json();
-    } catch {
-      /* said below */
-    }
+    const body = await readResponseJson(r);
     const list = mapRecipeList(body);
     if (!list) throw new RecipeError(UNREADABLE_ANSWER);
     return list;

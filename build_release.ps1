@@ -119,6 +119,8 @@ if (-not $env:TAURI_SIGNING_PRIVATE_KEY -and -not $env:TAURI_SIGNING_PRIVATE_KEY
     $defaultKey = Join-Path $HOME '.aqua-signing\aqua-updater.key'
     if (-not (Test-Path $defaultKey)) { throw "No updater signing key found. Set TAURI_SIGNING_PRIVATE_KEY_PATH or create $defaultKey (see documentation/UPDATES.md)." }
     $env:TAURI_SIGNING_PRIVATE_KEY_PATH = $defaultKey
+    $env:TAURI_SIGNING_PRIVATE_KEY = $defaultKey
+    if ($null -eq $env:TAURI_SIGNING_PRIVATE_KEY_PASSWORD) { $env:TAURI_SIGNING_PRIVATE_KEY_PASSWORD = '' }
 }
 Step 'Building the Tauri installer...' { npx tauri build }
 Assert-WindowsInstaller

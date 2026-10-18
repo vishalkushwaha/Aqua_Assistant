@@ -1,3 +1,5 @@
+import { requireJson } from '../api/jsonResponse.ts';
+
 // Always-on wake word: while the orb is idle, the microphone stays open and each stretch of speech is checked by the core
 // (/voice/wake-check: a small local Whisper model, nothing leaves this machine). When the assistant's name ("Hey Aqua") or
 // "wake up" is said anywhere in a sentence, onWake fires. Audio that is not speech, and speech without the phrase, is
@@ -58,8 +60,7 @@ async function checkWake(pcm: Float32Array, srcRate: number, mode: ListenMode): 
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ wav_base64: pcmToWavBase64(pcm, srcRate) }),
   });
-  if (!res.ok) throw new Error(`wake check ${res.status}`);
-  const data = await res.json();
+  const data = await requireJson<Record<string, unknown>>(res, 'Wake-word checking is unavailable.');
   return { wake: (mode === 'stop' ? data.stop : data.wake) === true, heard: String(data.heard ?? ''), skipped: typeof data.skipped === 'string' ? data.skipped : undefined };
 }
 

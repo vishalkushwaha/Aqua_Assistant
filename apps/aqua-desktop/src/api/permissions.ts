@@ -1,6 +1,8 @@
 // Typed client for "full access" for the project (/api/v1/permissions/full-access). The dev proxy adds the tokens; changing
 // the setting needs the UI token, which only the proxy (and the packaged app's own page) holds.
 
+import { JsonResponseError, readResponseJson, responseErrorMessage } from './jsonResponse.ts';
+
 export type LayerState = 'on' | 'off' | 'unavailable';
 
 export interface FullAccessLayer {
@@ -30,14 +32,14 @@ export class PermissionError extends Error {
 }
 
 async function json<T>(r: Response): Promise<T> {
-  if (r.ok) return (await r.json()) as T;
-  let detail = '';
-  try {
-    const body = await r.json();
-    detail = typeof body?.error === 'string' ? body.error : '';
-  } catch {
-    /* not JSON */
+  let body: unknown;
+  try { body = await readResponseJson(r); }
+  catch (error) { throw error instanceof JsonResponseError ? new PermissionError(error.message, r.status) : error; }
+  if (r.ok) {
+    if (body === null) throw new PermissionError('Aqua sent an empty response. Please try again.', r.status);
+    return body as T;
   }
+  const detail = responseErrorMessage(body);
   if (r.status === 403) throw new PermissionError('Only the Aqua app can change this. Open it from the Aqua window, not from a script or another program.', 403);
   if (r.status === 409) throw new PermissionError(detail || 'The tool policy is locked, so full access cannot be turned on. Fix data/tools/policy.json first.', 409);
   throw new PermissionError(detail || `Aqua answered ${r.status} ${r.statusText}`, r.status);

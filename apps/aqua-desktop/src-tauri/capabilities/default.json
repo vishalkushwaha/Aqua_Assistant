@@ -3,5 +3,23 @@
   "identifier": "default",
   "description": "Permissions for the main window and the voice orb overlay",
   "windows": ["main", "voice-overlay"],
-  "permissions": ["core:default", "core:window:allow-start-dragging"]
+  "permissions": [
+    "core:default",
+    "core:window:allow-start-dragging",
+    "allow-gateway-info",
+    "allow-open-external",
+    "allow-bring-to-front",
+    "allow-orb-menu",
+    "allow-orb-resize",
+    "allow-orb-place-state",
+    "allow-orb-place-set",
+    "allow-orb-place-move",
+    "allow-orb-place-forget",
+    "allow-orb-place-recheck",
+    "allow-orb-hit-regions",
+    "allow-update-status",
+    "allow-check-for-update",
+    "allow-install-update",
+    "allow-update-progress"
+  ]
 }

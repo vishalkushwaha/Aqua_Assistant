@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { fileIndexApi, type IndexState } from '../api/fileIndex';
-import { PageHeader, Pill, Section, type Tone } from './ui';
+import { PageHeader, Pill, Section, UnavailableState, type Tone } from './ui';
 
 const INPUT_STYLE = {
   flex: 1,
@@ -97,7 +97,12 @@ export function FileIndexPanel() {
   if (!st) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 980, margin: '0 auto' }}>
-        <PageHeader title="File index" subtitle="The index is not running. Start Aqua's backend and this page will fill in." />
+        <PageHeader title="File Search Index" subtitle="Fast, private lookup across the folders and shortcuts you choose." />
+        <UnavailableState
+          title="Preparing your private file index"
+          description="Start Aqua Core to load indexed folders, scan progress, privacy exclusions, and search controls. Indexed content stays on this computer."
+          status="File index offline"
+        />
       </div>
     );
   }
@@ -108,7 +113,7 @@ export function FileIndexPanel() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 980, margin: '0 auto' }}>
       <PageHeader
-        title="File index"
+        title="File Search Index"
         subtitle="Aqua keeps a list of the folders, programs and shortcuts on this computer, so “open the Personal AI folder” works at once. The list stays on this computer and is never sent anywhere."
         actions={
           <>

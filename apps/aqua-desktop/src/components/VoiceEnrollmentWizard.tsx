@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Mic, CheckCircle2, ShieldCheck, RefreshCw, Volume2, RotateCcw, MessageSquare, UserCheck, UserX, Square } from 'lucide-react';
 import { mayAdvanceByItself, saidWakePhrase } from '../api/enrollmentMatch';
+import { requireJson } from '../api/jsonResponse';
 
 interface AudioMetrics {
   rmsDb: number;
@@ -63,7 +64,7 @@ export function VoiceEnrollmentWizard() {
   // Load saved settings from Rust backend on mount
   useEffect(() => {
     fetch('/api/v1/voice/settings')
-      .then(res => res.json())
+      .then(res => requireJson<Record<string, any>>(res, 'Voice settings are unavailable.'))
       .then(data => {
         if (data.wakeup_word) setWakeupWord(data.wakeup_word);
         if (data.custom_reply) setCustomReply(data.custom_reply);
@@ -221,7 +222,7 @@ export function VoiceEnrollmentWizard() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ wav_base64: stepData.base64 })
           });
-          const data = await res.json();
+          const data = await requireJson<Record<string, any>>(res, 'Speech transcription is unavailable.');
           sttResult = !res.ok ? `[STT Error: ${data?.error ?? res.status}]` : data.transcription?.trim() || "[No speech detected]";
         } catch (err: any) {
           sttResult = `[STT Error: ${err.message}]`;
@@ -298,7 +299,7 @@ export function VoiceEnrollmentWizard() {
             custom_reply: customReply
           })
         });
-        const data = await res.json();
+        const data = await requireJson<Record<string, any>>(res, 'Voice enrollment could not be completed.');
         if (data.success && data.enrolled_fingerprint_id) {
           setEnrolledFingerprint(data.enrolled_fingerprint_id);
         } else {
@@ -351,10 +352,10 @@ export function VoiceEnrollmentWizard() {
           });
 
           const [verifyRes, sttRes] = await Promise.all([verifyPromise, sttPromise]);
-          const data = await verifyRes.json();
+          const data = await requireJson<Record<string, any>>(verifyRes, 'Voice verification could not be completed.');
           let sttResult = "[No speech detected]";
           if (sttRes.ok) {
-            const sttData = await sttRes.json();
+            const sttData = await requireJson<Record<string, any>>(sttRes, 'Speech transcription is unavailable.');
             if (sttData.transcription) sttResult = sttData.transcription.trim();
           }
 

@@ -148,6 +148,77 @@ export function OverviewPage({ status, loading, connected, starting, onOpen }: P
         </div>
       </div>
 
+      {/* WeMakeDevs FalkorDB Hackathon Spotlight Card */}
+      <div
+        className="glass-panel"
+        style={{
+          padding: '22px 26px',
+          borderRadius: 16,
+          background: 'linear-gradient(135deg, rgba(60, 203, 255, 0.1) 0%, rgba(176, 106, 255, 0.1) 100%)',
+          border: '1px solid rgba(60, 203, 255, 0.25)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 14,
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <Sparkles size={18} color="var(--accent-cyan)" />
+            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#fff' }}>
+              WeMakeDevs Hackathon: Graph Hacks Powered by FalkorDB
+            </h3>
+          </div>
+          <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--accent-cyan)', background: 'rgba(60,203,255,0.15)', padding: '3px 10px', borderRadius: 20 }}>
+            3-Track Showcase
+          </span>
+        </div>
+
+        <p style={{ margin: 0, fontSize: 13.5, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+          Project Aqua integrates FalkorDB as its primary context and associative memory engine across all three hackathon tracks:
+          multi-hop incident reasoning, cross-session memory recall, and unified organizational knowledge.
+        </p>
+
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 4 }}>
+          <button
+            className="btn-primary"
+            onClick={() => onOpen('company-brain')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '9px 18px',
+              fontSize: 13,
+              fontWeight: 700,
+              background: 'linear-gradient(135deg, var(--accent-cyan), var(--accent-blue))',
+              color: '#020617',
+              borderRadius: 8,
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Launch Company Brain (Tracks 1 & 3) <ChevronRight size={15} />
+          </button>
+          <button
+            className="btn-ghost"
+            onClick={() => onOpen('graph-memory')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '9px 18px',
+              fontSize: 13,
+              fontWeight: 600,
+              borderRadius: 8,
+              border: '1px solid var(--glass-border-highlight)',
+              color: 'var(--text-primary)',
+              cursor: 'pointer',
+            }}
+          >
+            Explore Memory Graph (Track 2) <ChevronRight size={15} />
+          </button>
+        </div>
+      </div>
+
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
         {/* System Status Section */}
         <Section title="System Status" hint="Operational status of your assistant services.">

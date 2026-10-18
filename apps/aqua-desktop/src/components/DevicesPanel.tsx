@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CATEGORY_LABELS, devicesApi, useDevices, type Category, type DevicePrefs, type DeviceSettings, type DeviceView } from '../api/devices';
-import { PageHeader, Pill, Section, Switch, type Tone } from './ui';
+import { PageHeader, Pill, Section, Switch, UnavailableState, type Tone } from './ui';
 
 const INPUT_STYLE = {
   width: 72,
@@ -60,7 +60,12 @@ export function DevicesPanel() {
   if (!snap) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 1000, margin: '0 auto' }}>
-        <PageHeader title="Devices and battery" subtitle="Device monitoring is not running. Start Aqua's backend and this page will fill in." />
+        <PageHeader title="Audio Devices & Battery" subtitle="Local connection, battery, and announcement controls for your devices." />
+        <UnavailableState
+          title="Waiting for device monitoring"
+          description="Start Aqua Core to load microphones, speakers, Bluetooth devices, battery levels, notification history, and quiet-hour controls."
+          status="Device monitor offline"
+        />
       </div>
     );
   }
@@ -84,7 +89,7 @@ export function DevicesPanel() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 1000, margin: '0 auto' }}>
       <PageHeader
-        title="Devices and battery"
+        title="Audio Devices & Battery"
         subtitle="Aqua tells you by voice when a device connects, and when the battery of a device (or of this computer) runs low. It uses Windows' own notifications, so it costs nothing while nothing changes. Nothing leaves this computer."
         actions={
           <>

@@ -26,6 +26,10 @@ import { CompanyBrainPage } from './components/CompanyBrainPage';
 import { ProductShowcasePage } from './components/ProductShowcasePage';
 
 const TAB_KEY = 'aquaActiveTab';
+const CORE_DEPENDENT_TABS = new Set<TabId>([
+  'tts-voices', 'security', 'workflows', 'flows', 'tools', 'permissions', 'memory',
+  'agent-learning', 'skills-inbox', 'file-index', 'vault', 'devices',
+]);
 
 function initialTab(): TabId {
   const params = new URLSearchParams(window.location.search);
@@ -161,6 +165,35 @@ export default function App() {
 
         {/* Remounting on the key plays the short entrance, so choosing a page is acknowledged */}
         <main style={{ flex: 1, minWidth: 0, padding: 24, overflowY: 'auto' }}>
+          {!loading && !connected && CORE_DEPENDENT_TABS.has(activeTab) && (
+            <div
+              role="status"
+              className="glass-panel page-enter"
+              style={{
+                maxWidth: 1200,
+                margin: '0 auto 18px',
+                padding: '12px 16px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 14,
+                flexWrap: 'wrap',
+                borderColor: 'rgba(255, 176, 60, 0.25)',
+                background: 'linear-gradient(90deg, rgba(255, 176, 60, 0.08), rgba(60, 203, 255, 0.04))',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
+                <span className="pulse-dot" style={{ width: 9, height: 9, borderRadius: '50%', background: 'var(--state-attention)', color: 'var(--state-attention)', flexShrink: 0 }} />
+                <div>
+                  <strong style={{ display: 'block', fontSize: 13.5 }}>Aqua Core is connecting</strong>
+                  <span style={{ color: 'var(--text-secondary)', fontSize: 12.5 }}>
+                    This page is ready; live data and controls appear automatically when the private local service responds.
+                  </span>
+                </div>
+              </div>
+              <span style={{ color: 'var(--text-muted)', fontSize: 11.5, fontFamily: 'var(--font-mono)' }}>LOCAL · PRIVATE · AUTO-RETRY</span>
+            </div>
+          )}
           <div key={activeTab} className="page-enter">
             {activeTab === 'overview' && (
               <OverviewPage status={status} loading={loading} connected={connected} starting={starting?.text} onOpen={setActiveTab} />

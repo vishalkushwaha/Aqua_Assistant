@@ -386,7 +386,7 @@ fn scalar(reply: &Reply) -> Option<String> {
     }
 }
 
-fn parse_rows(reply: &Reply) -> Result<Vec<BTreeMap<String, String>>, ToolError> {
+pub(crate) fn parse_rows(reply: &Reply) -> Result<Vec<BTreeMap<String, String>>, ToolError> {
     let bad = |message: &str| ToolError::new(ErrorCode::BackendError, format!("unexpected FalkorDB result: {message}"));
     let Reply::Array(Some(sections)) = reply else {
         return Err(bad("the result is not an array"));

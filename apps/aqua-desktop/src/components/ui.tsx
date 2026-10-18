@@ -49,6 +49,42 @@ export function Section({ title, hint, children, actions }: { title: string; hin
   );
 }
 
+/** A calm, informative first-load state for panels whose local service is not ready yet. */
+export function UnavailableState({
+  title,
+  description,
+  status = 'Waiting for the local service',
+}: {
+  title: string;
+  description: ReactNode;
+  status?: string;
+}) {
+  return (
+    <div
+      className="glass-panel"
+      role="status"
+      style={{
+        minHeight: 190,
+        padding: 28,
+        display: 'grid',
+        placeItems: 'center',
+        textAlign: 'center',
+        background: 'radial-gradient(circle at 50% 0%, rgba(60, 203, 255, 0.08), transparent 58%), var(--glass-bg)',
+      }}
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, maxWidth: 560 }}>
+        <div style={{ width: 44, height: 44, borderRadius: 14, display: 'grid', placeItems: 'center', background: 'rgba(60, 203, 255, 0.1)', border: '1px solid rgba(60, 203, 255, 0.24)' }}>
+          <span className="pulse-dot" style={{ width: 10, height: 10, borderRadius: '50%', background: 'var(--accent-cyan)', color: 'var(--accent-cyan)' }} />
+        </div>
+        <h3 style={{ fontSize: 18 }}>{title}</h3>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 14, lineHeight: 1.55 }}>{description}</p>
+        <Pill tone="attention" label={status} live />
+        <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>This panel reconnects automatically. No refresh is required.</span>
+      </div>
+    </div>
+  );
+}
+
 /** A checkbox with a label and an optional one-line explanation under it. */
 export function Switch({ label, hint, checked, onChange, disabled }: { label: string; hint?: string; checked: boolean; onChange: (v: boolean) => void; disabled?: boolean }) {
   return (

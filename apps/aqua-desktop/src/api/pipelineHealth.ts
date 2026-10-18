@@ -1,3 +1,5 @@
+import { requireJson } from './jsonResponse';
+
 export interface StageStatus {
   id: string;
   label: string;
@@ -26,7 +28,7 @@ export async function fetchPipelineHealth(): Promise<PipelineStageHealth | null>
   try {
     const res = await fetch('/api/v1/pipeline/health', { headers: { Accept: 'application/json' } });
     if (!res.ok) return null;
-    return (await res.json()) as PipelineStageHealth;
+    return await requireJson<PipelineStageHealth>(res);
   } catch {
     return null;
   }
@@ -44,7 +46,7 @@ export async function runTextPipeline(
       body: JSON.stringify({ text, voice, lang }),
     });
     if (!res.ok) return null;
-    const raw = (await res.json()) as PipelineTextResult & { latency_ms: number };
+    const raw = await requireJson<PipelineTextResult & { latency_ms: number }>(res);
     return raw;
   } catch {
     return null;

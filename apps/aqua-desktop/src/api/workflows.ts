@@ -2,6 +2,8 @@
 // tokens. Reading needs any token; creating, editing, enabling, running, cancelling and deleting need
 // the UI token, which the proxy sends.
 
+import { requireJson } from './jsonResponse.ts';
+
 export type Trigger =
   | { type: 'manual' }
   | { type: 'schedule'; cron: string }
@@ -78,17 +80,7 @@ export interface SchedulerStatus {
 }
 
 async function json<T>(r: Response): Promise<T> {
-  if (!r.ok) {
-    let detail = '';
-    try {
-      const body = await r.json();
-      detail = body?.error ? String(body.error) : '';
-    } catch {
-      /* not JSON */
-    }
-    throw new Error(detail || `${r.status} ${r.statusText}`);
-  }
-  return (await r.json()) as T;
+  return requireJson<T>(r, `Could not load or update this workflow (${r.status}).`);
 }
 
 const send = (method: string, url: string, body?: unknown) =>

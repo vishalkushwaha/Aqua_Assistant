@@ -4,6 +4,7 @@
 // ever used. If Kokoro is not ready nothing is spoken, and the caller is told so.
 
 import { meterAudioElement } from '../activity';
+import { requireJson } from './jsonResponse.ts';
 
 const VOICE_KEY = 'aqua.agent.speak';
 const MAX_SPOKEN_CHARS = 700;
@@ -104,7 +105,7 @@ async function synthesize(text: string, signal: AbortSignal): Promise<string | n
       signal,
     });
     if (!res.ok) return null;
-    const data = (await res.json()) as { wav_base64?: string; engine_ready?: boolean };
+    const data = await requireJson<{ wav_base64?: string; engine_ready?: boolean }>(res);
     return data.engine_ready && data.wav_base64 ? data.wav_base64 : null;
   } catch {
     return null;

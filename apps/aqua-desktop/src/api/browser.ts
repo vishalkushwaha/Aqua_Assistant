@@ -1,6 +1,8 @@
 // Typed client for aqua-core's policy-guarded browser API (/api/v1/browser/*).
 // The dev proxy adds the API token, so these are plain relative fetches.
 
+import { requireJson } from './jsonResponse.ts';
+
 export type BackendKind = 'managed' | 'extension';
 export type SiteMode = 'ask' | 'allowlist' | 'denylist';
 export type JavascriptPolicy = 'off' | 'allowed_sites';
@@ -69,11 +71,7 @@ export interface BrowserObservation {
 }
 
 async function json<T>(res: Response): Promise<T> {
-  const body = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    throw new Error((body as { error?: string }).error || `Request failed (${res.status})`);
-  }
-  return body as T;
+  return requireJson<T>(res, `Browser request failed (${res.status}).`);
 }
 
 const send = (method: string, body: unknown) => ({

@@ -183,7 +183,7 @@ You can install the ready-to-use Windows bundle, launch everything simultaneousl
 ### Option 0: Standalone Windows Installer (`.exe`) (For End-Users & Reviewers)
 
 For the easiest setup without requiring any development toolchains, run the compiled NSIS installer:
-- **Installer Executable:** `Aqua Assistant_0.1.0_x64-setup.exe` (located in `apps/aqua-desktop/src-tauri/target/release/bundle/nsis/` or from [GitHub Releases](https://github.com/vishalkushwaha/Aqua_Assistant/releases/tag/v1.0.0)).
+- **Installer Executable:** `Aqua Assistant_0.1.3_x64-setup.exe` (located in `apps/aqua-desktop/src-tauri/target/release/bundle/nsis/`; use the newest matching asset on [GitHub Releases](https://github.com/vishalkushwaha/Aqua_Assistant/releases)).
 - Download and run the file whose name ends in `-Setup.exe`. Do not download or distribute the raw `aqua-desktop.exe`; it is a build output and does not contain the required Windows loader and installed resources by itself.
 - **What is Bundled & Configured:**
   - **Full Desktop UI & Floating Voice Orb**: Native Windows application with acrylic glassmorphism, drag-anywhere voice orb, and screen vision.

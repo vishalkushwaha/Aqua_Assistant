@@ -142,6 +142,7 @@ pub(crate) fn api_routes() -> Router<AppState> {
         .merge(super::super::self_repair_api::routes())
         .merge(super::super::autonomy_api::routes())
         .merge(super::super::eval_api::routes())
+        .merge(super::super::falkor_api::routes())
         .merge(super::super::models_api::routes())
         .merge(super::super::contract::routes())
         .merge(super::super::routing_feedback_api::routes())

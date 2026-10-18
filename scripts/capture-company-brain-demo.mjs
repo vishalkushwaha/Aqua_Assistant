@@ -32,7 +32,22 @@ const submissionScenes = [
 const failureScenes = [
   ['?demo=answer', 'submission-08-falkordb-refusal.png', 18000],
 ];
-const scenes = mode === 'submission' ? submissionScenes : mode === 'failure' ? failureScenes : showcaseScenes;
+const panelTabs = [
+  'overview', 'tts-voices', 'security', 'workflows', 'flows', 'tools', 'permissions', 'memory',
+  'graph-memory', 'company-brain', 'agent-learning', 'skills-inbox', 'file-index', 'vault', 'devices', 'orb-position',
+];
+const panelScenes = panelTabs.map((tab, index) => [
+  `?showcase=${tab}`,
+  `panel-${String(index + 1).padStart(2, '0')}-${tab}.png`,
+  6000,
+]);
+const scenes = mode === 'submission'
+  ? submissionScenes
+  : mode === 'failure'
+    ? failureScenes
+    : mode === 'panel'
+      ? panelScenes
+      : showcaseScenes;
 
 await mkdir(outputDir, { recursive: true });
 

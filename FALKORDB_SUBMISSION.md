@@ -1,12 +1,19 @@
 # Graph Hacks Submission: Aqua Company Brain
 
-**Track:** Track 03 — Company Brain  
+**Tracks:** Track 01 — Agents That Act on Connected Data; Track 02 — Agent Memory and Coordination; Track 03 — Company Brain
+
 **Project:** Aqua, a graph-grounded private desktop agent  
 **Context layer:** FalkorDB
 
 ## The company problem
 
 Company knowledge is split between people, teams, projects, tickets, decisions, documents, and chats. Aqua's Company Brain follows those relationships in FalkorDB, acts only after graph validation, remembers the resulting trail, and returns the exact paths and records behind its answer. If FalkorDB cannot provide connected evidence, it refuses to answer.
+
+## Track coverage
+
+- **Track 01:** multi-hop Cypher retrieval, explainable paths, MCP/ToolHost graph tools, and graph-authorized ticket assignment.
+- **Track 02:** tenant-isolated sessions, episodic answer memory, shared state revisions, and agent-to-agent handoffs persisted in FalkorDB.
+- **Track 03:** connected people, teams, projects, systems, tickets, decisions, documents, and chats with source provenance and freshness controls.
 
 ## Demonstrated workflow
 

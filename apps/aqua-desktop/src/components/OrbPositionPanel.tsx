@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { orbPlacement, useOrbPlacement, type OrbLogEntry, type OrbPlacementSettings, type Sensitivity, type SpotName } from '../api/orbPlacement';
-import { PageHeader, Pill, Section, Switch } from './ui';
+import { PageHeader, Pill, Section, Switch, UnavailableState } from './ui';
 
 const SELECT_STYLE = {
   padding: '5px 8px',
@@ -64,14 +64,19 @@ export function OrbPositionPanel() {
   if (!orbPlacement.available()) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 1000, margin: '0 auto' }}>
-        <PageHeader title="Orb position" subtitle="This page works in the Aqua desktop app, which owns the orb's window. Open it from the app, not from a browser." />
+        <PageHeader title="Display Settings" subtitle="Position and behavior controls for Aqua's floating assistant orb." />
+        <UnavailableState
+          title="Open Display Settings in Aqua Desktop"
+          description="The desktop app owns the orb window and provides automatic placement, per-app memory, screen-edge controls, and privacy-safe content avoidance."
+          status="Desktop-only controls"
+        />
       </div>
     );
   }
   if (!state) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 1000, margin: '0 auto' }}>
-        <PageHeader title="Orb position" subtitle={error ?? 'Loading…'} />
+        <PageHeader title="Display Settings" subtitle={error ?? 'Loading…'} />
       </div>
     );
   }
@@ -100,7 +105,7 @@ export function OrbPositionPanel() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 1000, margin: '0 auto' }}>
       <PageHeader
-        title="Orb position"
+        title="Display Settings"
         subtitle="When you switch program or page, Aqua looks once at the window in front and, only if the orb is covering something, slides it to the clearest nearby spot. It never moves while you drag it, while its text box is open, or when you lock it. The picture of the window is analysed and thrown away; nothing is stored about what is on your screen."
         actions={
           <>

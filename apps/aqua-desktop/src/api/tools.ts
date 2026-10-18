@@ -1,6 +1,8 @@
 // Typed client for aqua-core's tool host (/api/v1/tools/*). The dev proxy adds the tokens.
 // Reading is open to any token; saving the policy needs the UI token, which the proxy sends.
 
+import { requireJson } from './jsonResponse.ts';
+
 export type Mode = 'locked' | 'standard' | 'developer';
 export type Decision = 'auto' | 'ask' | 'always_ask' | 'deny';
 
@@ -48,17 +50,7 @@ export interface AuditRecord {
 }
 
 async function json<T>(r: Response): Promise<T> {
-  if (!r.ok) {
-    let detail = '';
-    try {
-      const body = await r.json();
-      detail = body?.error ? `: ${body.error}` : '';
-    } catch {
-      /* not JSON */
-    }
-    throw new Error(`${r.status} ${r.statusText}${detail}`);
-  }
-  return (await r.json()) as T;
+  return requireJson<T>(r, `Could not load or update tools (${r.status}).`);
 }
 
 export const toolsApi = {
