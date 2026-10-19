@@ -41,13 +41,19 @@ const panelScenes = panelTabs.map((tab, index) => [
   `panel-${String(index + 1).padStart(2, '0')}-${tab}.png`,
   6000,
 ]);
+const focusedScenes = {
+  answer: submissionScenes.filter(([, filename]) => filename === 'submission-03-grounded-answer.png'),
+  action: submissionScenes.filter(([, filename]) => filename === 'submission-04-graph-action.png'),
+  memory: submissionScenes.filter(([, filename]) => filename === 'submission-05-persistent-memory.png'),
+  handoff: submissionScenes.filter(([, filename]) => filename === 'submission-06-agent-handoff.png'),
+};
 const scenes = mode === 'submission'
   ? submissionScenes
   : mode === 'failure'
     ? failureScenes
     : mode === 'panel'
       ? panelScenes
-      : showcaseScenes;
+      : focusedScenes[mode] || showcaseScenes;
 
 await mkdir(outputDir, { recursive: true });
 

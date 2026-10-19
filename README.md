@@ -1,15 +1,15 @@
 <div align="center">
 
-<img src="https://files.catbox.moe/g5aymx.png" alt="Aqua Logo" width="100" height="100" />
+<img src="assets/aqua-logo.png" alt="Aqua Logo" width="100" height="100" />
 
 # Aqua AI Assistant
 
 **Unified Graph-Grounded Private AI Agent powered by FalkorDB**
 ### 🏆 WeMakeDevs Graph Hacks — Complete Tri-Track Submission
 
-[![YouTube Demo](https://img.shields.io/badge/YouTube-Watch%20Demo-red?style=flat-square&logo=youtube)](https://youtu.be/8DfhnxvLxXA)
-[![Release](https://img.shields.io/badge/Release-v1.0.0-blue?style=flat-square)](https://github.com/vishalkushwaha/Aqua_Assistant/releases/tag/v1.0.0)
-[![Windows Installer](https://img.shields.io/badge/Windows-Installer%20(.exe)-blueviolet?style=flat-square&logo=windows)](https://github.com/vishalkushwaha/Aqua_Assistant/releases/tag/v1.0.0)
+[![Latest Demo](https://img.shields.io/badge/Demo-1080p%20Narrated-06b6d4?style=flat-square&logo=youtube)](demo/video/aqua-falkordb-submission-demo.mp4)
+[![Desktop Build](https://img.shields.io/badge/Desktop-v0.1.3-blue?style=flat-square)](apps/aqua-desktop/src-tauri/tauri.conf.json)
+[![Windows Installer](https://img.shields.io/badge/Windows-NSIS%20Installer-blueviolet?style=flat-square&logo=windows)](https://github.com/vishalkushwaha/Aqua_Assistant/releases)
 [![License](https://img.shields.io/badge/License-Proprietary%20%2F%20Restricted-red?style=flat-square)](LICENSE)
 [![Hackathon](https://img.shields.io/badge/WeMakeDevs-Graph%20Hacks%20Tri--Track%20(01%2C%2002%2C%2003)-purple?style=flat-square)](https://www.wemakedevs.org/hackathons/falkordb)
 [![Track 01](https://img.shields.io/badge/Track%2001-Acting%20on%20Connected%20Data-orange?style=flat-square)](#-track-01-agents-that-act-on-connected-data)
@@ -72,57 +72,68 @@ Aqua satisfies every requirement across all three tracks:
 
 ---
 
-## Demo Video & Walkthrough
+## Demo video and judge walkthrough
 
-A narrated, captioned walkthrough demonstrating live FalkorDB retrieval, explainability, graph-controlled action, persistent memory, and disconnection refusal across all three tracks:
+The latest repository-native demo is a **2:50, 1920×1080** walkthrough with offline neural narration, subtle scene motion, chapter labels, mastered stereo audio, burned-in captions, and an accessible subtitle sidecar.
 
-> **Judge-focused working demo**: [Play `aqua-falkordb-submission-demo.mp4` on GitHub](https://github.com/vishalkushwaha/Aqua_Assistant/blob/main/demo/video/aqua-falkordb-submission-demo.mp4)
-> **Submission captions**: [`demo/video/aqua-falkordb-submission-demo.srt`](demo/video/aqua-falkordb-submission-demo.srt)
+[![Play the latest Aqua Graph Hacks walkthrough](assets/company-brain-dashboard.png)](demo/video/aqua-falkordb-submission-demo.mp4)
 
-[![Aqua Company Brain Walkthrough](https://img.youtube.com/vi/8DfhnxvLxXA/maxresdefault.jpg)](https://youtu.be/8DfhnxvLxXA)
+- **Latest tri-track video:** [Play or download `aqua-falkordb-submission-demo.mp4`](demo/video/aqua-falkordb-submission-demo.mp4)
+- **Accessible captions:** [`aqua-falkordb-submission-demo.srt`](demo/video/aqua-falkordb-submission-demo.srt)
+- **Public YouTube demo:** [Watch the earlier published walkthrough](https://youtu.be/8DfhnxvLxXA)
+- **Reproduction guide:** [`docs/DEMO_RUNBOOK.md`](docs/DEMO_RUNBOOK.md)
 
-<p align="center">
-  <a href="https://youtu.be/8DfhnxvLxXA"><strong>▶️ Click to Watch the Full Walkthrough on YouTube (1080p HD with Audio Narration)</strong></a>
-</p>
+### Video timeline
 
-> 🎬 **YouTube Video URL**: [https://youtu.be/8DfhnxvLxXA](https://youtu.be/8DfhnxvLxXA)  
-> 📹 **GitHub Native Player**: [Play `aqua-company-brain-demo.mp4` on GitHub](https://github.com/vishalkushwaha/Aqua_Assistant/blob/main/demo/video/aqua-company-brain-demo.mp4) | [💾 Download MP4](https://github.com/vishalkushwaha/Aqua_Assistant/releases/download/v1.0.0/aqua-company-brain-demo.mp4)  
-> 📝 **Captions/Subtitles**: [📄 `demo/video/captions.srt`](demo/video/captions.srt) | 📖 **Step-by-step Runbook**: [`docs/DEMO_RUNBOOK.md`](docs/DEMO_RUNBOOK.md)
+| Time | Demonstration | Hackathon evidence |
+| :--- | :--- | :--- |
+| `0:00–0:13` | Aqua overview and the FalkorDB dependency | All tracks |
+| `0:13–0:28` | Seeds people, teams, projects, incidents, decisions, documents, and chats | Track 03 — Company Brain input |
+| `0:28–0:49` | Provides the incident question, runs multi-hop traversal, and displays the grounded owner, decision, paths, and exact sources | Tracks 01 + 03 — Processing and output |
+| `0:49–1:08` | Rechecks the owner relationship before assigning the incident and records the result | Track 01 — Agent action |
+| `1:08–1:24` | Recalls questions, answers, citations, action, and outcome in a later session | Track 02 — Persistent memory |
+| `1:24–1:40` | Transfers the incident and shared evidence to a second agent | Track 02 — Coordination |
+| `1:40–1:56` | Inspects the populated memory graph and Cypher/algorithm surface | All tracks — Processing evidence |
+| `1:56–2:14` | Disconnects FalkorDB and shows the fail-closed response instead of a fabricated answer | All tracks — Required dependency |
+| `2:14–2:30` | Tours the wider assistant capabilities and complete control panel | Product experience |
+| `2:30–2:51` | Summarizes the validated Windows, Docker/cloud, and delivery workflow | Reproducibility |
 
-### Walkthrough Timeline:
-- **0:00 - 0:16**: Problem statement & tenant-scoped company knowledge model in FalkorDB. `[Track 03: Company Brain]`
-- **0:16 - 0:32**: Live multi-hop graph retrieval (`Ticket -> Project <- Person -> Team`) and citing grounded sources. `[Track 01: Acting on Connected Data]` & `[Track 03: Company Brain]`
-- **0:32 - 0:40**: Graph-authorized action: revalidates ownership via Cypher before creating `ASSIGNED_TO`. `[Track 01: Acting on Connected Data]`
-- **0:40 - 0:48**: Persistent memory recall across sessions from FalkorDB. `[Track 02: Agent Memory & Coordination]`
-- **0:48 - 0:56**: Multi-agent coordination: warm handoff to second agent with shared graph context. `[Track 02: Agent Memory & Coordination]`
+### Input → processing → output
 
-## 🖼️ User Interface & System Showcase
+1. **Input:** The reviewer seeds the synthetic Acme Cloud graph and asks: “Who should handle the OAuth production incident, what earlier decision affects the fix, and which sources support the answer?”
+2. **Processing:** Aqua executes bounded, tenant-scoped Cypher traversals across `Ticket`, `Project`, `Person`, `Team`, `Decision`, and `Source`; it keeps the exact paths used as explanation evidence.
+3. **Output:** Aqua names Priya Raman, cites `DEC-014`, displays two primary sources, and exposes every relationship hop behind the answer.
+4. **Action:** The proposed ticket assignment is independently authorized through `Ticket -> Project <- Person` before any mutation is written.
+5. **Memory and coordination:** The question, answer, citations, outcome, shared state, and handoff are persisted in FalkorDB for another session or agent.
+6. **Safety:** If FalkorDB is unavailable or the required relationship is missing, the workflow stops with a dependency/precondition error.
 
-### 1. Neural Voice Orb & Desktop Assistant
-Aqua features an always-available floating desktop **Neural Voice Orb** that handles hands-free speech, system control, and workspace context:
+## User interface and system showcase
 
-![Aqua Neural Voice Orb](https://files.catbox.moe/8jjr62.png)
+The latest UI pass covers all 16 panel destinations: Overview, Voice Profiles, Voice Security, Workflows, Automated Routines, App Approvals, Permissions & Privacy, Memory, Memory Graph, Company Brain, Preferences & Learning, Extensions & Skills, File Search Index, Secure Vault, Audio Devices, and Display Settings. Loading, offline, recovery, empty, and success states use the same responsive visual system.
 
----
+### 1. Private desktop assistant overview
 
-### 2. Company Brain Knowledge Graph Dashboard
-Ask complex enterprise questions and receive answers composed exclusively from FalkorDB records, complete with verified multi-hop paths, citations, and authority scores:
+![Aqua private desktop assistant overview](assets/aqua-orb-assistant.png)
 
-![Aqua Company Brain Dashboard](https://files.catbox.moe/ljl3zd.png)
+### 2. Graph-grounded answer, paths, and primary sources
 
----
+![Aqua Company Brain grounded answer](assets/company-brain-dashboard.png)
 
-### 3. Graph-Authorized Action Execution
-Before modifying team tickets or triggering mutations, Aqua executes pre-flight Cypher traversals (`Ticket -> Project <- Person`) to revalidate ownership:
+### 3. Graph-authorized action execution
 
-![Graph-Authorized Action Execution](https://files.catbox.moe/sziohn.png)
+![Aqua graph-authorized incident assignment](assets/action-validation-dashboard.png)
 
----
+### 4. Persistent memory and agent coordination
 
-### 4. Persistent Memory Graph & Multi-Agent Coordination
-Sessions, questions, answers, source citations, state revisions, and agent handoffs are saved as persistent graph entities in FalkorDB:
+![Aqua persistent FalkorDB memory and handoff](assets/persistent-memory-dashboard.png)
 
-![FalkorDB Persistent Memory Graph](https://files.catbox.moe/2jdr9q.png)
+### 5. Live FalkorDB memory graph and analytics
+
+![Aqua live FalkorDB memory graph](assets/memory-graph-dashboard.png)
+
+### 6. Fail-closed behavior when FalkorDB is unavailable
+
+![Aqua fail-closed FalkorDB dependency state](assets/fail-closed-dashboard.png)
 
 ## Architecture
 
@@ -350,6 +361,8 @@ npm.cmd run lint
 npm.cmd run build
 ```
 
+Verified on October 19, 2026: **20 tests passed**, the one credential-dependent live integration test was skipped by default, and the TypeScript/Vite production build completed successfully.
+
 Focused Rust check, on a machine with the required native toolchain and sufficient disk space:
 
 ```powershell
@@ -360,7 +373,7 @@ This passes on the development machine. The `core_` test command is deliberately
 
 Live acceptance passed on October 16, 2026 against the configured `AquaCompanyBrain` graph: seed, sourced multi-hop answer, graph-authorized action, persisted recall, invalid-owner rejection, disconnected-database refusal, and configuration recovery all passed. Run `npm.cmd run test:integration` again against the exact deployment submitted to judges.
 
-The final desktop workflow also persists a tenant-scoped `Agent -> Session -> Question -> Answer -> Source` trail, action outcomes, and a handoff to a second agent. The checked-in narrated and captioned demo video is [`demo/video/aqua-company-brain-demo.mp4`](demo/video/aqua-company-brain-demo.mp4). It demonstrates Company Brain, the live memory graph, Aqua's wider assistant capabilities, voice controls, and the validated Windows platform target. To recapture it from the configured live graph and render it with Aqua's offline neural Kokoro voice:
+The final desktop workflow also persists a tenant-scoped `Agent -> Session -> Question -> Answer -> Source` trail, action outcomes, and a handoff to a second agent. The latest checked-in walkthrough is [`demo/video/aqua-falkordb-submission-demo.mp4`](demo/video/aqua-falkordb-submission-demo.mp4): 170.6 seconds, 1920×1080 H.264 at 30 fps, AAC 48 kHz stereo, and SHA-256 `93104DF3151DD236AF221D578031EED21393BEA5DB7AFF0F4E1D6C4F4B7ACE34`. To recapture the live graph and reproduce its motion, labels, mastered offline Kokoro narration, burned-in captions, and SRT sidecar:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/render-company-brain-demo.ps1
@@ -390,7 +403,7 @@ The `Company Brain` GitHub Actions workflow runs the frontend checks, scoped Rus
 - AI-assistance disclosure below is accurate.
 - Every participant can explain the graph model, queries, architecture, and tradeoffs.
 
-Publishing the repository, registering the team, recording/uploading the video, and confirming participant/data attestations are owner actions; they cannot be completed safely by source-code automation.
+Hackathon registration, team membership, participant/data attestations, submission-form entry, and publishing a replacement video to a third-party account remain owner actions.
 
 ## AI-assistance disclosure
 

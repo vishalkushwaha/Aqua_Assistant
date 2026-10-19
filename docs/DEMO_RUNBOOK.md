@@ -28,11 +28,11 @@ This runbook produces repeatable evidence for Track 03. It does not require or e
 
 ## Recording script
 
-### 0:00-0:30 - problem and graph
+### 0:00-0:28 - problem and graph input
 
-State the problem: ownership, incidents, decisions, documents, and chats are disconnected in ordinary systems. Show the graph model in the root README, then show FalkorDB Browser.
+Introduce Aqua, explain why FalkorDB is required, and prepare the repeatable synthetic company graph. This is the Company Brain input for Track 03.
 
-### 0:30-1:15 - graph-dependent retrieval
+### 0:28-0:49 - graph-dependent retrieval and output
 
 Select **Prepare demo company**. Ask:
 
@@ -40,7 +40,7 @@ Select **Prepare demo company**. Ask:
 
 Show that the response names Priya Raman, the Identity Platform, `DEC-014`, and both sources. Point to the relationship paths and source cards, not only the prose answer.
 
-### 1:15-1:50 - graph-controlled action
+### 0:49-1:08 - graph-controlled action
 
 Select **Approve graph-backed action**. Explain that the mutation first rechecks:
 
@@ -48,11 +48,15 @@ Select **Approve graph-backed action**. Explain that the mutation first rechecks
 
 Show the resulting `ASSIGNED_TO`, `ACTED_ON`, and `SELECTED_FROM_GRAPH` relationships in FalkorDB Browser.
 
-### 1:50-2:25 - persistent memory and handoff
+### 1:08-1:40 - persistent memory and handoff
 
 In the normal Aqua agent flow, open a session, remember the exchange, publish shared state, hand it to a second agent, and recall it. Show the resulting `Agent`, `Session`, `Question`, `Answer`, `StateRevision`, and `Handoff` records. Do not claim this step passed unless it was performed against the live graph used in the recording.
 
-### 2:25-2:50 - dependency proof
+### 1:40-1:56 - live graph inspection
+
+Open **Memory Graph (FalkorDB)**. Show the live node and relationship counts, entity filters, adaptive visualization, and Cypher/algorithm presets.
+
+### 1:56-2:14 - dependency proof
 
 Stop only the disposable database:
 
@@ -67,9 +71,9 @@ Ask the question again. Show the explicit FalkorDB error and that no fallback an
 docker compose -f docker-compose.company-brain.yml start falkordb
 ```
 
-### 2:50-3:00 - close
+### 2:14-2:51 - product and delivery close
 
-Name the entry as **Track 03 - Company Brain**. State that FalkorDB controls retrieval, source paths, action validation, and persistent memory.
+Show the complete Aqua panel and validated Windows target. Name the entry as a tri-track submission: **Track 01 — Agents That Act on Connected Data**, **Track 02 — Agent Memory and Coordination**, and **Track 03 — Company Brain**. State that FalkorDB controls retrieval, source paths, action validation, persistent memory, and handoffs.
 
 ## Reset and repeat
 
@@ -91,7 +95,7 @@ With the desktop dev server and FalkorDB running, the submission renderer captur
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/render-company-brain-demo.ps1 -Mode Submission
 ```
 
-The outputs are `demo/video/aqua-falkordb-submission-demo.mp4` and its matching `.srt` caption file. The temporary configuration change does not stop or modify the database.
+The outputs are `demo/video/aqua-falkordb-submission-demo.mp4` and its matching `.srt` caption file. The renderer adds subtle motion, fades, chapter labels, mastered stereo narration, and burned-in captions. The temporary configuration change does not stop or modify the database.
 
 ## Evidence checklist
 

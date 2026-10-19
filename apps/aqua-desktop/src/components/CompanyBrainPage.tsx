@@ -125,8 +125,15 @@ export function CompanyBrainPage() {
       } finally {
         setSeeding(false);
         setBusy(false);
-        if (stage === 'memory' || stage === 'handoff') {
-          window.setTimeout(() => document.querySelector('[data-demo-memory]')?.scrollIntoView({ block: 'start' }), 400);
+        const demoTarget = stage === 'answer'
+          ? '[data-demo-answer]'
+          : stage === 'action'
+            ? '[data-demo-action]'
+            : stage === 'memory' || stage === 'handoff'
+              ? '[data-demo-memory]'
+              : null;
+        if (demoTarget) {
+          window.setTimeout(() => document.querySelector(demoTarget)?.scrollIntoView({ block: 'start' }), 400);
         }
       }
     })();
@@ -408,6 +415,7 @@ export function CompanyBrainPage() {
       {/* Answer & Provenance Details */}
       {answer && (
         <>
+          <span data-demo-answer style={{ display: 'block', height: 1 }} />
           {/* Grounded Answer Card */}
           <Section
             title="Graph-Grounded Answer"
@@ -510,11 +518,13 @@ export function CompanyBrainPage() {
 
           {/* Action Execution Gated by Graph Preconditions (Track 1) */}
           {answer.action && (
-            <Section
-              title="Track 1: Act on Connected Data (Graph Precondition Verified)"
-              hint="The assignment is authorized only because FalkorDB verified Priya Raman owns Identity Platform."
-              actions={<Pill tone={completedAction ? 'ok' : 'attention'} label={completedAction ? 'Action Recorded' : 'Approval Pending'} />}
-            >
+            <div style={{ position: 'relative' }}>
+              <span data-demo-action style={{ position: 'absolute', top: -12 }} />
+              <Section
+                title="Track 1: Act on Connected Data (Graph Precondition Verified)"
+                hint="The assignment is authorized only because FalkorDB verified Priya Raman owns Identity Platform."
+                actions={<Pill tone={completedAction ? 'ok' : 'attention'} label={completedAction ? 'Action Recorded' : 'Approval Pending'} />}
+              >
               <div
                 style={{
                   display: 'flex',
@@ -567,7 +577,8 @@ export function CompanyBrainPage() {
                   </span>
                 )}
               </div>
-            </Section>
+              </Section>
+            </div>
           )}
 
           {/* Memory & Multi-Agent Coordination (Track 2) */}

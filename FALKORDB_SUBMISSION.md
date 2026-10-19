@@ -120,15 +120,16 @@ The live cloud endpoint supplied for this demo accepts plain Redis rather than T
 
 ## Demo video outline
 
-- **Watch on YouTube**: [https://youtu.be/8DfhnxvLxXA](https://youtu.be/8DfhnxvLxXA)
-- **Local Video Asset**: `demo/video/aqua-company-brain-demo.mp4` (with captions in `demo/video/captions.srt`)
-- **Release Download**: `https://github.com/vishalkushwaha/Aqua_Assistant/releases/tag/v1.0.0`
+- **Latest repository video**: [`demo/video/aqua-falkordb-submission-demo.mp4`](demo/video/aqua-falkordb-submission-demo.mp4)
+- **Accessible captions**: [`demo/video/aqua-falkordb-submission-demo.srt`](demo/video/aqua-falkordb-submission-demo.srt)
+- **Earlier public YouTube cut**: [https://youtu.be/8DfhnxvLxXA](https://youtu.be/8DfhnxvLxXA)
 
-1. **Problem and graph (0:00–0:30):** show the connected company and memory model.
-2. **Live retrieval (0:30–1:20):** ask the incident question and show the graph-grounded answer.
-3. **Explainability (1:20–1:50):** walk through ownership, decision, and source paths.
-4. **Action and memory (1:50–2:30):** approve assignment, show the mutation, then recall it from another session/agent.
-5. **Dependency proof (2:30–2:50):** disconnect FalkorDB and show explicit refusal.
+1. **Problem and graph input (0:00–0:28):** introduce Aqua and seed the connected company model. `[Track 03]`
+2. **Live retrieval and output (0:28–0:49):** ask the incident question, then show the grounded answer, paths, and sources. `[Tracks 01 + 03]`
+3. **Authorized action (0:49–1:08):** recheck graph ownership before assigning the incident and recording the outcome. `[Track 01]`
+4. **Persistent memory and handoff (1:08–1:40):** recall the interaction and hand it to a second agent with shared graph context. `[Track 02]`
+5. **Graph inspection and dependency proof (1:40–2:14):** inspect the populated graph, disconnect FalkorDB, and show explicit refusal. `[All tracks]`
+6. **Product and delivery (2:14–2:51):** show the wider panel and validated Windows/Docker or cloud workflow.
 
 ## AI assistance disclosure
 
