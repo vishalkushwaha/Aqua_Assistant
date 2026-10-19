@@ -120,8 +120,10 @@ The live cloud endpoint supplied for this demo accepts plain Redis rather than T
 
 ## Demo video outline
 
-- **Latest repository video**: [`demo/video/aqua-falkordb-submission-demo.mp4`](demo/video/aqua-falkordb-submission-demo.mp4)
-- **Accessible captions**: [`demo/video/aqua-falkordb-submission-demo.srt`](demo/video/aqua-falkordb-submission-demo.srt)
+- **Complete Aqua and tri-track walkthrough**: [`demo/video/aqua-complete-product-walkthrough.mp4`](demo/video/aqua-complete-product-walkthrough.mp4)
+- **Complete-walkthrough captions**: [`demo/video/aqua-complete-product-walkthrough.srt`](demo/video/aqua-complete-product-walkthrough.srt)
+- **Judge-focused repository cut**: [`demo/video/aqua-falkordb-submission-demo.mp4`](demo/video/aqua-falkordb-submission-demo.mp4)
+- **Judge-cut captions**: [`demo/video/aqua-falkordb-submission-demo.srt`](demo/video/aqua-falkordb-submission-demo.srt)
 - **Earlier public YouTube cut**: [https://youtu.be/8DfhnxvLxXA](https://youtu.be/8DfhnxvLxXA)
 
 1. **Problem and graph input (0:00–0:28):** introduce Aqua and seed the connected company model. `[Track 03]`

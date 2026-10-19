@@ -1,0 +1,55 @@
+﻿1
+00:00:00,000 --> 00:00:20,900
+Meet Aqua, a Windows desktop assistant that combines a local language model, private voice interaction, safe automation, inspectable knowledge, secure files, device controls, and a FalkorDB powered company brain. This walkthrough explains the complete product and then proves all three Graph Hacks tracks.
+
+2
+00:00:20,900 --> 00:00:49,400
+Aqua's core assistant intelligence is a local G G U F language model hosted by its Llama runtime. Typed text, or speech transcribed locally by Whisper, becomes the input. Aqua retrieves permitted memory, files, or graph evidence, streams the model response, and sends every requested action through deterministic ToolHost policy and approval checks. Kokoro can then speak the final output.
+
+3
+00:00:49,400 --> 00:01:16,600
+The voice pipeline combines a custom wake phrase, Deep Filter Net noise cleanup, Whisper speech recognition, the local language model, and Kokoro neural speech. Voice Profiles selects the delivery style. Voice Security can enroll a master speaker for protected actions. Audio Devices chooses input and output, while the floating neural orb shows listening, thinking, speaking, and screen context states.
+
+4
+00:01:16,600 --> 00:01:46,300
+Workflows combine tool steps, agent goals, and saved values into repeatable jobs. Automated Routines can be described in natural language, created from templates, scheduled, monitored, and inspected after failure. App Approvals exposes policy, tools, activity, and emergency stop controls. Permissions and Privacy manages trusted projects, browser profiles, consent, autonomy limits, and auditable approvals.
+
+5
+00:01:46,300 --> 00:02:13,100
+Aqua exposes remembered facts, preferences, corrections, and verified experiences instead of hiding them. Users can tune learning and retrieval, review proposed skills, index local files, protect selected documents in the Secure Vault, and remove knowledge. The FalkorDB Memory Graph adds associative recall, graph algorithms, company knowledge, and shared agent state with tenant isolation.
+
+6
+00:02:13,100 --> 00:02:40,400
+For Track Three, Aqua creates a repeatable synthetic company graph. People, teams, projects, systems, incidents, decisions, documents, chats, and agents become tenant scoped nodes. Explicit relationships record ownership, team membership, dependencies, affected systems, and supporting evidence. Source hashes, observation times, freshness deadlines, and active state preserve provenance.
+
+7
+00:02:40,400 --> 00:03:05,900
+The input asks who should handle the OAuth production incident, which earlier decision affects the fix, and which records support the answer. Aqua executes bounded Cypher traversals from ticket to project to owner, and from decision to project to source. The output names Priya Raman, decision D E C zero fourteen, two primary sources, and every relationship hop used as proof.
+
+8
+00:03:05,900 --> 00:03:31,600
+A generated recommendation is not enough to act. Aqua independently reruns the ticket to project to owner relationship in FalkorDB. Only a person proven to own the affected project can receive the incident. After approval, the assignment, selected graph entity, supporting path, and action outcome are stored as auditable records. Invalid owners are rejected.
+
+9
+00:03:31,600 --> 00:03:55,900
+Aqua stores the agent, session, question, grounded answer, cited sources, authorized action, and outcome as connected graph records. A later session recalls the same evidence from FalkorDB rather than browser state. Tenant identifiers isolate organizations, while retention and deletion controls keep the memory inspectable and manageable.
+
+10
+00:03:55,900 --> 00:04:20,200
+The Company Brain publishes shared state and transfers the incident to a second response agent through FalkorDB. The receiving agent gets the incident, architectural decision, source identifiers, and prior outcome. The handoff itself remains queryable and auditable, so coordination preserves context without copying an opaque conversation transcript.
+
+11
+00:04:20,200 --> 00:04:45,100
+The live Memory Graph confirms FalkorDB is connected and populated. Entity filters separate people, projects, sources, questions, answers, actions, and handoffs. The adaptive visualization handles the larger graph, while Cypher presets demonstrate multi hop expertise discovery, shortest paths, associative recall, and connected entity centrality.
+
+12
+00:04:45,100 --> 00:05:09,300
+FalkorDB is an indispensable dependency. When the database is deliberately made unavailable, Aqua displays the connection failure and produces no fabricated answer. The same loss prevents evidence retrieval, graph authorization, persistent recall, and agent handoff. Restoring the saved configuration returns the workflow to the live graph.
+
+13
+00:05:09,300 --> 00:05:37,200
+The full panel brings together the overview, voice profiles, voice security, workflows, automated routines, app approvals, permissions and privacy, private memory, the FalkorDB graph, Company Brain, preferences and learning, reviewed extensions and skills, local file search, Secure Vault, audio devices, and display or orb settings. Loading, offline, recovery, and success states share one responsive design.
+
+14
+00:05:37,200 --> 00:06:06,100
+Aqua's validated target is Windows desktop. The N S I S installer bundles the desktop shell and required runtime support, while setup can add the local G G U F language model, Whisper, Kokoro, Deep Filter Net, and optional C U D A acceleration. FalkorDB can run in local Docker or at a configured secure cloud endpoint. This completes the product tour and all three hackathon tracks.

@@ -32,6 +32,24 @@ const submissionScenes = [
 const failureScenes = [
   ['?demo=answer', 'submission-08-falkordb-refusal.png', 18000],
 ];
+const completeFailureScenes = [
+  ['?demo=answer', 'complete-12-falkordb-refusal.png', 18000],
+];
+const completeScenes = [
+  ['?showcase=overview', 'complete-01-overview.png', 8000],
+  ['?showcase=showcase-local-ai', 'complete-02-local-ai.png', 8000],
+  ['?showcase=showcase-voice', 'complete-03-voice.png', 8000],
+  ['?showcase=showcase-automation', 'complete-04-automation.png', 8000],
+  ['?showcase=showcase-knowledge', 'complete-05-knowledge.png', 8000],
+  ['?demo=seed', 'complete-06-company-graph.png', 14000],
+  ['?demo=answer', 'complete-07-grounded-answer.png', 24000],
+  ['?demo=action', 'complete-08-graph-action.png', 30000],
+  ['?demo=memory', 'complete-09-persistent-memory.png', 36000],
+  ['?demo=handoff', 'complete-10-agent-handoff.png', 42000],
+  ['?showcase=graph-memory', 'complete-11-live-graph.png', 14000],
+  ['?showcase=showcase-capabilities', 'complete-13-capabilities.png', 8000],
+  ['?showcase=showcase-platform', 'complete-14-platform.png', 8000],
+];
 const panelTabs = [
   'overview', 'tts-voices', 'security', 'workflows', 'flows', 'tools', 'permissions', 'memory',
   'graph-memory', 'company-brain', 'agent-learning', 'skills-inbox', 'file-index', 'vault', 'devices', 'orb-position',
@@ -49,6 +67,8 @@ const focusedScenes = {
 };
 const scenes = mode === 'submission'
   ? submissionScenes
+  : mode === 'complete'
+    ? completeScenes
   : mode === 'failure'
     ? failureScenes
     : mode === 'panel'
@@ -88,7 +108,7 @@ for (const [query, filename, budget] of scenes) {
   await capture(query, filename, budget);
 }
 
-if (mode === 'submission') {
+if (mode === 'submission' || mode === 'complete') {
   const origin = new URL(baseUrl).origin;
   const request = async (path, options = {}) => {
     const response = await fetch(`${baseUrl}${path}`, {
@@ -105,7 +125,8 @@ if (mode === 'submission') {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ port: 1 }),
     });
-    for (const [query, filename, budget] of failureScenes) {
+    const dependencyScenes = mode === 'complete' ? completeFailureScenes : failureScenes;
+    for (const [query, filename, budget] of dependencyScenes) {
       await capture(query, filename, budget);
     }
   } finally {
@@ -117,5 +138,5 @@ if (mode === 'submission') {
   }
 }
 
-const capturedCount = scenes.length + (mode === 'submission' ? failureScenes.length : 0);
+const capturedCount = scenes.length + (mode === 'submission' || mode === 'complete' ? 1 : 0);
 console.log(`Captured ${capturedCount} live Aqua ${mode} frames in ${outputDir}`);

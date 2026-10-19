@@ -30,12 +30,16 @@ const CORE_DEPENDENT_TABS = new Set<TabId>([
   'tts-voices', 'security', 'workflows', 'flows', 'tools', 'permissions', 'memory',
   'agent-learning', 'skills-inbox', 'file-index', 'vault', 'devices',
 ]);
+const SHOWCASE_TABS = new Set<TabId>([
+  'showcase-capabilities', 'showcase-local-ai', 'showcase-voice',
+  'showcase-automation', 'showcase-knowledge', 'showcase-platform',
+]);
 
 function initialTab(): TabId {
   const params = new URLSearchParams(window.location.search);
   if (params.has('demo')) return 'company-brain';
   const showcaseTab = params.get('showcase') as TabId | null;
-  if (showcaseTab === 'showcase-capabilities' || showcaseTab === 'showcase-platform') return showcaseTab;
+  if (showcaseTab && SHOWCASE_TABS.has(showcaseTab)) return showcaseTab;
   if (showcaseTab && ALL_TABS.includes(showcaseTab)) return showcaseTab;
   try {
     const saved = localStorage.getItem(TAB_KEY) as TabId | null;
@@ -214,6 +218,10 @@ export default function App() {
             {activeTab === 'devices' && <DevicesPanel />}
             {activeTab === 'orb-position' && <OrbPositionPanel />}
             {activeTab === 'showcase-capabilities' && <ProductShowcasePage variant="capabilities" />}
+            {activeTab === 'showcase-local-ai' && <ProductShowcasePage variant="local-ai" />}
+            {activeTab === 'showcase-voice' && <ProductShowcasePage variant="voice" />}
+            {activeTab === 'showcase-automation' && <ProductShowcasePage variant="automation" />}
+            {activeTab === 'showcase-knowledge' && <ProductShowcasePage variant="knowledge" />}
             {activeTab === 'showcase-platform' && <ProductShowcasePage variant="platform" />}
           </div>
         </main>

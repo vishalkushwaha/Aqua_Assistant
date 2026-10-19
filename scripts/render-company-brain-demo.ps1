@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("Showcase", "Submission")]
+    [ValidateSet("Showcase", "Submission", "Complete")]
     [string]$Mode = "Showcase",
     [string]$Output = "",
     [string]$Voice = "af_heart",
@@ -11,7 +11,13 @@ $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $captureMode = $Mode.ToLowerInvariant()
 if (-not $Output) {
-    $Output = if ($Mode -eq "Submission") { "demo/video/aqua-falkordb-submission-demo.mp4" } else { "demo/video/aqua-company-brain-demo.mp4" }
+    $Output = if ($Mode -eq "Submission") {
+        "demo/video/aqua-falkordb-submission-demo.mp4"
+    } elseif ($Mode -eq "Complete") {
+        "demo/video/aqua-complete-product-walkthrough.mp4"
+    } else {
+        "demo/video/aqua-company-brain-demo.mp4"
+    }
 }
 $frames = Join-Path $repoRoot "demo/video/frames"
 $videoDir = Split-Path -Parent (Join-Path $repoRoot $Output)
@@ -56,7 +62,23 @@ $submissionScenes = @(
     @{ File="submission-09-capabilities.png"; Label="COMPLETE PRODUCT EXPERIENCE"; Title="Beyond the hackathon workflow"; Text="Company Brain runs inside the wider Aqua Assistant: local voice interaction, workflows, scheduled routines, approval and privacy controls, inspectable learning, reviewed skills, private file search, and a secure vault." },
     @{ File="submission-10-platform.png"; Label="DELIVERY & SETUP"; Title="A reproducible Windows workflow"; Text="The validated target is Aqua for Windows desktop, with FalkorDB available through local Docker or a configured cloud endpoint. This working demonstration covers connected reasoning, sourced answers, graph controlled action, persistent memory, tenant isolation, and multi agent coordination." }
 )
-$scenes = if ($Mode -eq "Submission") { $submissionScenes } else { $showcaseScenes }
+$completeScenes = @(
+    @{ File="complete-01-overview.png"; Label="AQUA | COMPLETE WALKTHROUGH"; Title="One private assistant, end to end"; Text="Meet Aqua, a Windows desktop assistant that combines a local language model, private voice interaction, safe automation, inspectable knowledge, secure files, device controls, and a FalkorDB powered company brain. This walkthrough explains the complete product and then proves all three Graph Hacks tracks." },
+    @{ File="complete-02-local-ai.png"; Label="LOCAL LLM | INPUT TO OUTPUT"; Title="Private reasoning with controlled execution"; Text="Aqua's core assistant intelligence is a local G G U F language model hosted by its Llama runtime. Typed text, or speech transcribed locally by Whisper, becomes the input. Aqua retrieves permitted memory, files, or graph evidence, streams the model response, and sends every requested action through deterministic ToolHost policy and approval checks. Kokoro can then speak the final output." },
+    @{ File="complete-03-voice.png"; Label="VOICE + DESKTOP EXPERIENCE"; Title="Hands free, local, and identity aware"; Text="The voice pipeline combines a custom wake phrase, Deep Filter Net noise cleanup, Whisper speech recognition, the local language model, and Kokoro neural speech. Voice Profiles selects the delivery style. Voice Security can enroll a master speaker for protected actions. Audio Devices chooses input and output, while the floating neural orb shows listening, thinking, speaking, and screen context states." },
+    @{ File="complete-04-automation.png"; Label="AUTOMATION + SAFETY"; Title="Build routines without surrendering control"; Text="Workflows combine tool steps, agent goals, and saved values into repeatable jobs. Automated Routines can be described in natural language, created from templates, scheduled, monitored, and inspected after failure. App Approvals exposes policy, tools, activity, and emergency stop controls. Permissions and Privacy manages trusted projects, browser profiles, consent, autonomy limits, and auditable approvals." },
+    @{ File="complete-05-knowledge.png"; Label="PRIVATE KNOWLEDGE + LEARNING"; Title="Inspectable memory that users can change"; Text="Aqua exposes remembered facts, preferences, corrections, and verified experiences instead of hiding them. Users can tune learning and retrieval, review proposed skills, index local files, protect selected documents in the Secure Vault, and remove knowledge. The FalkorDB Memory Graph adds associative recall, graph algorithms, company knowledge, and shared agent state with tenant isolation." },
+    @{ File="complete-06-company-graph.png"; Label="TRACK 03 | COMPANY BRAIN INPUT"; Title="Connect the organization before asking"; Text="For Track Three, Aqua creates a repeatable synthetic company graph. People, teams, projects, systems, incidents, decisions, documents, chats, and agents become tenant scoped nodes. Explicit relationships record ownership, team membership, dependencies, affected systems, and supporting evidence. Source hashes, observation times, freshness deadlines, and active state preserve provenance." },
+    @{ File="complete-07-grounded-answer.png"; Label="TRACKS 01 + 03 | PROCESSING TO OUTPUT"; Title="Ask once and trace every claim"; Text="The input asks who should handle the OAuth production incident, which earlier decision affects the fix, and which records support the answer. Aqua executes bounded Cypher traversals from ticket to project to owner, and from decision to project to source. The output names Priya Raman, decision D E C zero fourteen, two primary sources, and every relationship hop used as proof." },
+    @{ File="complete-08-graph-action.png"; Label="TRACK 01 | CONNECTED ACTION"; Title="The graph authorizes the assignment"; Text="A generated recommendation is not enough to act. Aqua independently reruns the ticket to project to owner relationship in FalkorDB. Only a person proven to own the affected project can receive the incident. After approval, the assignment, selected graph entity, supporting path, and action outcome are stored as auditable records. Invalid owners are rejected." },
+    @{ File="complete-09-persistent-memory.png"; Label="TRACK 02 | PERSISTENT MEMORY"; Title="Context survives the current session"; Text="Aqua stores the agent, session, question, grounded answer, cited sources, authorized action, and outcome as connected graph records. A later session recalls the same evidence from FalkorDB rather than browser state. Tenant identifiers isolate organizations, while retention and deletion controls keep the memory inspectable and manageable." },
+    @{ File="complete-10-agent-handoff.png"; Label="TRACK 02 | AGENT COORDINATION"; Title="Hand off work without losing evidence"; Text="The Company Brain publishes shared state and transfers the incident to a second response agent through FalkorDB. The receiving agent gets the incident, architectural decision, source identifiers, and prior outcome. The handoff itself remains queryable and auditable, so coordination preserves context without copying an opaque conversation transcript." },
+    @{ File="complete-11-live-graph.png"; Label="ALL TRACKS | GRAPH INSPECTION"; Title="See the knowledge, memory, and coordination layer"; Text="The live Memory Graph confirms FalkorDB is connected and populated. Entity filters separate people, projects, sources, questions, answers, actions, and handoffs. The adaptive visualization handles the larger graph, while Cypher presets demonstrate multi hop expertise discovery, shortest paths, associative recall, and connected entity centrality." },
+    @{ File="complete-12-falkordb-refusal.png"; Label="ALL TRACKS | FAIL CLOSED"; Title="No graph means no unsupported answer"; Text="FalkorDB is an indispensable dependency. When the database is deliberately made unavailable, Aqua displays the connection failure and produces no fabricated answer. The same loss prevents evidence retrieval, graph authorization, persistent recall, and agent handoff. Restoring the saved configuration returns the workflow to the live graph." },
+    @{ File="complete-13-capabilities.png"; Label="COMPLETE AQUA CONTROL PANEL"; Title="Every capability in one desktop experience"; Text="The full panel brings together the overview, voice profiles, voice security, workflows, automated routines, app approvals, permissions and privacy, private memory, the FalkorDB graph, Company Brain, preferences and learning, reviewed extensions and skills, local file search, Secure Vault, audio devices, and display or orb settings. Loading, offline, recovery, and success states share one responsive design." },
+    @{ File="complete-14-platform.png"; Label="WINDOWS DELIVERY + SETUP"; Title="Installable, local first, and reproducible"; Text="Aqua's validated target is Windows desktop. The N S I S installer bundles the desktop shell and required runtime support, while setup can add the local G G U F language model, Whisper, Kokoro, Deep Filter Net, and optional C U D A acceleration. FalkorDB can run in local Docker or at a configured secure cloud endpoint. This completes the product tour and all three hackathon tracks." }
+)
+$scenes = if ($Mode -eq "Submission") { $submissionScenes } elseif ($Mode -eq "Complete") { $completeScenes } else { $showcaseScenes }
 
 New-Item -ItemType Directory -Path $videoDir -Force | Out-Null
 New-Item -ItemType Directory -Path $workDir -Force | Out-Null
@@ -190,6 +212,8 @@ Set-Content -LiteralPath $captions -Value $srtLines -Encoding utf8
 Set-Content -LiteralPath $overlays -Value $assLines -Encoding utf8
 $sidecarCaptions = if ($Mode -eq "Submission") {
     Join-Path $videoDir "aqua-falkordb-submission-demo.srt"
+} elseif ($Mode -eq "Complete") {
+    Join-Path $videoDir "aqua-complete-product-walkthrough.srt"
 } else {
     Join-Path $videoDir "captions.srt"
 }

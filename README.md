@@ -72,18 +72,39 @@ Aqua satisfies every requirement across all three tracks:
 
 ---
 
-## Demo video and judge walkthrough
+## Demo videos and complete product walkthrough
 
-The latest repository-native demo is a **2:50, 1920×1080** walkthrough with offline neural narration, subtle scene motion, chapter labels, mastered stereo audio, burned-in captions, and an accessible subtitle sidecar.
+The primary repository-native walkthrough is a **6:06, 1920×1080** guided tour of Aqua. It explains the local LLM pipeline, voice stack, automation and security controls, knowledge and memory systems, the complete control panel, and the evidence for all three Graph Hacks tracks. It includes offline neural narration, subtle scene motion, chapter labels, mastered stereo audio, burned-in captions, and an accessible subtitle sidecar.
 
-[![Play the latest Aqua Graph Hacks walkthrough](assets/company-brain-dashboard.png)](demo/video/aqua-falkordb-submission-demo.mp4)
+[![Play the complete Aqua product walkthrough](assets/company-brain-dashboard.png)](demo/video/aqua-complete-product-walkthrough.mp4)
 
-- **Latest tri-track video:** [Play or download `aqua-falkordb-submission-demo.mp4`](demo/video/aqua-falkordb-submission-demo.mp4)
-- **Accessible captions:** [`aqua-falkordb-submission-demo.srt`](demo/video/aqua-falkordb-submission-demo.srt)
+- **Complete Aqua walkthrough:** [Play or download `aqua-complete-product-walkthrough.mp4`](demo/video/aqua-complete-product-walkthrough.mp4)
+- **Complete-walkthrough captions:** [`aqua-complete-product-walkthrough.srt`](demo/video/aqua-complete-product-walkthrough.srt)
+- **Judge-focused tri-track cut:** [Play or download `aqua-falkordb-submission-demo.mp4`](demo/video/aqua-falkordb-submission-demo.mp4)
+- **Judge-cut captions:** [`aqua-falkordb-submission-demo.srt`](demo/video/aqua-falkordb-submission-demo.srt)
 - **Public YouTube demo:** [Watch the earlier published walkthrough](https://youtu.be/8DfhnxvLxXA)
 - **Reproduction guide:** [`docs/DEMO_RUNBOOK.md`](docs/DEMO_RUNBOOK.md)
 
-### Video timeline
+### Complete walkthrough timeline
+
+| Time | Demonstration | Coverage |
+| :--- | :--- | :--- |
+| `0:00–0:21` | Aqua overview, privacy model, and complete workflow | Product overview + all tracks |
+| `0:21–0:49` | Prompt input, local GGUF LLM processing, private grounding, and streamed output | Local AI pipeline |
+| `0:49–1:17` | Voice profiles, wake security, microphones, speakers, and floating orb | Voice experience |
+| `1:17–1:46` | Workflows, routines, approvals, permissions, and privacy controls | Automation + safety |
+| `1:46–2:13` | Memory, learning, FalkorDB graph, local files, skills, and secure vault | Knowledge system |
+| `2:13–2:40` | Seeds the connected company graph from people, projects, incidents, decisions, docs, and chats | Track 03 — Company Brain input |
+| `2:40–3:06` | Runs tenant-scoped multi-hop traversal and displays the grounded owner, decision, paths, and sources | Tracks 01 + 03 — Processing and output |
+| `3:06–3:32` | Revalidates graph ownership before assigning the incident and recording the outcome | Track 01 — Graph-authorized action |
+| `3:32–3:56` | Recalls the question, answer, citations, action, and result in another session | Track 02 — Persistent memory |
+| `3:56–4:20` | Transfers shared evidence and state to a second agent | Track 02 — Agent coordination |
+| `4:20–4:45` | Inspects live nodes, relationships, Cypher presets, and graph algorithms | All tracks — Graph evidence |
+| `4:45–5:09` | Disconnects FalkorDB and refuses to invent an answer | All tracks — Fail-closed dependency proof |
+| `5:09–5:37` | Reviews all 16 Aqua panel destinations | Complete UI coverage |
+| `5:37–6:06` | Explains Windows delivery, local model files, FalkorDB, and installer workflow | Reproducibility and delivery |
+
+### Judge-focused video timeline
 
 | Time | Demonstration | Hackathon evidence |
 | :--- | :--- | :--- |
@@ -373,13 +394,16 @@ This passes on the development machine. The `core_` test command is deliberately
 
 Live acceptance passed on October 16, 2026 against the configured `AquaCompanyBrain` graph: seed, sourced multi-hop answer, graph-authorized action, persisted recall, invalid-owner rejection, disconnected-database refusal, and configuration recovery all passed. Run `npm.cmd run test:integration` again against the exact deployment submitted to judges.
 
-The final desktop workflow also persists a tenant-scoped `Agent -> Session -> Question -> Answer -> Source` trail, action outcomes, and a handoff to a second agent. The latest checked-in walkthrough is [`demo/video/aqua-falkordb-submission-demo.mp4`](demo/video/aqua-falkordb-submission-demo.mp4): 170.6 seconds, 1920×1080 H.264 at 30 fps, AAC 48 kHz stereo, and SHA-256 `93104DF3151DD236AF221D578031EED21393BEA5DB7AFF0F4E1D6C4F4B7ACE34`. To recapture the live graph and reproduce its motion, labels, mastered offline Kokoro narration, burned-in captions, and SRT sidecar:
+The final desktop workflow also persists a tenant-scoped `Agent -> Session -> Question -> Answer -> Source` trail, action outcomes, and a handoff to a second agent. The complete walkthrough is [`demo/video/aqua-complete-product-walkthrough.mp4`](demo/video/aqua-complete-product-walkthrough.mp4): 366.1 seconds, 1920×1080 H.264 at 30 fps, AAC 48 kHz stereo, and SHA-256 `87288A6B846C0D8162B28009EF7FB58E74D70F414FFAC2FFA7A6383D67EF516E`. The shorter judge cut is [`demo/video/aqua-falkordb-submission-demo.mp4`](demo/video/aqua-falkordb-submission-demo.mp4): 170.6 seconds with the same delivery format, and SHA-256 `93104DF3151DD236AF221D578031EED21393BEA5DB7AFF0F4E1D6C4F4B7ACE34`. To recapture the live graph and reproduce the motion, labels, mastered offline Kokoro narration, burned-in captions, and SRT sidecars:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/render-company-brain-demo.ps1
 
 # Judge-focused Graph Hacks submission cut
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/render-company-brain-demo.ps1 -Mode Submission
+
+# Complete Aqua, local LLM, control-panel, and tri-track walkthrough
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/render-company-brain-demo.ps1 -Mode Complete
 ```
 
 The `Company Brain` GitHub Actions workflow runs the frontend checks, scoped Rust formatting, and the opt-in workflow against a disposable FalkorDB 6.0.0 service for every push and pull request.

@@ -24,6 +24,10 @@ export type TabId =
   | 'devices'
   | 'orb-position'
   | 'showcase-capabilities'
+  | 'showcase-local-ai'
+  | 'showcase-voice'
+  | 'showcase-automation'
+  | 'showcase-knowledge'
   | 'showcase-platform';
 
 export interface NavItem {
