@@ -5,8 +5,12 @@
 # Aqua AI Assistant
 
 **Unified Graph-Grounded Private AI Agent powered by FalkorDB**
+### ⚡ WeMakeDevs x DevTools Academy x Switch — Flip the Switch Hackathon (Track 01: Best Business Workflow)
 ### 🏆 WeMakeDevs Graph Hacks — Complete Tri-Track Submission
 
+[![Flip the Switch Track 01](https://img.shields.io/badge/Flip%20the%20Switch-Track%2001%20Business%20Workflow-ec4899?style=flat-square&logo=slack)](#-flip-the-switch-track-01-best-business-workflow)
+[![Switch Submission](https://img.shields.io/badge/Switch-Submission%20Guide-purple?style=flat-square)](SWITCH_SUBMISSION.md)
+[![Switch Blog Post](https://img.shields.io/badge/Blog-Best%20Blog%20Entry-blue?style=flat-square)](SWITCH_BLOG_POST.md)
 [![Latest Demo](https://img.shields.io/badge/Demo-1080p%20Narrated-06b6d4?style=flat-square&logo=youtube)](demo/video/aqua-falkordb-submission-demo.mp4)
 [![Desktop Build](https://img.shields.io/badge/Desktop-v0.1.3-blue?style=flat-square)](apps/aqua-desktop/src-tauri/tauri.conf.json)
 [![Windows Installer](https://img.shields.io/badge/Windows-NSIS%20Installer-blueviolet?style=flat-square&logo=windows)](https://github.com/vishalkushwaha/Aqua_Assistant/releases)
@@ -18,7 +22,42 @@
 
 </div>
 
-Aqua is a private, graph-grounded AI desktop assistant built for **WeMakeDevs Graph Hacks**. Rather than targeting a single track in isolation, Aqua's architecture natively unifies and solves **all three hackathon tracks**:
+## ⚡ Flip the Switch: Track 01 — Best Business Workflow
+
+> **Collaborative incident triage in team chat powered by Switch AI and FalkorDB.**  
+> Complete submission details: [`SWITCH_SUBMISSION.md`](SWITCH_SUBMISSION.md) | Blog post: [`SWITCH_BLOG_POST.md`](SWITCH_BLOG_POST.md) | Room template: [`demo/switch-incident-triage.template.yaml`](demo/switch-incident-triage.template.yaml)
+
+Aqua connects to **Switch** using the open-source **Agent Protocol** (WebSocket in, HTTP out), bringing enterprise graph reasoning directly into your team channels (**Mattermost, Slack, Microsoft Teams, Discord, Telegram**).
+
+### 💬 The 3-Step Collaborative Incident Workflow
+1. **Diagnosis in Chat**: Teammates in `#incident-triage` ask:
+   > `@aqua-company-brain Who should handle the OAuth production incident, what earlier decision affects the fix, and which sources support the answer?`
+   
+   Aqua traverses the FalkorDB company graph in sub-milliseconds, identifies Priya Raman as the verified owner of the affected Identity Platform, cites Architecture Decision `DEC-014` and primary ADR documentation, and proposes ticket assignment for `INC-1042`.
+2. **Human-in-the-Loop Sign-Off**: To ensure safety, graph mutations are strictly gated by human authorization:
+   > `approve assignment INC-1042`
+   
+   Aqua validates project ownership authority in Cypher, mutates the ticket assignment in FalkorDB, writes the audit log, and notifies `@release-agent`.
+3. **Persistent Memory & Handoffs**:
+   > `show room memory`
+   
+   Aqua recalls the interaction history, action outcomes, and agent handoffs directly from graph memory for shift handovers.
+
+### 🚀 Instant Offline Simulation (30 Seconds)
+Verify the entire Switch collaborative loop locally without any external chat setup:
+```powershell
+cd apps/aqua-desktop
+npm run switch:simulate
+```
+
+To chat interactively in your terminal:
+```powershell
+npm run switch:chat
+```
+
+---
+
+Aqua is a private, graph-grounded AI desktop assistant built for **WeMakeDevs Graph Hacks** and **Flip the Switch**. Rather than targeting a single track in isolation, Aqua's architecture natively unifies and solves **all three hackathon tracks**:
 
 1. 🕵️ **Track 01: Agents That Act on Connected Data** — Executes multi-hop Cypher reasoning, exposes 11 graph-aware tools through MCP and a sandboxed `ToolHost`, performs pre-flight graph authorization checks before mutating tickets, and outputs fully explainable graph paths.
 2. 🤖 **Track 02: Agent Memory and Coordination** — Models episodic, semantic, and procedural memory directly in FalkorDB (`Session -> Question -> Answer -> Source`), persists conversation history across application restarts, isolates memory by tenant, and executes warm agent-to-agent handoffs with shared graph state (`Agent -> StateRevision` & `Agent -> Handoff -> Agent`).

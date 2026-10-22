@@ -13,6 +13,9 @@
 # Aqua local credentials and runtime state
 data/.aqua_api_token
 data/.aqua_ui_token
+apps/aqua-desktop/.switch-agent.json
+apps/aqua-desktop/.switch-state.json
+apps/aqua-desktop/.switch-workflow.json
 data/*.db
 data/*.db-*
 data/*.db.*

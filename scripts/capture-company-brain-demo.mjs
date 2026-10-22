@@ -65,10 +65,18 @@ const focusedScenes = {
   memory: submissionScenes.filter(([, filename]) => filename === 'submission-05-persistent-memory.png'),
   handoff: submissionScenes.filter(([, filename]) => filename === 'submission-06-agent-handoff.png'),
 };
-const scenes = mode === 'submission'
-  ? submissionScenes
-  : mode === 'complete'
-    ? completeScenes
+const switchScenes = [
+  ['?showcase=company-brain', 'switch-01-company-brain-topology.png', 8000],
+  ['?demo=answer', 'switch-02-grounded-diagnosis.png', 24000],
+  ['?demo=action', 'switch-03-chat-authorized-action.png', 30000],
+  ['?demo=handoff', 'switch-04-persistent-memory-handoff.png', 40000],
+];
+const scenes = mode === 'switch'
+  ? switchScenes
+  : mode === 'submission'
+    ? submissionScenes
+    : mode === 'complete'
+      ? completeScenes
   : mode === 'failure'
     ? failureScenes
     : mode === 'panel'

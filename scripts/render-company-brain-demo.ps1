@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("Showcase", "Submission", "Complete")]
+    [ValidateSet("Showcase", "Submission", "Complete", "Switch")]
     [string]$Mode = "Showcase",
     [string]$Output = "",
     [string]$Voice = "af_heart",
@@ -15,6 +15,8 @@ if (-not $Output) {
         "demo/video/aqua-falkordb-submission-demo.mp4"
     } elseif ($Mode -eq "Complete") {
         "demo/video/aqua-complete-product-walkthrough.mp4"
+    } elseif ($Mode -eq "Switch") {
+        "demo/video/aqua-switch-submission-demo.mp4"
     } else {
         "demo/video/aqua-company-brain-demo.mp4"
     }
@@ -78,7 +80,13 @@ $completeScenes = @(
     @{ File="complete-13-capabilities.png"; Label="COMPLETE AQUA CONTROL PANEL"; Title="Every capability in one desktop experience"; Text="The full panel brings together the overview, voice profiles, voice security, workflows, automated routines, app approvals, permissions and privacy, private memory, the FalkorDB graph, Company Brain, preferences and learning, reviewed extensions and skills, local file search, Secure Vault, audio devices, and display or orb settings. Loading, offline, recovery, and success states share one responsive design." },
     @{ File="complete-14-platform.png"; Label="WINDOWS DELIVERY + SETUP"; Title="Installable, local first, and reproducible"; Text="Aqua's validated target is Windows desktop. The N S I S installer bundles the desktop shell and required runtime support, while setup can add the local G G U F language model, Whisper, Kokoro, Deep Filter Net, and optional C U D A acceleration. FalkorDB can run in local Docker or at a configured secure cloud endpoint. This completes the product tour and all three hackathon tracks." }
 )
-$scenes = if ($Mode -eq "Submission") { $submissionScenes } elseif ($Mode -eq "Complete") { $completeScenes } else { $showcaseScenes }
+$switchScenes = @(
+    @{ File="switch-01-company-brain-topology.png"; Label="SWITCH ROOM | TRACK 01"; Title="Collaborative team incident triage"; Text="Welcome to Aqua Company Brain connected to Switch. Aqua bridges an isolated AI agent directly into team chat channels on Mattermost, Slack, Teams, and Discord, turning solo assistance into real team collaboration." },
+    @{ File="switch-02-grounded-diagnosis.png"; Label="GROUNDED EVIDENCE | TRACK 01"; Title="Ask in chat, trace every claim"; Text="When an incident strikes, teammates tag Aqua in the triage room. Aqua traverses FalkorDB to find the project owner, historical architecture decisions, and verified documentation, proposing a ticket assignment without guessing." },
+    @{ File="switch-03-chat-authorized-action.png"; Label="HUMAN SIGN-OFF | TRACK 01"; Title="Gated mutation in team chat"; Text="Mutations require human approval. When a teammate replies 'approve assignment', Aqua verifies project ownership authority in Cypher, executes the ticket assignment, and writes the audit trail." },
+    @{ File="switch-04-persistent-memory-handoff.png"; Label="SHARED ROOM MEMORY | TRACK 01"; Title="Continuity across agents and shifts"; Text="Questions, actions, and peer agent handoffs are stored in the graph. Teammates can inspect room memory at any time, ensuring total context continuity for the whole engineering team." }
+)
+$scenes = if ($Mode -eq "Submission") { $submissionScenes } elseif ($Mode -eq "Complete") { $completeScenes } elseif ($Mode -eq "Switch") { $switchScenes } else { $showcaseScenes }
 
 New-Item -ItemType Directory -Path $videoDir -Force | Out-Null
 New-Item -ItemType Directory -Path $workDir -Force | Out-Null

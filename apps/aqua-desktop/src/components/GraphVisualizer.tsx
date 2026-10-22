@@ -52,6 +52,11 @@ const TYPE_CONFIG: Record<
   Skill: { color: '#fbbf24', bg: 'rgba(251, 191, 36, 0.15)', border: '#d97706' },
   Agent: { color: '#38bdf8', bg: 'rgba(56, 189, 248, 0.15)', border: '#0284c7' },
   Handoff: { color: '#fb7185', bg: 'rgba(251, 113, 133, 0.15)', border: '#e11d48' },
+  Session: { color: '#a855f7', bg: 'rgba(168, 85, 247, 0.15)', border: '#9333ea' },
+  Question: { color: '#38bdf8', bg: 'rgba(56, 189, 248, 0.15)', border: '#0284c7' },
+  Answer: { color: '#10b981', bg: 'rgba(16, 185, 129, 0.15)', border: '#059669' },
+  Action: { color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.15)', border: '#d97706' },
+  Room: { color: '#ec4899', bg: 'rgba(236, 72, 153, 0.15)', border: '#db2777' },
   Default: { color: '#94a3b8', bg: 'rgba(148, 163, 184, 0.15)', border: '#64748b' },
 };
 
@@ -102,8 +107,14 @@ export function GraphVisualizer({
     return Array.from(types);
   }, [nodes]);
 
+  const hasSwitchNodes = useMemo(
+    () => nodes.some((n) => n.id.toLowerCase().includes('switch')),
+    [nodes],
+  );
+
   const filteredNodes = useMemo(() => {
     if (filterType === 'all') return nodes;
+    if (filterType === 'switch') return nodes.filter((n) => n.id.toLowerCase().includes('switch'));
     return nodes.filter((n) => n.label === filterType);
   }, [nodes, filterType]);
 
@@ -309,6 +320,27 @@ export function GraphVisualizer({
               </button>
             );
           })}
+          {hasSwitchNodes && (
+            <button
+              onClick={() => setFilterType('switch')}
+              style={{
+                padding: '3px 8px',
+                borderRadius: 6,
+                fontSize: 11,
+                fontWeight: 600,
+                cursor: 'pointer',
+                border: `1px solid ${filterType === 'switch' ? '#ec4899' : 'var(--glass-border)'}`,
+                background: filterType === 'switch' ? 'rgba(236, 72, 153, 0.2)' : 'transparent',
+                color: filterType === 'switch' ? '#f472b6' : 'var(--text-secondary)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+              }}
+            >
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#ec4899' }} />
+              ⚡ Switch Rooms ({nodes.filter((n) => n.id.toLowerCase().includes('switch')).length})
+            </button>
+          )}
         </div>
       </div>
 
@@ -510,17 +542,35 @@ export function GraphVisualizer({
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-              <span
-                style={{
-                  fontSize: 10,
-                  fontWeight: 800,
-                  color: (TYPE_CONFIG[activeSelected.label] || TYPE_CONFIG.Default).color,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
-                }}
-              >
-                {activeSelected.label} Node
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 800,
+                    color: (TYPE_CONFIG[activeSelected.label] || TYPE_CONFIG.Default).color,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.06em',
+                  }}
+                >
+                  {activeSelected.label} Node
+                </span>
+                {activeSelected.id.toLowerCase().includes('switch') && (
+                  <span
+                    style={{
+                      fontSize: 9,
+                      fontWeight: 700,
+                      padding: '1px 5px',
+                      borderRadius: 4,
+                      background: 'rgba(236, 72, 153, 0.2)',
+                      color: '#f472b6',
+                      border: '1px solid rgba(236, 72, 153, 0.4)',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    ⚡ Switch Room
+                  </span>
+                )}
+              </div>
               <button
                 onClick={() => setInternalSelected(null)}
                 style={{

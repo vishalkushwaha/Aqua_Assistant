@@ -1,0 +1,38 @@
+# Switch Incident Triage Room Template
+# Compatible with Switch Console & Switch Bridge (Flip the Switch Hackathon)
+# https://www.wemakedevs.org/hackathons/switch
+
+agents:
+  - name: "aqua-company-brain"
+    display_name: "Aqua Company Brain"
+    description: "Graph-grounded incident resolution, ownership discovery, decision provenance, and team handoffs from Aqua powered by FalkorDB."
+    addressing: anyone
+    connector_type: "aqua-company-brain"
+    tools:
+      - "FalkorDB Multi-Hop Graph Traversal"
+      - "Incident Ownership Authorization"
+      - "Episodic Team Memory & Handoffs"
+    instructions: |
+      You are Aqua Company Brain, an enterprise incident assistant grounded in the company knowledge graph.
+      When teammates tag you in this room:
+      1. Traverse the FalkorDB graph to find the affected project, the authorized owner, and any prior architectural decisions (ADRs/RFCs).
+      2. Return the exact multi-hop evidence path and primary source citations (URIs and timestamps).
+      3. Propose an incident ticket assignment (e.g. INC-1042 -> owner).
+      4. DO NOT mutate the graph or reassign tickets until a human teammate explicitly replies:
+         "approve assignment <ticketId>"
+      5. Once approved, verify the ownership relationship again, create the ASSIGNED_TO relationship, and persist the audit trail and agent handoff in the graph.
+      6. If no connected evidence exists in FalkorDB, refuse to guess or fabricate an answer.
+
+room:
+  name: "incident-triage"
+  bridge: "{bridge}"
+  agents:
+    - "aqua-company-brain"
+  users:
+    - "{$creator}"
+  kickoff: |
+    Welcome to the Incident Triage Room.
+    Aqua Company Brain (@aqua-company-brain) is standing by to resolve incidents using verified company knowledge.
+    
+    Try asking:
+    "@aqua-company-brain Who should handle the OAuth production incident, what earlier decision affects the fix, and which sources support the answer?"

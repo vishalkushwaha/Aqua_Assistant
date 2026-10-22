@@ -23,6 +23,13 @@ const PRESET_SCENARIOS = [
     description: 'Multi-hop reasoning connecting Incident -> Project -> Owner -> Architecture Decision (DEC-014).',
   },
   {
+    track: 'Switch Track 01',
+    title: 'Collaborative Incident Triage',
+    question:
+      '@aqua-company-brain Who should handle the OAuth production incident, what earlier decision affects the fix, and which sources support the answer?',
+    description: 'Switch team room workflow: traces owner, requires human sign-off, and executes graph assignment.',
+  },
+  {
     track: 'Track 3',
     title: 'Ownership & Dependency Mapping',
     question:
@@ -49,6 +56,7 @@ const SEEDED_COMPANY_NODES: VisualNode[] = [
   { id: 'DEC-014', label: 'Decision', title: 'DEC-014: Staged PKCE', sub: 'Architecture Decision', properties: { decided_at: '2026-10-15' }, x: 400, y: 330 },
   { id: 'SRC-ADR-014', label: 'Document', title: 'ADR-014: PKCE Migration', sub: 'company://docs/ADR-014', properties: { kind: 'document' }, x: 550, y: 290 },
   { id: 'SRC-CHAT-221', label: 'Chat', title: 'Slack #incident-221', sub: 'company://chat/identity/221', properties: { kind: 'chat' }, x: 550, y: 360 },
+  { id: 'room_incident_triage', label: 'Room', title: '#incident-triage', sub: 'Switch Room', properties: { bridge: 'switch-local', channel: 'mattermost' }, x: 120, y: 140 },
   { id: 'agent_aqua', label: 'Agent', title: 'Aqua Company Brain', sub: 'company_brain', properties: { role: 'company_brain' }, x: 120, y: 240 },
   { id: 'agent_incident', label: 'Agent', title: 'Incident Response Agent', sub: 'incident_response', properties: { role: 'incident_response' }, x: 120, y: 340 },
 ];
@@ -64,11 +72,13 @@ const SEEDED_COMPANY_EDGES: VisualEdge[] = [
   { source: 'DEC-014', target: 'SRC-ADR-014', label: 'SUPPORTED_BY' },
   { source: 'DEC-014', target: 'SRC-CHAT-221', label: 'SUPPORTED_BY' },
   { source: 'INC-1042', target: 'SRC-CHAT-221', label: 'SUPPORTED_BY' },
+  { source: 'agent_aqua', target: 'room_incident_triage', label: 'CONNECTED_TO' },
   { source: 'agent_aqua', target: 'INC-1042', label: 'TRIAGED' },
   { source: 'agent_aqua', target: 'agent_incident', label: 'HANDOFF' },
 ];
 
 const COMPANY_ENTITY_STATS: EntityStat[] = [
+  { type: 'Switch Rooms', count: 1, color: '#ec4899', description: 'Team chat room bridge' },
   { type: 'People & Teams', count: 2, color: '#34d399', description: 'Owner and engineering team' },
   { type: 'Projects & Systems', count: 2, color: '#a78bfa', description: 'Platform and dependency' },
   { type: 'Tickets', count: 1, color: '#fb923c', description: 'Production incident' },
@@ -243,7 +253,22 @@ export function CompanyBrainPage() {
     <div className="page" style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 1180, margin: '0 auto' }}>
       {/* Hackathon Badge & Page Header */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+          <span
+            style={{
+              padding: '4px 10px',
+              borderRadius: 6,
+              background: 'rgba(236, 72, 153, 0.15)',
+              border: '1px solid rgba(236, 72, 153, 0.35)',
+              color: '#f472b6',
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: '0.04em',
+              textTransform: 'uppercase',
+            }}
+          >
+            ⚡ Flip the Switch Hackathon · Track 01
+          </span>
           <span
             style={{
               padding: '4px 10px',
@@ -257,10 +282,10 @@ export function CompanyBrainPage() {
               textTransform: 'uppercase',
             }}
           >
-            WeMakeDevs Hackathon · FalkorDB Powered
+            FalkorDB Powered Graph Brain
           </span>
           <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-            Track 1 (Connected Data) · Track 2 (Memory & Coordination) · Track 3 (Company Brain)
+            Best Business Workflow · Team Chat Incident Triage
           </span>
         </div>
 
@@ -268,7 +293,7 @@ export function CompanyBrainPage() {
           title="Company Brain Agent"
           subtitle="Autonomous agent grounded in FalkorDB: connects people, teams, systems, tickets, decisions, and chat records. Every action is gated by graph relationship proofs."
           actions={
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
               <button
                 className="btn-ghost"
                 onClick={() => void seed()}
@@ -278,6 +303,7 @@ export function CompanyBrainPage() {
                 <Database size={15} /> {seeding ? 'Seeding Graph…' : 'Seed FalkorDB Graph'}
               </button>
               <Pill tone="ok" label="Database" value="FalkorDB Native" />
+              <Pill tone="ok" label="Team Chat" value="Switch Connected" />
             </div>
           }
         />
